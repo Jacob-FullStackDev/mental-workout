@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing</title>
+    <link href="index.css" rel="stylesheet" />
+    <script src="index.js" defer></script>
+</head>
+<body>
+<h1 id="preboarding-heading">Multiplication Game</h1>
+<form id="session-form">
+<label for="session-goal">How many problems do you want to solve within the duration?</label>
+<input type="number" min="1" id="session-goal" required />
+<label for="session-duration">In Seconds:</label>
+<input type="number" min="1" id="session-duration" required />
+</form>
+<button id="start-session-btn">Start multiplying!</button>
+<section id="session-container">
+<math id="math-problem"></math>
+<span id="session-countdown"></span>
+<span id="problems-answered-correctly"></span>
+</section>
+</html>

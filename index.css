@@ -1,0 +1,10 @@
+math {
+display: block;
+}
+#session-countdown {
+color: red;
+}
+#problems-answered-correctly {
+color: green;
+}
+/* TODO: when I get back from vacation, style this*/ 
