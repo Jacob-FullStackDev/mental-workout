@@ -8,17 +8,19 @@
     <script src="index.js" defer></script>
 </head>
 <body>
-<h1 id="preboarding-heading">Multiplication Game</h1>
+<h1 id="preboarding-heading">Practice mental</h1>
 <form id="session-form">
 <label for="session-goal">How many problems do you want to solve within the duration?</label>
 <input type="number" min="1" id="session-goal" required />
 <label for="session-duration">In Seconds:</label>
 <input type="number" min="1" id="session-duration" required />
-</form>
 <button id="start-session-btn">Start multiplying!</button>
-<section id="session-container">
+</form>
+<div class="hidden">
+<main id="session-container">
 <math id="math-problem"></math>
 <span id="session-countdown"></span>
 <span id="problems-answered-correctly"></span>
-</section>
+</main>
+</div>
 </html>

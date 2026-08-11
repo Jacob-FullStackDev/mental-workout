@@ -1,10 +1,16 @@
 math {
-display: block;
+  display: block;
 }
 #session-countdown {
-color: red;
+  color: red;
 }
 #problems-answered-correctly {
-color: green;
+  color: green;
 }
-/* TODO: when I get back from vacation, style this*/ 
+.hidden {
+  display: none;
+}
+h1 {
+  color: #2f124b;
+  font-size: 50px;
+}
