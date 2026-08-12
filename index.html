@@ -9,18 +9,32 @@
 </head>
 <body>
 <h1 id="preboarding-heading">Practice mental</h1>
-<form id="session-form">
+<form id="start-session">
+<div>
 <label for="session-goal">How many problems do you want to solve within the duration?</label>
-<input type="number" min="1" id="session-goal" required />
+<input id="session-goal" type="number" min="1"  />
+</div>
+<div>
 <label for="session-duration">In Seconds:</label>
-<input type="number" min="1" id="session-duration" required />
-<button id="start-session-btn">Start multiplying!</button>
+<input id="session-duration" type="number" min="1" required />
+</div>
+<div>
+<label for="first-operand-length">How long should the first operand be?</label>
+<input id="first-operand-length" type="number" min="1" required />
+<p class="sample-operand sample-operand--1"></p>
+</div>
+<div>
+<label for="second-operand-length">How long should the second operand be?</label>
+<input id="second-operand-length" type="number" min="1" />
+<p class="sample-operand sample-operand--2"></p>
+</div>
+<button>Start!</button>
 </form>
 <div class="hidden">
 <main id="session-container">
 <math id="math-problem"></math>
 <span id="session-countdown"></span>
-<span id="problems-answered-correctly"></span>
+<span id="accuracy"></span>
 </main>
 </div>
 </html>
