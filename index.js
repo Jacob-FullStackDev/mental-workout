@@ -25,18 +25,14 @@ function startSession(firstLength, secondLength = firstLength) {
 function operandGen(digits) {
   let max = 10 ** digits - 1;
   let min = 10 ** (digits - 1) - 1;
-  console.log(min, max);
   let operand = Math.round(Math.random() * (max - min)) + min;
-  console.log(operand);
   return operand;
 }
-console.log(Math.round(900));
-operandGen(3);
 firstOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
-  console.log(e.target.value);
   sampleProblemOperand1El.textContent = operandGen(Number(e.target.value));
 });
 secondOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
+  sampleProblemOperand1El.textContent = operandGen(Number(e.target.value));
 });
