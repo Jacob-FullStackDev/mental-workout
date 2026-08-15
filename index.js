@@ -14,6 +14,8 @@ const secondOperandOfSampleProblemEl =
 const sampleProblemFeedbackEl = document.getElementById(
   "sample-problem-feedback",
 );
+const correctAnswerSfx = new Audio("/assets/rightanswer-95219.mp3");
+const incorrectAnswerSfx = new Audio("assets/wrong-47985.mp3");
 // SESSION DOM ELEMENT SELECTORS
 const mathProblemEl = document.getElementById("math-problem");
 const sessionCountdownEl = document.getElementById("session-countdown");
@@ -153,9 +155,9 @@ startSessionFormEl.addEventListener("submit", (e) => {
     answerInputEl.value = "";
     problemsAnswered++;
     if (answer === firstOperand * secondOperand) {
-      console.log(answer);
+      correctAnswerSfx.play();
       correctAnswers++;
-    }
+    } else incorrectAnswerSfx.play();
     accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
     problemGen(firstOperandDigits, secondOperandDigits);
   });
