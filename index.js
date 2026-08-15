@@ -1,14 +1,12 @@
 "use strict";
-// DOM ELEMENT SELECTORS
-const preboardingHeadingEl = document.getElementById("preboarding-heading");
+// PREBOARDING DOM ELEMENT SELECTORS
+const preboardingSectionEl = document.getElementById("preboarding-section");
 const durationInputEl = document.getElementById("session-duration");
 const goalInputEl = document.getElementById("session-goal");
 const firstOperandInputEl = document.getElementById("first-operand-length");
 const secondOperandInputEl = document.getElementById("second-operand-length");
 const sampleProblemEl = document.getElementById("sample-problem");
-const startSessionEl = document.getElementById("start-session");
-const sessionCountdownEl = document.getElementById("session-countdown");
-const accuracyEl = document.getElementById("accuracy");
+const startSessionFormEl = document.getElementById("start-session");
 const firstOperandOfSampleProblemEl =
   document.getElementById("sample-operand-1");
 const secondOperandOfSampleProblemEl =
@@ -16,14 +14,36 @@ const secondOperandOfSampleProblemEl =
 const sampleProblemFeedbackEl = document.getElementById(
   "sample-problem-feedback",
 );
+// SESSION DOM ELEMENT SELECTORS
+const mathProblemEl = document.getElementById("math-problem");
+const sessionCountdownEl = document.getElementById("session-countdown");
+const accuracyEl = document.getElementById("accuracy");
+const answerInputEl = document.getElementById("problem-answer-input");
+const sessionSectionEl = document.getElementById("session-section-container");
+const answerInputFormEl = document.getElementById("problem-answer-form");
 // INITIAL STATE
-let sessionInProgress = false;
-let sampleProblemDisplayed = false;
-let sampleProblem = ` × `;
-function startSession(firstLength, secondLength = firstLength) {
-  sessionInProgress = true;
+let firstOperand;
+let secondOperand;
+let firstOperandDigits;
+let secondOperandDigits;
+// INITAL STATE FUNCTION
+let correctAnswers,
+  problemsAnswered,
+  sessionProblemSolveGoal,
+  durationInMS,
+  durationInS;
+function init() {
+  correctAnswers = 0;
+  problemsAnswered = 0;
+  sessionProblemSolveGoal = 0;
+  accuracyEl.value = "";
+  goalInputEl.value = "";
+  durationInputEl.value = "";
+  firstOperandInputEl.value = secondOperandInputEl.value = "";
+  sessionSectionEl.classList.add("hidden");
 }
 
+init();
 function operandGen(digits) {
   if (digits >= 1) {
     let max = 10 ** digits - 1;
@@ -32,7 +52,37 @@ function operandGen(digits) {
     return operand;
   }
 }
+function problemGen(firstOperandDigits, secondOperandDigits) {
+  firstOperand = operandGen(firstOperandDigits);
+  secondOperand = operandGen(secondOperandDigits);
+  mathProblemEl.textContent = `${firstOperand} × ${secondOperand}`;
+}
 
+function handleSession() {
+  preboardingSectionEl.classList.toggle("hidden");
+  sessionSectionEl.classList.toggle("hidden");
+  sessionProblemSolveGoal = Number(goalInputEl.value);
+  firstOperandDigits = Number(firstOperandInputEl.value);
+  secondOperandDigits = Number(secondOperandInputEl.value)
+    ? Number(secondOperandInputEl.value)
+    : firstOperandDigits;
+  durationInMS = Number(durationInputEl.value) * 1000;
+  durationInS = durationInMS / 1000;
+  sessionCountdownEl.textContent = durationInS;
+  accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
+}
+function setSessionGoalResultMessage() {
+  if (correctAnswers > sessionProblemSolveGoal) return "exceeded";
+  else if (correctAnswers < sessionCountdownEl) return "failed to meet";
+  else return "met";
+}
+function endSession() {
+  console.log(
+    `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal}`,
+  );
+  init();
+  sessionSectionEl.classList.add("hidden");
+}
 firstOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
@@ -87,4 +137,26 @@ secondOperandInputEl.addEventListener("input", (e) => {
     }
   }
   sampleProblemEl.classList.remove("hidden");
+});
+startSessionFormEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+  handleSession();
+  const sessionHandler = setTimeout(endSession, durationInMS);
+  const sessionTimer = setInterval(() => {
+    durationInS--;
+    sessionCountdownEl.textContent = durationInS;
+  }, 1000);
+  problemGen(firstOperandDigits, secondOperandDigits);
+  answerInputFormEl.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let answer = Number(answerInputEl.value);
+    answerInputEl.value = "";
+    problemsAnswered++;
+    if (answer === firstOperand * secondOperand) {
+      console.log(answer);
+      correctAnswers++;
+    }
+    accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
+    problemGen(firstOperandDigits, secondOperandDigits);
+  });
 });
