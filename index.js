@@ -14,8 +14,8 @@ const secondOperandOfSampleProblemEl =
 const sampleProblemFeedbackEl = document.getElementById(
   "sample-problem-feedback",
 );
-const correctAnswerSfx = new Audio("/assets/rightanswer-95219.mp3");
-const incorrectAnswerSfx = new Audio("assets/wrong-47985.mp3");
+const volumeValueEl = document.getElementById("volume-value");
+const volumeSliderEl = document.getElementById("volume-slider");
 // SESSION DOM ELEMENT SELECTORS
 const mathProblemEl = document.getElementById("math-problem");
 const sessionCountdownEl = document.getElementById("session-countdown");
@@ -28,6 +28,16 @@ let firstOperand;
 let secondOperand;
 let firstOperandDigits;
 let secondOperandDigits;
+
+// SFX VOLUME
+const correctAnswerSfx = new Audio("/assets/rightanswer-95219.mp3");
+const incorrectAnswerSfx = new Audio("assets/wrong-47985.mp3");
+let volume = Number(volumeSliderEl.value);
+volumeValueEl.textContent = volume;
+volumeSliderEl.addEventListener("input", (e) => {
+  volume = Number(volumeSliderEl.value);
+  volumeValueEl.textContent = volume;
+});
 // INITAL STATE FUNCTION
 let correctAnswers,
   problemsAnswered,
@@ -75,7 +85,7 @@ function handleSession() {
 }
 function setSessionGoalResultMessage() {
   if (correctAnswers > sessionProblemSolveGoal) return "exceeded";
-  else if (correctAnswers < sessionCountdownEl) return "failed to meet";
+  else if (correctAnswers < sessionProblemSolveGoal) return "failed to meet";
   else return "met";
 }
 function endSession() {
@@ -143,6 +153,8 @@ secondOperandInputEl.addEventListener("input", (e) => {
 startSessionFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   handleSession();
+  // handle SFX volume
+  correctAnswerSfx.volume = incorrectAnswerSfx.volume = volume / 100;
   const sessionHandler = setTimeout(endSession, durationInMS);
   const sessionTimer = setInterval(() => {
     durationInS--;
