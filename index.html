@@ -1,54 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing</title>
     <link href="index.css" rel="stylesheet" />
     <script src="index.js" defer></script>
-</head>
-<body>
-<section id="preboarding-section">
-<h1 id="preboarding-heading">Practice mental multiplication</h1>
-<form id="start-session">
-<fieldset>
-<div>
-<label for="session-goal">How many problems do you want to solve within the duration?</label>
-<input id="session-goal" type="number" min="1"  />
-</div>
-<div>
-<label for="session-duration">In Seconds:</label>
-<input id="session-duration" type="number" min="1" required />
-</div>
-<div>
-<label for="first-operand-length">How many digits should the first operand be?</label>
-<input id="first-operand-length" type="number" min="1" max="16" placeholder="0" required />
-</div>
-<div>
-<label for="second-operand-length">How many digits should the second operand be?</label>
-<input id="second-operand-length" type="number" min="1" max="16" placeholder="0" />
-</div>
-<math id="sample-problem" class="hidden"><mrow><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn></mrow></math>
-<p class="feedback" id="sample-problem-feedback"></p>
-<button>Start session</button>
-</fieldset>
-<fieldset>
-<label for="volume-slider">Volume</label>
-<input id="volume-slider" type="range" min="0" max="100" />
-<p id="volume-value"></p>
-</fieldset>
-</form>
-</section>
-<div id="session-section-container" class="hidden">
-<main>
-<math id="math-problem"></math>
-<span id="session-countdown"></span>
-<span id="accuracy"></span>
-<form id="problem-answer-form">
-<label for="problem-answer-input">Answer:</label>
-<input id="problem-answer-input" type="number" required />
-<button id="problem-answer-submit">Submit answer</button>
-</form>
-</main>
-</div>
+  </head>
+  <body>
+    <section id="preboarding-section">
+      <h1 id="preboarding-heading">Practice mental multiplication</h1>
+      <form id="start-session">
+        <fieldset>
+          <div>
+            <label for="session-goal"
+              >How many problems do you want to solve within the
+              duration?</label
+            >
+            <input id="session-goal" type="number" min="1" />
+          </div>
+          <div>
+            <label for="session-duration">In Seconds:</label>
+            <input id="session-duration" type="number" min="1" required />
+          </div>
+          <div>
+            <label for="first-operand-length"
+              >How many digits should the first operand be?</label
+            >
+            <input
+              id="first-operand-length"
+              type="number"
+              min="1"
+              max="16"
+              placeholder="0"
+              required
+            />
+          </div>
+          <div>
+            <label for="second-operand-length"
+              >How many digits should the second operand be?</label
+            >
+            <input
+              id="second-operand-length"
+              type="number"
+              min="1"
+              max="16"
+              placeholder="0"
+            />
+          </div>
+          <math id="sample-problem" class="hidden"
+            ><mrow
+              ><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo
+              ><mn id="sample-operand-2"></mn></mrow
+          ></math>
+          <p class="feedback" id="sample-problem-feedback"></p>
+          <button>Start session</button>
+        </fieldset>
+        <fieldset>
+          <div id="set-volume-container">
+            <div>
+              <label for="volume-slider">Volume</label>
+              <input id="volume-slider" type="range" min="0" max="100" />
+              <p id="volume-value"></p>
+            </div>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+                />
+              </svg>
+              <input id="volume-slider" type="range" min="0" max="100" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+                />
+              </svg>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+    <div id="session-section-container" class="hidden">
+      <main>
+        <math id="math-problem"></math>
+        <p id="session-countdown"></p>
+        <p id="accuracy"></p>
+        <form id="problem-answer-form">
+          <label for="problem-answer-input">Answer:</label>
+          <input id="problem-answer-input" type="number" required />
+          <button id="problem-answer-submit">Submit answer</button>
+        </form>
+        <button id="pause-btn">Pause session</button>
+      </main>
+    </div>
+    <section id="pause-menu" class="hidden">
+      <button id="resume-btn">Resume session</button>
+      <div id="set-volume-container">
+        <div>
+          <label for="volume-slider">Volume</label>
+          <p id="volume-value"></p>
+        </div>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+            />
+          </svg>
+          <input id="volume-slider" type="range" min="0" max="100" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+            />
+          </svg>
+        </div>
+      </div>
+      <p>When you get back, a new problem will be generated.</p>
+      <p id="time-remaining"></p>
+    </section>
+  </body>
 </html>
