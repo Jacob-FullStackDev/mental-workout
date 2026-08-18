@@ -23,31 +23,43 @@ const accuracyEl = document.getElementById("accuracy");
 const answerInputEl = document.getElementById("problem-answer-input");
 const sessionSectionEl = document.getElementById("session-section-container");
 const answerInputFormEl = document.getElementById("problem-answer-form");
+// PAUSE MENU DOM ELEMENT SELECTORS
+const pauseMenuEl = document.getElementById("pause-menu");
+const timeRemainingEl = document.getElementById("time-remaining");
 // INITIAL STATE
 let firstOperand;
 let secondOperand;
 let firstOperandDigits;
 let secondOperandDigits;
+let volume;
 
 // SFX VOLUME
 const correctAnswerSfx = new Audio("/assets/rightanswer-95219.mp3");
 const incorrectAnswerSfx = new Audio("assets/wrong-47985.mp3");
-let volume = Number(volumeSliderEl.value);
-volumeValueEl.textContent = volume;
-volumeSliderEl.addEventListener("input", (e) => {
+function handleSFXVolume() {
+  console.log("reached");
   volume = Number(volumeSliderEl.value);
   volumeValueEl.textContent = volume;
-});
+  volumeSliderEl.addEventListener("input", (e) => {
+    console.log("reached");
+    volume = Number(volumeSliderEl.value);
+    volumeValueEl.textContent = volume;
+  });
+}
+handleSFXVolume();
+
 // INITAL STATE FUNCTION
 let correctAnswers,
   problemsAnswered,
   sessionProblemSolveGoal,
   durationInMS,
-  durationInS;
+  durationInS,
+  sessionPaused;
 function init() {
   correctAnswers = 0;
   problemsAnswered = 0;
   sessionProblemSolveGoal = 0;
+  sessionPaused = false;
   accuracyEl.value = "";
   goalInputEl.value = "";
   durationInputEl.value = "";
@@ -56,6 +68,7 @@ function init() {
 }
 
 init();
+
 function operandGen(digits) {
   if (digits >= 1) {
     let max = 10 ** digits - 1;
@@ -83,9 +96,10 @@ function handleSession() {
   sessionCountdownEl.textContent = durationInS;
   accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
 }
+
 function setSessionGoalResultMessage() {
   if (correctAnswers > sessionProblemSolveGoal) return "exceeded";
-  else if (correctAnswers < sessionProblemSolveGoal) return "failed to meet";
+  else if (correctAnswers < sessionCountdownEl) return "failed to meet";
   else return "met";
 }
 function endSession() {
@@ -95,6 +109,15 @@ function endSession() {
   init();
   sessionSectionEl.classList.add("hidden");
 }
+// PAUSE MENU
+const pauseBtnEl = document.getElementById("pause-btn");
+pauseBtnEl.addEventListener("click", (e) => {
+  e.preventDefault();
+  sessionPaused = !sessionPaused;
+  pauseMenuEl.classList.toggle("hidden");
+  handleSFXVolume();
+});
+// START SESSION EVENT LISTENERS
 firstOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
@@ -155,10 +178,20 @@ startSessionFormEl.addEventListener("submit", (e) => {
   handleSession();
   // handle SFX volume
   correctAnswerSfx.volume = incorrectAnswerSfx.volume = volume / 100;
-  const sessionHandler = setTimeout(endSession, durationInMS);
+  const sessionEnd = setInterval(() => {
+    // ends session
+    if (!sessionPaused) {
+      if (durationInS === 0) {
+        endSession();
+      }
+    }
+  }, 1000);
   const sessionTimer = setInterval(() => {
-    durationInS--;
-    sessionCountdownEl.textContent = durationInS;
+    // counts down time while not paused
+    if (!sessionPaused) {
+      durationInS--;
+      sessionCountdownEl.textContent = durationInS;
+    }
   }, 1000);
   problemGen(firstOperandDigits, secondOperandDigits);
   answerInputFormEl.addEventListener("submit", (e) => {
