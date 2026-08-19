@@ -1,5 +1,7 @@
 "use strict";
+
 // PREBOARDING DOM ELEMENT SELECTORS
+
 const preboardingSectionEl = document.getElementById("preboarding-section");
 const durationInputEl = document.getElementById("session-duration");
 const goalInputEl = document.getElementById("session-goal");
@@ -14,19 +16,28 @@ const secondOperandOfSampleProblemEl =
 const sampleProblemFeedbackEl = document.getElementById(
   "sample-problem-feedback",
 );
-const volumeValueEl = document.getElementById("volume-value");
-const volumeSliderEl = document.getElementById("volume-slider");
+
+// VOLUME %
+
+let activeVolumeSliderEl = document.getElementById("volume-slider--1"); // volume slider locations: onboarding, pause menu
+let activeVolumeValueEl = document.getElementById("volume-value--1");
+
 // SESSION DOM ELEMENT SELECTORS
+
 const mathProblemEl = document.getElementById("math-problem");
 const sessionCountdownEl = document.getElementById("session-countdown");
 const accuracyEl = document.getElementById("accuracy");
 const answerInputEl = document.getElementById("problem-answer-input");
 const sessionSectionEl = document.getElementById("session-section-container");
 const answerInputFormEl = document.getElementById("problem-answer-form");
+
 // PAUSE MENU DOM ELEMENT SELECTORS
+
 const pauseMenuEl = document.getElementById("pause-menu");
 const timeRemainingEl = document.getElementById("time-remaining");
+
 // INITIAL STATE
+
 let firstOperand;
 let secondOperand;
 let firstOperandDigits;
@@ -34,21 +45,28 @@ let secondOperandDigits;
 let volume;
 
 // SFX VOLUME
+
 const correctAnswerSfx = new Audio("/assets/rightanswer-95219.mp3");
 const incorrectAnswerSfx = new Audio("assets/wrong-47985.mp3");
-function handleSFXVolume() {
-  console.log("reached");
-  volume = Number(volumeSliderEl.value);
-  volumeValueEl.textContent = volume;
-  volumeSliderEl.addEventListener("input", (e) => {
-    console.log("reached");
-    volume = Number(volumeSliderEl.value);
-    volumeValueEl.textContent = volume;
+function handleSFXVolume(id) {
+  activeVolumeSliderEl = document.getElementById(`volume-slider--${id}`);
+  activeVolumeValueEl = document.getElementById(`volume-value--${id}`);
+  volume = Number(activeVolumeSliderEl.value);
+  activeVolumeValueEl.textContent = volume;
+  activeVolumeSliderEl.addEventListener("input", () => {
+    volume = Number(activeVolumeSliderEl.value);
+    activeVolumeValueEl.textContent = volume;
+    // tests volume
+    activeVolumeSliderEl.addEventListener("change", () => {
+      correctAnswerSfx.volume = volume / 100;
+      correctAnswerSfx.play();
+    });
   });
 }
-handleSFXVolume();
+handleSFXVolume(1);
 
 // INITAL STATE FUNCTION
+
 let correctAnswers,
   problemsAnswered,
   sessionProblemSolveGoal,
@@ -66,7 +84,6 @@ function init() {
   firstOperandInputEl.value = secondOperandInputEl.value = "";
   sessionSectionEl.classList.add("hidden");
 }
-
 init();
 
 function operandGen(digits) {
@@ -77,6 +94,7 @@ function operandGen(digits) {
     return operand;
   }
 }
+
 function problemGen(firstOperandDigits, secondOperandDigits) {
   firstOperand = operandGen(firstOperandDigits);
   secondOperand = operandGen(secondOperandDigits);
@@ -99,9 +117,10 @@ function handleSession() {
 
 function setSessionGoalResultMessage() {
   if (correctAnswers > sessionProblemSolveGoal) return "exceeded";
-  else if (correctAnswers < sessionCountdownEl) return "failed to meet";
+  else if (correctAnswers < sessionProblemSolveGoal) return "failed to meet";
   else return "met";
 }
+
 function endSession() {
   console.log(
     `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal}`,
@@ -109,15 +128,19 @@ function endSession() {
   init();
   sessionSectionEl.classList.add("hidden");
 }
+
 // PAUSE MENU
+
 const pauseBtnEl = document.getElementById("pause-btn");
 pauseBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
   sessionPaused = !sessionPaused;
   pauseMenuEl.classList.toggle("hidden");
-  handleSFXVolume();
+  handleSFXVolume(2);
 });
+
 // START SESSION EVENT LISTENERS
+
 firstOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
@@ -202,7 +225,10 @@ startSessionFormEl.addEventListener("submit", (e) => {
     if (answer === firstOperand * secondOperand) {
       correctAnswerSfx.play();
       correctAnswers++;
-    } else incorrectAnswerSfx.play();
+    } else {
+      incorrectAnswerSfx.play();
+      console.log(answer, firstOperand * secondOperand);
+    }
     accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
     problemGen(firstOperandDigits, secondOperandDigits);
   });
