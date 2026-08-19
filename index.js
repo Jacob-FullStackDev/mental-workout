@@ -17,10 +17,10 @@ const sampleProblemFeedbackEl = document.getElementById(
   "sample-problem-feedback",
 );
 
-// VOLUME %
+// VOLUME % DOM ELEMENT SELECTORS
 
-let activeVolumeSliderEl = document.getElementById("volume-slider--1"); // volume slider locations: onboarding, pause menu
-let activeVolumeValueEl = document.getElementById("volume-value--1");
+let activeVolumeSliderEl; // volume slider/volume value element locations: onboarding, pause menu
+let activeVolumeValueEl;
 
 // SESSION DOM ELEMENT SELECTORS
 
@@ -35,6 +35,8 @@ const answerInputFormEl = document.getElementById("problem-answer-form");
 
 const pauseMenuEl = document.getElementById("pause-menu");
 const timeRemainingEl = document.getElementById("time-remaining");
+const pauseBtnEl = document.getElementById("pause-btn");
+const resumeBtnEl = document.getElementById("resume-btn");
 
 // INITIAL STATE
 
@@ -44,7 +46,7 @@ let firstOperandDigits;
 let secondOperandDigits;
 let volume;
 
-// SFX VOLUME
+// HANDLE SFX
 
 const correctAnswerSfx = new Audio("/assets/rightanswer-95219.mp3");
 const incorrectAnswerSfx = new Audio("assets/wrong-47985.mp3");
@@ -56,7 +58,7 @@ function handleSFXVolume(id) {
   activeVolumeSliderEl.addEventListener("input", () => {
     volume = Number(activeVolumeSliderEl.value);
     activeVolumeValueEl.textContent = volume;
-    // tests volume
+    // plays sound effect for the user to gauge the volume
     activeVolumeSliderEl.addEventListener("change", () => {
       correctAnswerSfx.volume = volume / 100;
       correctAnswerSfx.play();
@@ -83,6 +85,8 @@ function init() {
   durationInputEl.value = "";
   firstOperandInputEl.value = secondOperandInputEl.value = "";
   sessionSectionEl.classList.add("hidden");
+  activeVolumeSliderEl = document.getElementById("volume-slider--1");
+  activeVolumeValueEl = document.getElementById("volume-value--1");
 }
 init();
 
@@ -130,13 +134,26 @@ function endSession() {
 }
 
 // PAUSE MENU
-
-const pauseBtnEl = document.getElementById("pause-btn");
-pauseBtnEl.addEventListener("click", (e) => {
-  e.preventDefault();
+function togglePauseMenu(volumeElementId = null) {
   sessionPaused = !sessionPaused;
   pauseMenuEl.classList.toggle("hidden");
-  handleSFXVolume(2);
+  if (volumeElementId) {
+    handleSFXVolume(volumeElementId);
+  }
+}
+
+pauseBtnEl.addEventListener("click", (e) => {
+  console.log("reached1");
+  e.preventDefault();
+  togglePauseMenu(2);
+  resumeBtnEl.addEventListener(
+    "click",
+    (e) => {
+      e.preventDefault();
+      togglePauseMenu();
+    },
+    { once: true },
+  );
 });
 
 // START SESSION EVENT LISTENERS
@@ -196,6 +213,7 @@ secondOperandInputEl.addEventListener("input", (e) => {
   }
   sampleProblemEl.classList.remove("hidden");
 });
+
 startSessionFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   handleSession();
