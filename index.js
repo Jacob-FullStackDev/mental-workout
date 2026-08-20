@@ -30,6 +30,7 @@ const accuracyEl = document.getElementById("accuracy");
 const answerInputEl = document.getElementById("problem-answer-input");
 const sessionSectionEl = document.getElementById("session-section-container");
 const answerInputFormEl = document.getElementById("problem-answer-form");
+const answerFeedbackEl = document.getElementById("answer-feedback"); // whether or not the answer was correct
 
 // PAUSE MENU DOM ELEMENT SELECTORS
 
@@ -48,8 +49,9 @@ let volume;
 
 // HANDLE SFX
 
-const correctAnswerSfx = new Audio("/assets/rightanswer-95219.mp3");
-const incorrectAnswerSfx = new Audio("assets/wrong-47985.mp3");
+const correctAnswerSfx = new Audio("assets/CorrectAnswerSFX.mp3");
+const incorrectAnswerSfx = new Audio("assets/IncorrectAnswerSFX.mp3");
+
 function handleSFXVolume(id) {
   activeVolumeSliderEl = document.getElementById(`volume-slider--${id}`);
   activeVolumeValueEl = document.getElementById(`volume-value--${id}`);
@@ -84,7 +86,6 @@ function init() {
   goalInputEl.value = "";
   durationInputEl.value = "";
   firstOperandInputEl.value = secondOperandInputEl.value = "";
-  sessionSectionEl.classList.add("hidden");
   activeVolumeSliderEl = document.getElementById("volume-slider--1");
   activeVolumeValueEl = document.getElementById("volume-value--1");
 }
@@ -126,9 +127,18 @@ function setSessionGoalResultMessage() {
 }
 
 function endSession() {
-  console.log(
-    `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal}`,
-  );
+  const resultsElement = document.createElement("p"); // session results
+  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal}`;
+  const returnToHomeBtn = document.createElement("button");
+  returnToHomeBtn.textContent = "Return to Home";
+  document.body.append(resultsElement, returnToHomeBtn);
+  returnToHomeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    // returns to home
+    returnToHomeBtn.remove();
+    resultsElement.remove();
+    preboardingSectionEl.classList.remove("hidden");
+  });
   init();
   sessionSectionEl.classList.add("hidden");
 }
@@ -143,7 +153,6 @@ function togglePauseMenu(volumeElementId = null) {
 }
 
 pauseBtnEl.addEventListener("click", (e) => {
-  console.log("reached1");
   e.preventDefault();
   togglePauseMenu(2);
   resumeBtnEl.addEventListener(
@@ -220,16 +229,14 @@ startSessionFormEl.addEventListener("submit", (e) => {
   // handle SFX volume
   correctAnswerSfx.volume = incorrectAnswerSfx.volume = volume / 100;
   const sessionEnd = setInterval(() => {
-    // ends session
-    if (!sessionPaused) {
-      if (durationInS === 0) {
-        endSession();
-      }
-    }
+    // ends session once timer has 0 seconds
   }, 1000);
   const sessionTimer = setInterval(() => {
     // counts down time while not paused
     if (!sessionPaused) {
+      if (durationInS === 0) {
+        endSession();
+      }
       durationInS--;
       sessionCountdownEl.textContent = durationInS;
     }
@@ -238,15 +245,26 @@ startSessionFormEl.addEventListener("submit", (e) => {
   answerInputFormEl.addEventListener("submit", (e) => {
     e.preventDefault();
     let answer = Number(answerInputEl.value);
+    const correctAnswerCondition = answer === firstOperand * secondOperand;
     answerInputEl.value = "";
     problemsAnswered++;
-    if (answer === firstOperand * secondOperand) {
+    if (correctAnswerCondition) {
       correctAnswerSfx.play();
       correctAnswers++;
     } else {
       incorrectAnswerSfx.play();
-      console.log(answer, firstOperand * secondOperand);
     }
+    answerFeedbackEl.textContent = correctAnswerCondition
+      ? `Correct!: ${answer}`
+      : `Incorrect! you answered ${answer} but it was ${firstOperand * secondOperand}`;
+    answerFeedbackEl.classList.add(
+      correctAnswerCondition ? "correct-answer" : "incorrect-answer",
+    );
+    const showAnswerFeedbacktimer = setInterval(() => {
+      answerFeedbackEl.textContent = "";
+      answerFeedbackEl.classList.remove("correct-answer", "incorrect-answer");
+      clearInterval(showAnswerFeedbacktimer);
+    }, 800);
     accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
     problemGen(firstOperandDigits, secondOperandDigits);
   });
