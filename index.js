@@ -39,13 +39,20 @@ const timeRemainingEl = document.getElementById("time-remaining");
 const pauseBtnEl = document.getElementById("pause-btn");
 const resumeBtnEl = document.getElementById("resume-btn");
 
-// INITIAL STATE
+// RESULTS SECTION ELEMENTS
 
-let firstOperand;
-let secondOperand;
-let firstOperandDigits;
-let secondOperandDigits;
-let volume;
+const returnToHomeBtn = document.createElement("button");
+const resultsElement = document.createElement("p"); // session results displayed as fraction (1/3)
+
+// INITIAL STATE (that isn't handled in the init function)
+
+let firstOperand,
+  secondOperand,
+  firstOperandDigits,
+  secondOperandDigits,
+  volume,
+  durationInMS,
+  durationInS;
 
 // HANDLE SFX
 
@@ -74,14 +81,16 @@ handleSFXVolume(1);
 let correctAnswers,
   problemsAnswered,
   sessionProblemSolveGoal,
-  durationInMS,
-  durationInS,
-  sessionPaused;
+  sessionPaused, // indicates being on the pause screen
+  sessionFinished, // indicates being on the session results screen
+  sessionEndTimer,
+  sessionTimer;
 function init() {
   correctAnswers = 0;
   problemsAnswered = 0;
   sessionProblemSolveGoal = 0;
   sessionPaused = false;
+  sessionFinished = false;
   accuracyEl.value = "";
   goalInputEl.value = "";
   durationInputEl.value = "";
@@ -90,6 +99,8 @@ function init() {
   activeVolumeValueEl = document.getElementById("volume-value--1");
 }
 init();
+
+// GENERATE PROBLEM
 
 function operandGen(digits) {
   if (digits >= 1) {
@@ -106,6 +117,8 @@ function problemGen(firstOperandDigits, secondOperandDigits) {
   mathProblemEl.textContent = `${firstOperand} × ${secondOperand}`;
 }
 
+// START SESSION
+
 function handleSession() {
   preboardingSectionEl.classList.toggle("hidden");
   sessionSectionEl.classList.toggle("hidden");
@@ -120,6 +133,8 @@ function handleSession() {
   accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
 }
 
+// END SESSION
+
 function setSessionGoalResultMessage() {
   if (correctAnswers > sessionProblemSolveGoal) return "exceeded";
   else if (correctAnswers < sessionProblemSolveGoal) return "failed to meet";
@@ -127,42 +142,43 @@ function setSessionGoalResultMessage() {
 }
 
 function endSession() {
-  const resultsElement = document.createElement("p"); // session results
+  clearInterval(sessionEndTimer);
+  clearInterval(sessionTimer);
   resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal}`;
-  const returnToHomeBtn = document.createElement("button");
   returnToHomeBtn.textContent = "Return to Home";
   document.body.append(resultsElement, returnToHomeBtn);
   returnToHomeBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    // returns to home
-    returnToHomeBtn.remove();
-    resultsElement.remove();
-    preboardingSectionEl.classList.remove("hidden");
+    returnToHome();
   });
   init();
   sessionSectionEl.classList.add("hidden");
 }
 
 // PAUSE MENU
-function togglePauseMenu(volumeElementId = null) {
+
+function togglePauseMenu(volumeElementId) {
   sessionPaused = !sessionPaused;
   pauseMenuEl.classList.toggle("hidden");
-  if (volumeElementId) {
-    handleSFXVolume(volumeElementId);
-  }
+  handleSFXVolume(volumeElementId);
 }
 
-pauseBtnEl.addEventListener("click", (e) => {
+// RESULTS SCREEN
+
+function returnToHome() {
+  returnToHomeBtn.remove();
+  resultsElement.remove();
+  preboardingSectionEl.classList.remove("hidden");
+}
+
+// RETURN TO AREA
+
+document.body.addEventListener("keyup", (e) => {
   e.preventDefault();
-  togglePauseMenu(2);
-  resumeBtnEl.addEventListener(
-    "click",
-    (e) => {
-      e.preventDefault();
-      togglePauseMenu();
-    },
-    { once: true },
-  );
+  if (e.key === "Escape") {
+    if (sessionPaused === true) togglePauseMenu(1);
+    if (sessionFinished === true) returnToHome();
+  }
 });
 
 // START SESSION EVENT LISTENERS
@@ -228,10 +244,10 @@ startSessionFormEl.addEventListener("submit", (e) => {
   handleSession();
   // handle SFX volume
   correctAnswerSfx.volume = incorrectAnswerSfx.volume = volume / 100;
-  const sessionEnd = setInterval(() => {
+  sessionEndTimer = setInterval(() => {
     // ends session once timer has 0 seconds
   }, 1000);
-  const sessionTimer = setInterval(() => {
+  sessionTimer = setInterval(() => {
     // counts down time while not paused
     if (!sessionPaused) {
       if (durationInS === 0) {
@@ -242,6 +258,9 @@ startSessionFormEl.addEventListener("submit", (e) => {
     }
   }, 1000);
   problemGen(firstOperandDigits, secondOperandDigits);
+
+  // IN SESSION EVENT LISTENERS
+
   answerInputFormEl.addEventListener("submit", (e) => {
     e.preventDefault();
     let answer = Number(answerInputEl.value);
@@ -267,5 +286,14 @@ startSessionFormEl.addEventListener("submit", (e) => {
     }, 800);
     accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
     problemGen(firstOperandDigits, secondOperandDigits);
+  });
+});
+
+pauseBtnEl.addEventListener("click", (e) => {
+  e.preventDefault();
+  togglePauseMenu(2);
+  resumeBtnEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    togglePauseMenu(1);
   });
 });
