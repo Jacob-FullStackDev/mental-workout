@@ -57,7 +57,9 @@ let firstOperand,
 // HANDLE SFX
 
 const correctAnswerSfx = new Audio("assets/CorrectAnswerSFX.mp3");
+correctAnswerSfx.preload = "auto";
 const incorrectAnswerSfx = new Audio("assets/IncorrectAnswerSFX.mp3");
+incorrectAnswerSfx.preload = "auto";
 
 function handleSFXVolume(id) {
   activeVolumeSliderEl = document.getElementById(`volume-slider--${id}`);
@@ -145,7 +147,7 @@ function endSession() {
   clearInterval(sessionEndTimer);
   clearInterval(sessionTimer);
   sessionFinished = true;
-  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal}`;
+  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal} correct answers`;
   returnToHomeBtn.textContent = "Return to Home";
   document.body.append(resultsElement, returnToHomeBtn);
   returnToHomeBtn.addEventListener("click", (e) => {
