@@ -19,7 +19,7 @@ const sampleProblemFeedbackEl = document.getElementById(
 
 // VOLUME % DOM ELEMENT SELECTORS
 
-let activeVolumeSliderEl; // volume slider/volume value element locations: onboarding, pause menu
+let activeVolumeSliderEl; // Volume slider/volume value element locations: onboarding, pause menu
 let activeVolumeValueEl;
 
 // SESSION DOM ELEMENT SELECTORS
@@ -30,7 +30,7 @@ const accuracyEl = document.getElementById("accuracy");
 const answerInputEl = document.getElementById("problem-answer-input");
 const sessionSectionEl = document.getElementById("session-section-container");
 const answerInputFormEl = document.getElementById("problem-answer-form");
-const answerFeedbackEl = document.getElementById("answer-feedback"); // whether or not the answer was correct
+const answerFeedbackEl = document.getElementById("answer-feedback"); // Whether or not the answer was correct
 
 // PAUSE MENU DOM ELEMENT SELECTORS
 
@@ -42,9 +42,9 @@ const resumeBtnEl = document.getElementById("resume-btn");
 // RESULTS SECTION ELEMENTS
 
 const returnToHomeBtn = document.createElement("button");
-const resultsElement = document.createElement("p"); // session results displayed as fraction (1/3)
+const resultsElement = document.createElement("p"); // Session results displayed as fraction (1/3)
 
-// INITIAL STATE (that isn't handled in the init function)
+// INITIAL STATE (That isn't handled in the init function)
 
 let firstOperand,
   secondOperand,
@@ -67,7 +67,7 @@ function handleSFXVolume(id) {
   activeVolumeSliderEl.addEventListener("input", () => {
     volume = Number(activeVolumeSliderEl.value);
     activeVolumeValueEl.textContent = volume;
-    // plays sound effect for the user to gauge the volume
+    // Plays sound effect for the user to gauge the volume
     activeVolumeSliderEl.addEventListener("change", () => {
       correctAnswerSfx.volume = volume / 100;
       correctAnswerSfx.play();
@@ -81,8 +81,8 @@ handleSFXVolume(1);
 let correctAnswers,
   problemsAnswered,
   sessionProblemSolveGoal,
-  sessionPaused, // indicates being on the pause screen
-  sessionFinished, // indicates being on the session results screen
+  sessionPaused, // Indicates being on the pause screen
+  sessionFinished, // Indicates being on the session results screen
   sessionEndTimer,
   sessionTimer;
 function init() {
@@ -196,9 +196,9 @@ firstOperandInputEl.addEventListener("input", (e) => {
     );
   }
   if (!firstOperandInputEl.value) {
-    // value removed
+    // Value removed
     if (secondOperandInputEl.value) {
-      // use length of other operand
+      // Use length of other operand
       firstOperandOfSampleProblemEl.textContent = operandGen(
         secondOperandOfSampleProblemEl.textContent.length,
       );
@@ -224,9 +224,9 @@ secondOperandInputEl.addEventListener("input", (e) => {
     );
   }
   if (!secondOperandInputEl.value) {
-    // value removed
+    // Value removed
     if (firstOperandInputEl.value) {
-      // use length of other operand
+      // Use length of other operand
       secondOperandOfSampleProblemEl.textContent = operandGen(
         firstOperandOfSampleProblemEl.textContent.length,
       );
@@ -243,13 +243,13 @@ secondOperandInputEl.addEventListener("input", (e) => {
 startSessionFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   handleSession();
-  // handle SFX volume
+  // Handle SFX volume
   correctAnswerSfx.volume = incorrectAnswerSfx.volume = volume / 100;
   sessionEndTimer = setInterval(() => {
-    // ends session once timer has 0 seconds
+    // Ends session once timer has 0 seconds
   }, 1000);
   sessionTimer = setInterval(() => {
-    // counts down time while not paused
+    // Counts down time while not paused
     if (!sessionPaused) {
       if (durationInS === 0) {
         endSession();
