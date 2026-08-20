@@ -144,6 +144,7 @@ function setSessionGoalResultMessage() {
 function endSession() {
   clearInterval(sessionEndTimer);
   clearInterval(sessionTimer);
+  sessionFinished = true;
   resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal}`;
   returnToHomeBtn.textContent = "Return to Home";
   document.body.append(resultsElement, returnToHomeBtn);
