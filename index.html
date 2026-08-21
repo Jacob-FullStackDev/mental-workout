@@ -17,7 +17,7 @@
               >How many problems do you want to solve within the
               duration?</label
             >
-            <input id="session-goal" type="number" min="1" />
+            <input id="session-goal" type="number" min="1" required />
           </div>
           <div>
             <label for="session-duration">In Seconds:</label>
@@ -101,7 +101,7 @@
     </section>
     <div id="session-section-container" class="hidden">
       <main>
-        <math id="math-problem"></math>
+        <math id="math-problem"><mn id="first-operand"></mn><mo id="operator">×</mo><mn id="second-operand"></mn></math>
         <p id="session-countdown"></p>
         <p id="accuracy"></p>
         <p id="answer-feedback"></p>

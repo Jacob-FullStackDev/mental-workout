@@ -8,14 +8,8 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
-math {
-  display: block;
-}
 #session-countdown {
   color: red;
-}
-#problems-answered-correctly {
-  color: green;
 }
 .hidden {
   display: none;
