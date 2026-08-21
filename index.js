@@ -55,9 +55,7 @@ const volumeValuePauseMenuEl = document.getElementById(`volume-value--2`);
 volumeValuePauseMenuEl.textContent = volumeSliderPreboardingEl.value;
 
 function handleSFXVolume(sliderEl) {
-  console.log(sliderEl.value);
   let volume = Number(sliderEl.value) / 100;
-  console.log(volume, typeof volume);
   correctAnswerSfx.volume = volume;
   incorrectAnswerSfx.volume = volume;
   // Plays sound effect for the user to gauge the volume
@@ -249,7 +247,7 @@ startSessionFormEl.addEventListener("submit", (e) => {
     if (!sessionPaused) {
       if (durationInS === 0) {
         endSession(sessionProblemSolveGoal);
-        clearInterval(sessionTimer);
+        return clearInterval(sessionTimer);
       }
       durationInS--;
       sessionCountdownEl.textContent = durationInS;
@@ -258,7 +256,6 @@ startSessionFormEl.addEventListener("submit", (e) => {
 });
 // IN SESSION EVENT LISTENERS
 answerInputFormEl.addEventListener("submit", (e) => {
-  let i = 0;
   e.preventDefault();
   let answer = Number(answerInputEl.value);
   let firstOperand = Number(firstOperandEl.textContent);
@@ -266,11 +263,12 @@ answerInputFormEl.addEventListener("submit", (e) => {
   const correctAnswerCondition = answer === firstOperand * secondOperand;
   answerInputEl.value = "";
   problemsAnswered++;
-  problemGen(1, 1);
+  problemGen(firstOperandDigits, secondOperandDigits);
   if (correctAnswerCondition) {
     correctAnswerSfx.play();
     correctAnswers++;
   } else {
+    // testing statement
     console.log(
       `you answered ${answer}, the solution is ${firstOperand * secondOperand}, ${firstOperand}, ${secondOperand}`,
     );
