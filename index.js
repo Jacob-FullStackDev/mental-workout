@@ -147,7 +147,7 @@ function endSession() {
   clearInterval(sessionEndTimer);
   clearInterval(sessionTimer);
   sessionFinished = true;
-  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal} correct answers`;
+  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal} correct problems`;
   returnToHomeBtn.textContent = "Return to Home";
   document.body.append(resultsElement, returnToHomeBtn);
   returnToHomeBtn.addEventListener("click", (e) => {
@@ -295,8 +295,12 @@ startSessionFormEl.addEventListener("submit", (e) => {
 pauseBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
   togglePauseMenu(2);
-  resumeBtnEl.addEventListener("click", (e) => {
-    e.preventDefault();
-    togglePauseMenu(1);
-  });
+  resumeBtnEl.addEventListener(
+    "click",
+    (e) => {
+      e.preventDefault();
+      togglePauseMenu(1);
+    },
+    { once: true },
+  );
 });

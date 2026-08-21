@@ -39,3 +39,9 @@ path {
 fieldset {
   border: none;
 }
+.set-volume-container {
+  display: flex;
+}
+.volume-value {
+  display: inline;
+}
