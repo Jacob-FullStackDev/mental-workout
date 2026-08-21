@@ -19,13 +19,14 @@ const sampleProblemFeedbackEl = document.getElementById(
 
 // SESSION DOM ELEMENT SELECTORS
 
-const mathProblemEl = document.getElementById("math-problem");
 const sessionCountdownEl = document.getElementById("session-countdown");
 const accuracyEl = document.getElementById("accuracy");
 const answerInputEl = document.getElementById("problem-answer-input");
 const sessionSectionEl = document.getElementById("session-section-container");
 const answerInputFormEl = document.getElementById("problem-answer-form");
 const answerFeedbackEl = document.getElementById("answer-feedback"); // Whether or not the answer was correct
+const firstOperandEl = document.getElementById("first-operand");
+const secondOperandEl = document.getElementById("second-operand");
 
 // PAUSE MENU DOM ELEMENT SELECTORS
 
@@ -45,33 +46,35 @@ const correctAnswerSfx = new Audio("assets/CorrectAnswerSFX.mp3");
 const incorrectAnswerSfx = new Audio("assets/IncorrectAnswerSFX.mp3");
 
 // volume Element Location El naming format
-let volumeSliderPreboardingEl = document.getElementById(`volume-slider--1`);
-let volumeValuePreboardingEl = document.getElementById(`volume-value--1`);
+const volumeSliderPreboardingEl = document.getElementById(`volume-slider--1`);
+const volumeValuePreboardingEl = document.getElementById(`volume-value--1`);
 volumeValuePreboardingEl.textContent = volumeSliderPreboardingEl.value;
 
-let volumeSliderPauseMenuEl = document.getElementById(`volume-slider--2`);
-let volumeValuePauseMenuEl = document.getElementById(`volume-value--2`);
+const volumeSliderPauseMenuEl = document.getElementById(`volume-slider--2`);
+const volumeValuePauseMenuEl = document.getElementById(`volume-value--2`);
 volumeValuePauseMenuEl.textContent = volumeSliderPreboardingEl.value;
 
-function handleSFXVolume(sliderEl, valueEl) {
+function handleSFXVolume(sliderEl) {
+  console.log(sliderEl.value);
   let volume = Number(sliderEl.value) / 100;
+  console.log(volume, typeof volume);
   correctAnswerSfx.volume = volume;
   incorrectAnswerSfx.volume = volume;
   // Plays sound effect for the user to gauge the volume
   correctAnswerSfx.play();
 }
 
-volumeSliderPreboardingEl.addEventListener("change", () => {
+volumeSliderPreboardingEl.addEventListener("change", (e) => {
   // updates SFX volume
-  handleSFXVolume(volumeSliderPreboardingEl, volumeValuePreboardingEl);
+  handleSFXVolume(volumeSliderPreboardingEl);
 });
 volumeSliderPreboardingEl.addEventListener("input", (e) => {
   // displays SFX volume
   volumeValuePreboardingEl.textContent = e.target.value;
 });
 
-volumeSliderPauseMenuEl.addEventListener("change", () => {
-  handleSFXVolume(volumeSliderPauseMenuEl, volumeValuePauseMenuEl);
+volumeSliderPauseMenuEl.addEventListener("change", (e) => {
+  handleSFXVolume(volumeSliderPauseMenuEl);
 });
 volumeSliderPauseMenuEl.addEventListener("input", (e) => {
   volumeValuePauseMenuEl.textContent = e.target.value;
@@ -83,7 +86,8 @@ let correctAnswers,
   problemsAnswered,
   sessionPaused, // Indicates being on the pause screen
   sessionFinished, // Indicates being on the session results screen
-  sessionTimer;
+  firstOperandDigits,
+  secondOperandDigits;
 function init() {
   correctAnswers = 0;
   problemsAnswered = 0;
@@ -93,6 +97,8 @@ function init() {
   goalInputEl.value = "";
   durationInputEl.value = "";
   firstOperandInputEl.value = secondOperandInputEl.value = "";
+  answerInputEl.value = "";
+  firstOperandDigits = secondOperandDigits = null;
 }
 init();
 
@@ -106,6 +112,10 @@ function operandGen(digits) {
     return operand;
   }
 }
+function problemGen(firstOperandDigits, secondOperandDigits) {
+  firstOperandEl.textContent = operandGen(firstOperandDigits);
+  secondOperandEl.textContent = operandGen(secondOperandDigits);
+}
 
 // STARTS/ENDS SESSION
 
@@ -118,31 +128,32 @@ function handleSession() {
 // UPON ENDING SESSION
 
 function setSessionGoalResultMessage(goal) {
-  if (correctAnswers > sessionProblemSolveGoal) return "exceeded";
-  else if (correctAnswers < sessionProblemSolveGoal) return "failed to meet";
+  if (correctAnswers > goal) return "exceeded";
+  else if (correctAnswers < goal) return "failed to meet";
   else return "met";
 }
 
-function endSession() {
-  clearInterval(sessionTimer);
+function endSession(goal) {
+  // stops timer, marks session as finished, enters results page
   sessionFinished = true;
-  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage()} your goal of ${sessionProblemSolveGoal} correct problems.`;
+  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
   returnToHomeBtn.textContent = "Return to Home";
   document.body.append(resultsElement, returnToHomeBtn);
-  returnToHomeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    returnToHome();
-  });
   init();
   sessionSectionEl.classList.add("hidden");
+  firstOperandEl.textContent = secondOperandEl.textContent = "";
 }
+
+returnToHomeBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  returnToHome();
+});
 
 // PAUSE MENU
 
 function togglePauseMenu(volumeElementId) {
   sessionPaused = !sessionPaused;
   pauseMenuEl.classList.toggle("hidden");
-  handleSFXVolume(volumeElementId);
 }
 
 // RESULTS SCREEN
@@ -224,57 +235,67 @@ secondOperandInputEl.addEventListener("input", (e) => {
 startSessionFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   handleSession();
-  let firstOperandDigits = Number(firstOperandInputEl.value);
-  let secondOperandDigits = Number(secondOperandInputEl.value);
+  firstOperandDigits = Number(firstOperandInputEl.value);
+  secondOperandDigits = secondOperandInputEl.value
+    ? Number(secondOperandInputEl.value)
+    : firstOperandDigits;
   let sessionProblemSolveGoal = Number(goalInputEl.value);
   let durationInMS = Number(durationInputEl.value) * 1000;
   let durationInS = durationInMS / 1000;
   sessionCountdownEl.textContent = durationInS;
-  sessionTimer = setInterval(() => {
+  problemGen(firstOperandDigits, secondOperandDigits);
+  let sessionTimer = setInterval(() => {
     // Counts down time while not paused
     if (!sessionPaused) {
       if (durationInS === 0) {
-        endSession();
+        endSession(sessionProblemSolveGoal);
+        clearInterval(sessionTimer);
       }
       durationInS--;
       sessionCountdownEl.textContent = durationInS;
     }
   }, 1000);
-
-  // IN SESSION EVENT LISTENERS
-
-  answerInputFormEl.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let answer = Number(answerInputEl.value);
-    const correctAnswerCondition = answer === firstOperand * secondOperand;
-    answerInputEl.value = "";
-    problemsAnswered++;
-    if (correctAnswerCondition) {
-      correctAnswerSfx.play();
-      correctAnswers++;
-    } else {
-      incorrectAnswerSfx.play();
-    }
-    answerFeedbackEl.textContent = correctAnswerCondition
-      ? `Correct!: ${answer}`
-      : `Incorrect! you answered ${answer} but it was ${firstOperand * secondOperand}`;
-    answerFeedbackEl.classList.add(
-      correctAnswerCondition ? "correct-answer" : "incorrect-answer",
+});
+// IN SESSION EVENT LISTENERS
+answerInputFormEl.addEventListener("submit", (e) => {
+  let i = 0;
+  e.preventDefault();
+  let answer = Number(answerInputEl.value);
+  let firstOperand = Number(firstOperandEl.textContent);
+  let secondOperand = Number(secondOperandEl.textContent);
+  const correctAnswerCondition = answer === firstOperand * secondOperand;
+  answerInputEl.value = "";
+  problemsAnswered++;
+  problemGen(1, 1);
+  if (correctAnswerCondition) {
+    correctAnswerSfx.play();
+    correctAnswers++;
+  } else {
+    console.log(
+      `you answered ${answer}, the solution is ${firstOperand * secondOperand}, ${firstOperand}, ${secondOperand}`,
     );
-    const showAnswerFeedbacktimer = setInterval(() => {
-      answerFeedbackEl.textContent = "";
-      answerFeedbackEl.classList.remove("correct-answer", "incorrect-answer");
-      clearInterval(showAnswerFeedbacktimer);
-    }, 800);
-    accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
-  });
+    incorrectAnswerSfx.play();
+  }
+  answerFeedbackEl.textContent = correctAnswerCondition
+    ? `Correct!: ${answer}`
+    : `Incorrect! you answered ${answer} but it was ${firstOperand * secondOperand}`;
+  answerFeedbackEl.classList.add(
+    correctAnswerCondition ? "correct-answer" : "incorrect-answer",
+  );
+  const showAnswerFeedbacktimer = setInterval(() => {
+    answerFeedbackEl.textContent = "";
+    answerFeedbackEl.classList.remove("correct-answer", "incorrect-answer");
+    clearInterval(showAnswerFeedbacktimer);
+  }, 800);
+  accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
 });
 
 pauseBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
-  togglePauseMenu(2);
+  togglePauseMenu();
 });
 resumeBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
-  togglePauseMenu(1);
+  togglePauseMenu();
+  problemGen(firstOperandDigits, secondOperandDigits);
 });
