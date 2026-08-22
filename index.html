@@ -48,11 +48,10 @@
               placeholder="0"
             />
           </div>
-          <math id="sample-problem" class="hidden"
-            ><mrow
-              ><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo
-              ><mn id="sample-operand-2"></mn></mrow
-          ></math>
+          <div class="math-problem-container hidden"><math id="sample-problem" class="math-problem"
+            ><mrow><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn></mrow>          
+        </math>
+        </div>
           <p class="feedback" id="sample-problem-feedback"></p>
           <button>Start session</button>
         </fieldset>
@@ -99,18 +98,23 @@
         </fieldset>
       </form>
     </section>
-    <div id="session-section-container" class="hidden">
+    <div id="session-section-container">
       <main>
-        <math id="math-problem"><mn id="first-operand"></mn><mo id="operator">×</mo><mn id="second-operand"></mn></math>
+        <div id="math-problem-container">
+        <math id="math-problem"><mn id="first-operand">35</mn><mo id="operator">×</mo><mn id="second-operand">2</mn></math>
+        <hr />
+        </div>
         <p id="session-countdown"></p>
         <p id="accuracy"></p>
         <p id="answer-feedback"></p>
         <form id="problem-answer-form">
           <label for="problem-answer-input">Answer:</label>
           <input id="problem-answer-input" type="number" required />
+          <div id="session-btns">
           <button id="problem-answer-submit">Submit answer</button>
         </form>
         <button id="pause-btn">Pause session</button>
+        </div>
       </main>
     </div>
     <section id="pause-menu" class="hidden">
