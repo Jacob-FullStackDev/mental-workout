@@ -1,13 +1,17 @@
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  padding: 2%;
+}
+
 #session-countdown {
   color: red;
 }
@@ -52,20 +56,20 @@ fieldset {
 #second-operand {
   grid-column: 2;
   margin-left: auto;
-  margin-right: 3px;
-  margin-top: 3px;
+  margin-right: 4px;
+  margin-top: 4px;
 }
 #second-operand,
 #operator {
-  margin-top: 4px;
-  margin-bottom: 6px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 #operator {
   display: flex;
   align-items: flex-end;
 }
 hr {
-  margin-top: -5px;
+  margin-top: -4px;
 }
 #problem-answer-form {
   margin-top: 24px;
