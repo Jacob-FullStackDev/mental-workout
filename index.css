@@ -10,6 +10,7 @@ html {
 }
 body {
   padding: 2%;
+  background-color: #aaa;
 }
 
 #session-countdown {
@@ -18,13 +19,9 @@ body {
 .hidden {
   display: none;
 }
-h1 {
-  color: #333;
-  font-size: 50px;
-}
 #pause-menu {
   opacity: 0.98;
-  background-color: #fff;
+  background-color: #ddd;
   z-index: 9999;
   position: fixed;
   inset: 0;
@@ -33,9 +30,6 @@ svg,
 path {
   width: 24px;
   height: 24px;
-}
-fieldset {
-  border: none;
 }
 .set-volume-container {
   display: flex;
@@ -81,4 +75,56 @@ hr {
   display: flex;
   margin-top: 8px;
   justify-content: space-between;
+}
+/* PREBOARDING */
+#preboarding-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #9d8cc3;
+  padding: 8px;
+  position: relative;
+}
+#start-session {
+  grid-template-columns: 1fr 60px;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+h1 {
+  font-size: 50px;
+  margin-bottom: 16px;
+}
+label {
+  display: block;
+}
+input {
+  width: 80px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* VOLUME SLIDER */
+.set-volume-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+label[for="volume-slider--1"] {
+  margin: 0 4px;
+  justify-content: flex-start;
+}
+.volume-inputandlabel-container {
+  display: flex;
+  justify-content: center;
+}
+.volume-value {
+  width: 5ch;
+  align-items: center;
+  justify-content: center;
+}
+button {
+  position: absolute;
+  bottom: 8px;
+}
+.volume-slider {
+  margin: 0 4px;
 }

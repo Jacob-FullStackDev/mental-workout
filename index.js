@@ -48,11 +48,11 @@ const incorrectAnswerSfx = new Audio("assets/IncorrectAnswerSFX.mp3");
 // volume Element Location El naming format
 const volumeSliderPreboardingEl = document.getElementById(`volume-slider--1`);
 const volumeValuePreboardingEl = document.getElementById(`volume-value--1`);
-volumeValuePreboardingEl.textContent = volumeSliderPreboardingEl.value;
+volumeValuePreboardingEl.textContent = `${volumeSliderPreboardingEl.value}%`;
 
 const volumeSliderPauseMenuEl = document.getElementById(`volume-slider--2`);
 const volumeValuePauseMenuEl = document.getElementById(`volume-value--2`);
-volumeValuePauseMenuEl.textContent = volumeSliderPreboardingEl.value;
+volumeValuePauseMenuEl.textContent = `${volumeSliderPreboardingEl.value}%`;
 
 function handleSFXVolume(sliderEl) {
   let volume = Number(sliderEl.value) / 100;
@@ -68,14 +68,14 @@ volumeSliderPreboardingEl.addEventListener("change", (e) => {
 });
 volumeSliderPreboardingEl.addEventListener("input", (e) => {
   // displays SFX volume
-  volumeValuePreboardingEl.textContent = e.target.value;
+  volumeValuePreboardingEl.textContent = `${e.target.value}%`;
 });
 
 volumeSliderPauseMenuEl.addEventListener("change", (e) => {
   handleSFXVolume(volumeSliderPauseMenuEl);
 });
 volumeSliderPauseMenuEl.addEventListener("input", (e) => {
-  volumeValuePauseMenuEl.textContent = e.target.value;
+  volumeValuePauseMenuEl.textContent = `${e.target.value}%`;
 });
 
 // INITAL STATE FUNCTION
