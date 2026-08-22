@@ -97,6 +97,7 @@ function init() {
   firstOperandInputEl.value = secondOperandInputEl.value = "";
   answerInputEl.value = "";
   firstOperandDigits = secondOperandDigits = null;
+  sampleProblemEl.textContent = "";
 }
 init();
 
