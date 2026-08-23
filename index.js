@@ -109,9 +109,30 @@ function operandGen(digits) {
     return operand;
   }
 }
-function problemGen(firstOperandDigits, secondOperandDigits) {
-  firstOperandEl.textContent = operandGen(firstOperandDigits);
-  secondOperandEl.textContent = operandGen(secondOperandDigits);
+function problemGen(
+  firstOperandDigits,
+  secondOperandDigits,
+  previousFirstOperand = undefined,
+  previousSecondOperand = undefined,
+) {
+  if (
+    (firstOperandEl.textContent && secondOperandEl.textContent) ||
+    (previousFirstOperand && previousSecondOperand)
+  ) {
+    let newFirstOperand;
+    let newSecondOperand;
+    while (!newFirstOperand || newFirstOperand === previousFirstOperand) {
+      newFirstOperand = operandGen(firstOperandDigits);
+    }
+    while (!newSecondOperand || newSecondOperand === previousSecondOperand) {
+      newSecondOperand = operandGen(secondOperandDigits);
+    }
+    firstOperandEl.textContent = newFirstOperand;
+    secondOperandEl.textContent = newSecondOperand;
+  } else {
+    firstOperandEl.textContent = operandGen(firstOperandDigits);
+    secondOperandEl.textContent = operandGen(secondOperandDigits);
+  }
 }
 
 // STARTS/ENDS SESSION
@@ -262,7 +283,12 @@ answerInputFormEl.addEventListener("submit", (e) => {
   const correctAnswerCondition = answer === firstOperand * secondOperand;
   answerInputEl.value = "";
   problemsAnswered++;
-  problemGen(firstOperandDigits, secondOperandDigits);
+  problemGen(
+    firstOperandDigits,
+    secondOperandDigits,
+    firstOperand,
+    secondOperand,
+  );
   if (correctAnswerCondition) {
     correctAnswerSfx.play();
     correctAnswers++;
