@@ -35,6 +35,26 @@ path {
   height: 24px;
 }
 
+/* PREBOARDING */
+
+#preboarding-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #9d8cc3;
+  padding: 8px;
+  position: relative;
+  box-shadow: 0 0 40px #000;
+}
+
+#second-operand-length {
+  margin-bottom: 16px;
+}
+
+button {
+  position: absolute;
+  bottom: 8px;
+}
+
 /* SESSION COMPONENT */
 
 .problem-card-bottom-line {
@@ -88,16 +108,6 @@ path {
   justify-content: space-between;
 }
 
-/* PREBOARDING */
-
-#preboarding-section {
-  display: flex;
-  flex-direction: column;
-  background-color: #9d8cc3;
-  padding: 8px;
-  position: relative;
-}
-
 /* VOLUME SLIDER */
 
 .set-volume-container {
@@ -124,8 +134,4 @@ label[for="volume-slider--1"] {
   width: 5ch;
   align-items: center;
   justify-content: center;
-}
-button {
-  position: absolute;
-  bottom: 8px;
 }
