@@ -24,11 +24,6 @@ h1 {
 label {
   display: block;
 }
-input {
-  width: 80px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-}
 svg,
 path {
   width: 24px;
@@ -50,11 +45,6 @@ path {
   margin-bottom: 16px;
 }
 
-button {
-  position: absolute;
-  bottom: 8px;
-}
-
 /* SESSION COMPONENT */
 
 .problem-card-bottom-line {
@@ -62,9 +52,6 @@ button {
   background-color: #000;
 }
 
-#session-countdown {
-  color: red;
-}
 #pause-menu {
   opacity: 0.98;
   background-color: #ddd;
@@ -121,10 +108,7 @@ button {
 .set-volume-container {
   display: flex;
 }
-label[for="volume-slider--1"] {
-  margin: 0 4px;
-  justify-content: flex-start;
-}
+
 .volume-inputandlabel-container {
   display: flex;
   justify-content: center;
@@ -134,4 +118,29 @@ label[for="volume-slider--1"] {
   width: 5ch;
   align-items: center;
   justify-content: center;
+}
+/* PLACEHOLDER/TEMPORARY STYLES */
+
+button {
+  /* START SESSION BUTTON */
+  position: absolute;
+  bottom: 8px;
+}
+
+label[for="volume-slider--1"] {
+  /* SHOULD BE ALL VOLUME SLIDERS */
+  margin: 0 4px;
+  justify-content: flex-start;
+}
+
+input {
+  /* SHOULD ONLY APPLY TO SESSION INPUTS */
+  width: 80px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+#session-countdown {
+  /* ADD CUSTOM RED/GREEN COLOR FOR RIGHT/WRONG ANSWER, TIMER */
+  color: red;
 }
