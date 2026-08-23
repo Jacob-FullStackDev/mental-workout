@@ -7,16 +7,12 @@ const durationInputEl = document.getElementById("session-duration");
 const goalInputEl = document.getElementById("session-goal");
 const firstOperandInputEl = document.getElementById("first-operand-length");
 const secondOperandInputEl = document.getElementById("second-operand-length");
-const sampleProblemEl = document.getElementById("sample-problem");
 const startSessionFormEl = document.getElementById("start-session");
 const firstOperandOfSampleProblemEl =
   document.getElementById("sample-operand-1");
 const secondOperandOfSampleProblemEl =
   document.getElementById("sample-operand-2");
-const sampleProblemFeedbackEl = document.getElementById(
-  "sample-problem-feedback",
-);
-
+const sampleProblemEl = document.getElementById("sample-problem");
 // SESSION DOM ELEMENT SELECTORS
 
 const sessionCountdownEl = document.getElementById("session-countdown");
@@ -97,7 +93,8 @@ function init() {
   firstOperandInputEl.value = secondOperandInputEl.value = "";
   answerInputEl.value = "";
   firstOperandDigits = secondOperandDigits = null;
-  sampleProblemEl.textContent = "";
+  firstOperandOfSampleProblemEl.textContent =
+    secondOperandOfSampleProblemEl.textContent = "";
 }
 init();
 

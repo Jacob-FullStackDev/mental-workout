@@ -38,11 +38,10 @@
               max="16"
               placeholder="0"
             />
-          <div class="math-problem-container"><math id="sample-problem" class="math-problem"
-            ><mrow><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn></mrow>          
-        </math>
-        </div>
-          <p class="feedback" id="sample-problem-feedback"></p>
+<div><math id="sample-problem" class="hidden"
+            ><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn>      
+        </math></div>
+
           <button>Start session</button>
           </form>
           <div class="set-volume-container">
@@ -86,13 +85,13 @@
           <label for="volume-slider--1">Volume:</label>
           <p id="volume-value--1" class="volume-value"></p>
           </div>
-                    </div>
+        </div>
     </section>
     <div id="session-section-container" class="hidden">
       <main>
         <div id="math-problem-container">
-        <math id="math-problem"><mn id="first-operand">35</mn><mo id="operator">×</mo><mn id="second-operand">2</mn></math>
-        <hr />
+        <math id="math-problem"><mn id="first-operand--session"></mn><mo id="operator--session">×</mo><mn id="second-operand--session"></mn></math>
+        <hr class="problem-card-bottom-line" />
         </div>
         <p id="session-countdown"></p>
         <p id="accuracy"></p>

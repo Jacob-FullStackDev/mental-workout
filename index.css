@@ -1,3 +1,5 @@
+/* GENERAL STYLES */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,12 +14,36 @@ body {
   padding: 2%;
   background-color: #aaa;
 }
+.hidden {
+  display: none !important;
+}
+h1 {
+  font-size: 50px;
+  margin-bottom: 16px;
+}
+label {
+  display: block;
+}
+input {
+  width: 80px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+svg,
+path {
+  width: 24px;
+  height: 24px;
+}
+
+/* SESSION */
+
+.problem-card-bottom-line {
+  margin-top: -4px;
+  background-color: #000;
+}
 
 #session-countdown {
   color: red;
-}
-.hidden {
-  display: none;
 }
 #pause-menu {
   opacity: 0.98;
@@ -26,11 +52,7 @@ body {
   position: fixed;
   inset: 0;
 }
-svg,
-path {
-  width: 24px;
-  height: 24px;
-}
+
 .set-volume-container {
   display: flex;
 }
@@ -38,13 +60,11 @@ path {
   display: inline;
 }
 
-#math-problem-container {
-  max-width: 44px;
-}
 #math-problem {
   display: grid;
   box-shadow: 0 0 20px #000;
   font-size: 20px;
+  background-color: #fff;
 }
 #first-operand,
 #second-operand {
@@ -62,9 +82,7 @@ path {
   display: flex;
   align-items: flex-end;
 }
-hr {
-  margin-top: -4px;
-}
+
 #problem-answer-form {
   margin-top: 24px;
 }
@@ -83,23 +101,6 @@ hr {
   background-color: #9d8cc3;
   padding: 8px;
   position: relative;
-}
-#start-session {
-  grid-template-columns: 1fr 60px;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-h1 {
-  font-size: 50px;
-  margin-bottom: 16px;
-}
-label {
-  display: block;
-}
-input {
-  width: 80px;
-  margin-top: 4px;
-  margin-bottom: 8px;
 }
 
 /* VOLUME SLIDER */
