@@ -1,4 +1,4 @@
-/* GENERAL STYLES */
+/* GENERAL STYLES (Not specific to any component) */
 
 * {
   margin: 0;
@@ -35,7 +35,7 @@ path {
   height: 24px;
 }
 
-/* SESSION */
+/* SESSION COMPONENT */
 
 .problem-card-bottom-line {
   margin-top: -4px;
@@ -51,13 +51,6 @@ path {
   z-index: 9999;
   position: fixed;
   inset: 0;
-}
-
-.set-volume-container {
-  display: flex;
-}
-.volume-value {
-  display: inline;
 }
 
 #math-problem {
@@ -94,7 +87,9 @@ path {
   margin-top: 8px;
   justify-content: space-between;
 }
+
 /* PREBOARDING */
+
 #preboarding-section {
   display: flex;
   flex-direction: column;
@@ -104,10 +99,17 @@ path {
 }
 
 /* VOLUME SLIDER */
+
 .set-volume-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+.volume-slider {
+  margin: 0 4px;
+}
+.set-volume-container {
+  display: flex;
 }
 label[for="volume-slider--1"] {
   margin: 0 4px;
@@ -118,6 +120,7 @@ label[for="volume-slider--1"] {
   justify-content: center;
 }
 .volume-value {
+  display: inline;
   width: 5ch;
   align-items: center;
   justify-content: center;
@@ -125,7 +128,4 @@ label[for="volume-slider--1"] {
 button {
   position: absolute;
   bottom: 8px;
-}
-.volume-slider {
-  margin: 0 4px;
 }
