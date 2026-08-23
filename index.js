@@ -21,8 +21,8 @@ const answerInputEl = document.getElementById("problem-answer-input");
 const sessionSectionEl = document.getElementById("session-section-container");
 const answerInputFormEl = document.getElementById("problem-answer-form");
 const answerFeedbackEl = document.getElementById("answer-feedback"); // Whether or not the answer was correct
-const firstOperandEl = document.getElementById("first-operand");
-const secondOperandEl = document.getElementById("second-operand");
+const firstOperandEl = document.getElementById("session-first-operand");
+const secondOperandEl = document.getElementById("session-second-operand");
 
 // PAUSE MENU DOM ELEMENT SELECTORS
 
@@ -95,6 +95,7 @@ function init() {
   firstOperandDigits = secondOperandDigits = null;
   firstOperandOfSampleProblemEl.textContent =
     secondOperandOfSampleProblemEl.textContent = "";
+  sampleProblemEl.classList.add("hidden");
 }
 init();
 
