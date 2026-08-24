@@ -14,9 +14,9 @@
             <label for="session-goal"
               >How many problems do you want to solve this session?</label
             >
-            <input id="session-goal" type="number" min="1" class="start-session-inputs" placeholder="0" required />
+            <input id="session-goal" type="number" min="1" class="start-session-inputs" placeholder="1" required />
             <label for="session-duration">How many seconds should this session be?</label>
-            <input id="session-duration" type="number" min="1" class="start-session-inputs" placeholder="0" required />
+            <input id="session-duration" type="number" min="1" class="start-session-inputs" placeholder="1" required />
             <label for="first-operand-length"
               >How many digits should the first operand be?</label
             >
@@ -26,7 +26,7 @@
               min="1"
               max="16"
               class="start-session-inputs"
-              placeholder="0"
+              placeholder="1"
               required
             />
             <label for="second-operand-length"
@@ -38,11 +38,11 @@
               min="1"
               max="16"
               class="start-session-inputs"
-              placeholder="0"
+              placeholder="1"
             />
-<div><math id="sample-problem"><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn>      
+<div id="sample-problem-container"><math id="sample-problem"><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn>      
         </math></div>
-          <button>Start session</button>
+          <button id="start-session-btn">Start session</button>
           </form>
           <div class="set-volume-container">
             <svg

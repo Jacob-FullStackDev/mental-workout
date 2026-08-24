@@ -32,7 +32,7 @@ path {
   height: 24px;
 }
 
-/* PREBOARDING */
+/* PREBOARDING COMPONENT */
 
 #preboarding-section {
   display: flex;
@@ -47,7 +47,7 @@ path {
 }
 
 #second-operand-length {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .start-session-inputs {
@@ -57,6 +57,14 @@ path {
   padding: 4px;
   outline: 1px solid #fff;
   border: none;
+}
+
+#start-session-btn {
+  margin-top: 16px;
+}
+
+#sample-problem-container {
+  height: 12px;
 }
 
 /* SESSION COMPONENT */
@@ -111,15 +119,14 @@ path {
 
 /* VOLUME SLIDER */
 
-.set-volume-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 .volume-slider {
   margin: 0 4px;
 }
 .set-volume-container {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .volume-inputandlabel-container {
