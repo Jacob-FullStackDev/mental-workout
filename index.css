@@ -12,7 +12,7 @@ html {
 }
 body {
   padding: 2%;
-  background-color: #aaa;
+  background-color: #ebecf0;
 }
 .hidden {
   display: none !important;
@@ -35,10 +35,11 @@ path {
 #preboarding-section {
   display: flex;
   flex-direction: column;
-  background-color: #9d8cc3;
+  background-color: #1042ef;
   padding: 8px;
   position: relative;
   box-shadow: 0 0 40px #000;
+  color: #fff;
 }
 
 #second-operand-length {
@@ -54,7 +55,7 @@ path {
 
 #pause-menu {
   opacity: 0.98;
-  background-color: #ddd;
+  background-color: #dadbd9;
   z-index: 9999;
   position: fixed;
   inset: 0;
@@ -119,6 +120,7 @@ path {
   align-items: center;
   justify-content: center;
 }
+
 /* PLACEHOLDER/TEMPORARY STYLES */
 
 button {
