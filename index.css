@@ -69,6 +69,9 @@ path {
 
 /* SESSION COMPONENT */
 
+#session-section-container {
+  background-color: #1042ef;
+}
 .problem-card-bottom-line {
   margin-top: -20px;
   background-color: #000;
