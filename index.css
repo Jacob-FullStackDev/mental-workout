@@ -70,8 +70,9 @@ path {
 /* SESSION COMPONENT */
 
 .problem-card-bottom-line {
-  margin-top: -4px;
+  margin-top: -20px;
   background-color: #000;
+  margin-bottom: 44px;
 }
 
 #pause-menu {
@@ -86,25 +87,28 @@ path {
   display: grid;
   box-shadow: 0 0 20px #000;
   font-size: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
   background-color: #fff;
+  padding-bottom: 12px;
 }
-#first-operand,
-#second-operand {
+
+#session-second-operand,
+#session-first-operand {
   grid-column: 2;
   margin-left: auto;
-  margin-right: 4px;
-  margin-top: 4px;
+  margin-right: 8px;
+  margin-top: 8px;
 }
-#second-operand,
-#operator {
+#session-operator,
+#second-operand {
   margin-top: 8px;
   margin-bottom: 8px;
 }
-#operator {
+#session-operator {
   display: flex;
   align-items: flex-end;
 }
-
 #problem-answer-form {
   margin-top: 24px;
 }
@@ -115,6 +119,10 @@ path {
   display: flex;
   margin-top: 8px;
   justify-content: space-between;
+}
+#math-problem-container {
+  display: flex;
+  flex-direction: column;
 }
 
 /* VOLUME SLIDER */
@@ -143,7 +151,6 @@ path {
 /* PLACEHOLDER/TEMPORARY STYLES */
 
 button {
-  /* START SESSION BUTTON */
   position: absolute;
 }
 
