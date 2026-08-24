@@ -197,7 +197,7 @@ document.body.addEventListener("keyup", (e) => {
 firstOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
-  if (digitsLength >= 1 && digitsLength <= 15) {
+  if (digitsLength >= 1 && digitsLength <= 16) {
     firstOperandOfSampleProblemEl.textContent = operandGen(digitsLength);
   }
   if (!secondOperandInputEl.value) {
@@ -225,7 +225,7 @@ firstOperandInputEl.addEventListener("input", (e) => {
 secondOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
-  if (digitsLength >= 1 && digitsLength <= 15) {
+  if (digitsLength >= 1 && digitsLength <= 16) {
     secondOperandOfSampleProblemEl.textContent = operandGen(digitsLength);
   }
   if (!firstOperandInputEl.value) {
