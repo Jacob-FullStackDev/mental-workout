@@ -13,6 +13,8 @@ html {
 body {
   padding: 2%;
   background-color: #ebecf0;
+  display: flex;
+  justify-content: center;
 }
 .hidden {
   display: none !important;
@@ -40,10 +42,21 @@ path {
   position: relative;
   box-shadow: 0 0 40px #000;
   color: #fff;
+  border-radius: 8px;
+  width: 50%;
 }
 
 #second-operand-length {
   margin-bottom: 16px;
+}
+
+.start-session-inputs {
+  background-color: #1042ef;
+  color: #fff;
+  border-radius: 8px;
+  padding: 4px;
+  outline: 1px solid #fff;
+  border: none;
 }
 
 /* SESSION COMPONENT */
@@ -107,7 +120,6 @@ path {
   margin: 0 4px;
 }
 .set-volume-container {
-  display: flex;
 }
 
 .volume-inputandlabel-container {
@@ -126,7 +138,6 @@ path {
 button {
   /* START SESSION BUTTON */
   position: absolute;
-  bottom: 8px;
 }
 
 label[for="volume-slider--1"] {
