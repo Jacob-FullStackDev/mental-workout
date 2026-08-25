@@ -8,7 +8,7 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <section id="preboarding-section">
+    <section id="preboarding-section" class="hidden">
       <h1 id="preboarding-heading">Practice mental multiplication</h1>
       <form id="start-session">
             <label for="session-goal"
@@ -87,7 +87,7 @@
           </div>
         </div>
     </section>
-    <div id="session-section-container" class="hidden">
+    <div id="session-section-container">
       <main>
         <div id="math-problem-container">
         <math id="math-problem"><mn id="session-first-operand"></mn><mo id="session-operator">×</mo><mn id="session-second-operand"></mn></math>
@@ -100,8 +100,7 @@
         </form>
         <p id="accuracy"></p>
         <p id="answer-feedback"></p>
-                <p id="session-countdown"></p>
-
+        <p id="session-countdown"></p>
         <button id="pause-btn">Pause session</button>
       </main>
     </div>
