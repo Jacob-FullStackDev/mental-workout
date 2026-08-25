@@ -10,41 +10,41 @@
   <body>
     <section id="preboarding-section">
       <h1 id="preboarding-heading">Practice mental multiplication</h1>
-      <form id="start-session">
-            <label for="session-goal"
+      <form id="preboarding-form">
+            <label for="preboarding-form-goal"
               >How many problems do you want to solve this session?</label
             >
-            <input id="session-goal" class="input start-session-inputs" type="number" min="1" placeholder="1" required />
-            <label for="session-duration">How many seconds should this session be?</label>
-            <input id="session-duration" class="input start-session-inputs" type="number" min="1" placeholder="1" required />
-            <label for="first-operand-length"
+            <input id="preboarding-form-goal" class="input input--preboarding-goal" type="number" min="1" placeholder="1" required />
+            <label for="preboarding-form-duration">How many seconds should this session be?</label>
+            <input id="preboarding-form-duration" class="input input--preboarding-duration" type="number" min="1" placeholder="1" required />
+            <label for="preboarding-form-first-operand-digits"
               >How many digits should the first operand be?</label
             >
             <input
-              id="first-operand-length"
-              class="input start-session-inputs"
+              id="preboarding-form-first-operand-digits"
+              class="input input--preboarding-operand-digits"
               type="number"
               min="1"
               max="16"
               placeholder="1"
               required
             />
-            <label for="second-operand-length"
+            <label for="preboarding-form-second-operand-digits"
               >How many digits should the second operand be?</label
             >
             <input
-              id="second-operand-length"
-              class="input start-session-inputs"
+              id="preboarding-form-second-operand-digits"
+              class="input input--preboarding-operand-digits"
               type="number"
               min="1"
               max="16"
               placeholder="1"
             />
-<div id="sample-problem-container"><math id="sample-problem"><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn>      
+<div id="preboarding-form-problem-container" class="hidden"><math id="preboarding-form-problem"><mn id="preboarding-form-first-operand"></mn><mo id="preboarding-form-operator">×</mo><mn id="preboarding-form-second-operand"></mn>      
         </math></div>
-          <button id="start-session-btn">Start session</button>
+          <button id="preboarding-form-start">Start session</button>
           </form>
-          <div class="set-volume-container">
+          <div id="volume-container">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -60,8 +60,8 @@
               />
             </svg>
             <input
-              id="volume-slider--1"
-              class="input volume-slider"
+              id="preboarding-volume-input"
+              class="input input--preboarding-volume"
               type="range"
               min="0"
               max="100"
@@ -81,32 +81,32 @@
                 d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
               />
             </svg>
-            <div class="volume-inputandlabel-container">
-          <label for="volume-slider--1" class="volume-slider--label">Volume:</label>
-          <p id="volume-value--1" class="volume-value"></p>
+            <div class="preboarding-container">
+          <label for="preboarding-volume-input" class="label-volume">Volume:</label>
+          <p id="preboarding-volume-value" class="volume-value"></p>
           </div>
         </div>
     </section>
-    <div id="session-section-container">
+    <div id="session-container" class="hidden">
       <main>
-        <div id="math-problem-container">
-        <math id="math-problem"><mn id="session-first-operand"></mn><mo id="session-operator">×</mo><mn id="session-second-operand"></mn></math>
-        <hr class="problem-card-bottom-line" />
+        <div id="session-problem-container">
+        <math id="session-problem"><mn id="session-first-operand"></mn><mo id="session-operator">×</mo><mn id="session-second-operand"></mn></math>
+        <hr class="session-card-bottom-line" />
         </div>
         <form id="problem-answer-form">
-          <label for="problem-answer-input" class="input-session-label">Answer:</label>
-          <input id="problem-answer-input" class="input session-input" type="number" min="0" placeholder="0" required />
-          <button id="problem-answer-submit">Submit answer</button>
+          <label for="session-form-first-operand" class="session-label">Answer:</label>
+          <input id="session-form-first-operand" class="input input--session" type="number" min="0" placeholder="0" required />
+          <button id="session-form-submit-btn">Submit answer</button>
         </form>
-        <p id="accuracy"></p>
-        <p id="answer-feedback"></p>
+        <p id="session-accuracy"></p>
+        <p id="session-answer-feedback"></p>
         <p id="session-countdown"></p>
-        <button id="pause-btn">Pause session</button>
+        <button id="session-pause-btn">Pause session</button>
       </main>
     </div>
-    <section id="pause-menu" class="hidden">
-      <button id="resume-btn">Resume session</button>
-     <div class="set-volume-container">
+    <section id="pause-menu-container" class="hidden">
+      <button id="pause-menu-section-resume-section-btn">Resume session</button>
+     <div class="volume-container">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -122,8 +122,8 @@
               />
             </svg>
             <input
-              id="volume-slider--2"
-              class="input volume-slider"
+              id="pause-menu-volume-input"
+              class="input input--pause-menu"
               type="range"
               min="0"
               max="100"
@@ -134,7 +134,7 @@
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="size-6"
+              class="icon"
             >
               <path
                 stroke-linecap="round"
@@ -143,11 +143,11 @@
               />
             </svg>
           </div>
-          <label for="volume-slider--2" class="volume-slider--label">Volume:</label>
-          <p id="volume-value--2" class="volume-value"></p>
+          <label for="pause-menu-volume-input" class="label-pause-menu-volume-value">Volume:</label>
+          <p id="pause-menu-volume-input" class="volume-value"></p>
       </div>
       <p>When you get back, a new problem will be generated.</p>
-      <p id="time-remaining"></p>
+      <p id="pause-menu-countdown"></p>
     </section>
   </body>
 </html>
