@@ -38,6 +38,18 @@ path {
   height: 24px;
 }
 
+.input:focus {
+  outline: 1px solid #fff;
+}
+
+.input {
+  background-color: #1042ef;
+  color: #fff;
+  border: 1px solid #fff;
+  margin-bottom: 8px;
+  padding: 4px;
+}
+
 /* PREBOARDING COMPONENT */
 
 #preboarding-section {
@@ -53,16 +65,12 @@ path {
 }
 
 #second-operand-length {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .start-session-inputs {
-  background-color: #1042ef;
-  color: #fff;
   border-radius: 8px;
   padding: 4px;
-  outline: 1px solid #fff;
-  border: none;
 }
 
 #start-session-btn {
@@ -167,10 +175,12 @@ path {
 }
 
 .session-input {
-  /* SHOULD ONLY APPLY TO SESSION INPUTS */
   width: 80px;
-  margin-top: 4px;
   margin-bottom: 8px;
+  border-radius: 16px;
+}
+.input-session-label {
+  margin-bottom: 4px;
 }
 
 /* VOLUME SLIDER */
