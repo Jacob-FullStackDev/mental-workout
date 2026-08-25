@@ -3,52 +3,68 @@
 // PREBOARDING DOM ELEMENT SELECTORS
 
 const preboardingSectionEl = document.getElementById("preboarding-section");
-const durationInputEl = document.getElementById("session-duration");
-const goalInputEl = document.getElementById("session-goal");
-const firstOperandInputEl = document.getElementById("first-operand-length");
-const secondOperandInputEl = document.getElementById("second-operand-length");
-const startSessionFormEl = document.getElementById("start-session");
-const firstOperandOfSampleProblemEl =
-  document.getElementById("sample-operand-1");
-const secondOperandOfSampleProblemEl =
-  document.getElementById("sample-operand-2");
-const sampleProblemEl = document.getElementById("sample-problem");
+const startSessionFormEl = document.getElementById("preboarding-form");
+const goalInputEl = document.getElementById("preboarding-goal-input");
+const durationInputEl = document.getElementById("preboarding-duration-input");
+const firstOperandInputEl = document.getElementById(
+  "preboarding-first-operand-digits-input",
+);
+const secondOperandInputEl = document.getElementById(
+  "preboarding-second-operand-digits-input",
+);
+const firstOperandOfSampleProblemEl = document.getElementById(
+  "preboarding-first-operand",
+);
+const secondOperandOfSampleProblemEl = document.getElementById(
+  "preboarding-second-operand",
+);
+const sampleProblemEl = document.getElementById("preboarding-problem");
+
 // SESSION DOM ELEMENT SELECTORS
 
-const sessionCountdownEl = document.getElementById("session-countdown");
-const accuracyEl = document.getElementById("accuracy");
-const answerInputEl = document.getElementById("problem-answer-input");
-const sessionSectionEl = document.getElementById("session-section-container");
-const answerInputFormEl = document.getElementById("problem-answer-form");
-const answerFeedbackEl = document.getElementById("answer-feedback"); // Whether or not the answer was correct
+const sessionSectionEl = document.getElementById("session-container");
 const firstOperandEl = document.getElementById("session-first-operand");
 const secondOperandEl = document.getElementById("session-second-operand");
+const answerInputFormEl = document.getElementById("session-answer-form");
+const answerInputEl = document.getElementById("session-answer-input");
+const accuracyEl = document.getElementById("session-accuracy");
+const answerFeedbackEl = document.getElementById("session-answer-feedback"); // Whether or not the answer was correct
+const sessionCountdownEl = document.getElementById("session-countdown");
+const pauseBtnEl = document.getElementById("session-pause-btn");
 
 // PAUSE MENU DOM ELEMENT SELECTORS
 
-const pauseMenuEl = document.getElementById("pause-menu");
-const timeRemainingEl = document.getElementById("time-remaining");
-const pauseBtnEl = document.getElementById("pause-btn");
-const resumeBtnEl = document.getElementById("resume-btn");
+const pauseMenuEl = document.getElementById("pause-menu-container");
+const resumeBtnEl = document.getElementById("pause-menu-resume-btn");
+const timeRemainingEl = document.getElementById("pause-menu-countdown");
 
 // RESULTS SECTION ELEMENTS
 
 const returnToHomeBtn = document.createElement("button");
-const resultsElement = document.createElement("p"); // Session results displayed as fraction (1/3)
+const resultsElement = document.createElement("p"); // Session results displayed as fraction (e.g. 1/3)
+
+// VOLUME ELEMENTS
+
+const volumeSliderPreboardingEl = document.getElementById(
+  "preboarding-volume-input",
+);
+const volumeValuePreboardingEl = document.getElementById(
+  "preboarding-volume-value",
+);
+volumeValuePreboardingEl.textContent = `${volumeSliderPreboardingEl.value}%`;
+
+const volumeSliderPauseMenuEl = document.getElementById(
+  "pause-menu-volume-input",
+);
+const volumeValuePauseMenuEl = document.getElementById(
+  "pause-menu-volume-value",
+);
+volumeValuePauseMenuEl.textContent = `${volumeSliderPreboardingEl.value}%`;
 
 // HANDLE SFX
 
 const correctAnswerSfx = new Audio("assets/CorrectAnswerSFX.mp3");
 const incorrectAnswerSfx = new Audio("assets/IncorrectAnswerSFX.mp3");
-
-// volume Element Location El naming format
-const volumeSliderPreboardingEl = document.getElementById(`volume-slider--1`);
-const volumeValuePreboardingEl = document.getElementById(`volume-value--1`);
-volumeValuePreboardingEl.textContent = `${volumeSliderPreboardingEl.value}%`;
-
-const volumeSliderPauseMenuEl = document.getElementById(`volume-slider--2`);
-const volumeValuePauseMenuEl = document.getElementById(`volume-value--2`);
-volumeValuePauseMenuEl.textContent = `${volumeSliderPreboardingEl.value}%`;
 
 function handleSFXVolume(sliderEl) {
   let volume = Number(sliderEl.value) / 100;
