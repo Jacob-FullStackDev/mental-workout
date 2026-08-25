@@ -11,17 +11,17 @@
     <section id="preboarding-section">
       <h1 id="preboarding-heading">Practice mental multiplication</h1>
       <form id="preboarding-form">
-            <label for="preboarding-form-goal"
+            <label for="preboarding-goal-form"
               >How many problems do you want to solve this session?</label
             >
-            <input id="preboarding-form-goal" class="input input--preboarding" type="number" min="1" placeholder="1" required />
-            <label for="preboarding-form-duration">How many seconds should this session be?</label>
-            <input id="preboarding-form-duration" class="input input--preboarding" type="number" min="1" placeholder="1" required />
-            <label for="preboarding-form-first-operand-digits"
+            <input id="preboarding-goal-form" class="input input--preboarding" type="number" min="1" placeholder="1" required />
+            <label for="preboarding-duration-input">How many seconds should this session be?</label>
+            <input id="preboarding-duration-input" class="input input--preboarding" type="number" min="1" placeholder="1" required />
+            <label for="preboarding-first-operand-digits-input"
               >How many digits should the first operand be?</label
             >
             <input
-              id="preboarding-form-first-operand-digits"
+              id="preboarding-first-operand-digits-input"
               class="input input--preboarding"
               type="number"
               min="1"
@@ -29,18 +29,18 @@
               placeholder="1"
               required
             />
-            <label for="preboarding-form-second-operand-digits"
+            <label for="preboarding-second-operand-digits-input"
               >How many digits should the second operand be?</label
             >
             <input
-              id="preboarding-form-second-operand-digits"
+              id="preboarding-second-operand-digits-input"
               class="input input--preboarding"
               type="number"
               min="1"
               max="16"
               placeholder="1"
             />
-<div id="preboarding-form-problem-container"><math id="preboarding-form-problem" class="hidden"><mn id="preboarding-form-first-operand"></mn><mo id="preboarding-form-operator">×</mo><mn id="preboarding-form-second-operand"></mn>      
+<div id="preboarding-problem-container"><math id="preboarding-problem" class="hidden"><mn id="preboarding-first-operand"></mn><mo id="preboarding-operator">×</mo><mn id="preboarding-second-operand"></mn>      
         </math></div>
           <button id="preboarding-start-btn">Start session</button>
           </form>
@@ -94,9 +94,9 @@
         <hr id="session-problem-card-bottom-divider" />
         </div>
         <form id="session-answer-form">
-          <label for="session-form-answer" class="label label--session">Answer:</label>
-          <input id="session-form-answer" class="input input--session" type="number" min="0" placeholder="1" required />
-          <button id="session-form-submit-btn" class="btn btn--session">Submit answer</button>
+          <label for="session-answer-input" class="label label--session">Answer:</label>
+          <input id="session-answer-input" class="input input--session" type="number" min="0" placeholder="1" required />
+          <button id="session-submit-btn" class="btn btn--session">Submit answer</button>
         </form>
         <p id="session-accuracy"></p>
         <p id="session-answer-feedback"></p>
@@ -105,7 +105,7 @@
       </main>
     </section>
     <section id="pause-menu-container" class="hidden">
-      <button id="pause-menu-section-resume-section-btn">Resume session</button>
+      <button id="pause-menu-resume-btn">Resume session</button>
      <div class="volume-container">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@
             </svg>
           </div>
           <label for="pause-menu-volume-input" class="label label--volume-input">Volume:</label>
-          <p id="pause-menu-volume-input" class="volume-value"></p>
+          <p id="pause-menu-volume-value" class="volume-value"></p>
       </div>
       <p>When you get back, a new problem will be generated.</p>
       <p id="pause-menu-countdown"></p>
