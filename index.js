@@ -98,6 +98,7 @@ let correctAnswers,
   sessionFinished, // Indicates being on the session results screen
   firstOperandDigits,
   secondOperandDigits;
+
 function init() {
   correctAnswers = 0;
   problemsAnswered = 0;
@@ -134,19 +135,22 @@ function problemGen(
     (firstOperandEl.textContent && secondOperandEl.textContent) ||
     (previousFirstOperand && previousSecondOperand)
   ) {
-    let newFirstOperand;
-    let newSecondOperand;
-    while (!newFirstOperand || newFirstOperand === previousFirstOperand) {
-      newFirstOperand = operandGen(firstOperandDigits);
-    }
-    while (!newSecondOperand || newSecondOperand === previousSecondOperand) {
-      newSecondOperand = operandGen(secondOperandDigits);
-    }
     firstOperandEl.textContent = newFirstOperand;
     secondOperandEl.textContent = newSecondOperand;
   } else {
     firstOperandEl.textContent = operandGen(firstOperandDigits);
     secondOperandEl.textContent = operandGen(secondOperandDigits);
+  }
+}
+
+function displayPreboardingOperand(operandPosition) {
+  if (operandPosition === 1) {
+    let previousFirstOperand = Number(firstOperandValueEl.textContent) || null;
+    let newFirstOperand = operandGen(firstOperandDigits);
+    while (newFirstOperand === previousFirstOperand) {
+      newFirstOperand = operandGen(firstOperandDigits);
+    }
+    return (firstOperandValueEl.textContent = newFirstOperand);
   }
 }
 
@@ -184,7 +188,7 @@ returnToHomeBtn.addEventListener("click", (e) => {
 
 // PAUSE MENU
 
-function togglePauseMenu(volumeElementId) {
+function togglePauseMenu() {
   sessionPaused = !sessionPaused;
   pauseMenuEl.classList.toggle("hidden");
 }
@@ -202,31 +206,31 @@ function returnToHome() {
 document.body.addEventListener("keyup", (e) => {
   e.preventDefault();
   if (e.key === "Escape") {
-    if (sessionPaused === true) togglePauseMenu(1);
+    if (sessionPaused === true) togglePauseMenu();
     if (sessionFinished === true) returnToHome();
   }
 });
 
-// START SESSION EVENT LISTENERS
+// PREBOARDING EVENT LISTENERS (To start a session)
 
 firstOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
-  if (digitsLength >= 1 && digitsLength <= 16) {
+  if (!firstOperandValueEl.textContent) {
     firstOperandValueEl.textContent = operandGen(digitsLength);
+    return preboardingProblemEl.classList.remove("hidden");
+  }
+  if (digitsLength >= 1 && digitsLength <= 16) {
+    displayPreboardingOperand(1);
   }
   if (!secondOperandInputEl.value) {
-    secondOperandValueEl.textContent = operandGen(
-      firstOperandValueEl.textContent.length,
-    );
+    displayPreboardingOperand(2);
   }
   if (!firstOperandInputEl.value) {
-    // Value removed
+    // Value removed or wasn't added
     if (secondOperandInputEl.value) {
       // Use length of other operand
-      firstOperandValueEl.textContent = operandGen(
-        secondOperandValueEl.textContent.length,
-      );
+      displayPreboardingOperand(1);
     } else if (!secondOperandInputEl.value) {
       secondOperandValueEl.textContent = firstOperandValueEl.textContent = "";
       preboardingProblemEl.classList.add("hidden");
@@ -239,28 +243,27 @@ firstOperandInputEl.addEventListener("input", (e) => {
 secondOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
+  if (!secondOperandDigitsOperandValueEl.textContent) {
+    secondOperandDigitsOperandValueEl.textContent = operandGen(digitsLength);
+    return preboardingProblemEl.classList.remove("hidden");
+  }
   if (digitsLength >= 1 && digitsLength <= 16) {
-    secondOperandValueEl.textContent = operandGen(digitsLength);
+    displayPreboardingOperand(2);
   }
   if (!firstOperandInputEl.value) {
-    firstOperandValueEl.textContent = operandGen(
-      secondOperandValueEl.textContent.length,
-    );
+    displayPreboardingOperand(1);
   }
   if (!secondOperandInputEl.value) {
-    // Value removed
+    // Value removed or wasn't aDDED
     if (firstOperandInputEl.value) {
       // Use length of other operand
-      secondOperandValueEl.textContent = operandGen(
-        firstOperandValueEl.textContent.length,
-      );
+      displayPreboardingOperand(2);
     } else if (!firstOperandInputEl.value) {
       firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
-      preboardingProblemEl.classList.add("hidden");
-      return;
+      return preboardingProblemEl.classList.add("hidden");
     }
   }
-  sampleProblemEl.classList.remove("hidden");
+  preboardingProblemEl.classList.remove("hidden");
 });
 
 preboardingFormEl.addEventListener("submit", (e) => {
