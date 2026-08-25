@@ -5,27 +5,33 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body,
 html {
   width: 100%;
   height: 100%;
 }
+
 body {
   padding: 2%;
   background-color: #ebecf0;
   display: flex;
   justify-content: center;
 }
+
 .hidden {
   display: none !important;
 }
+
 h1 {
   font-size: 50px;
   margin-bottom: 16px;
 }
+
 label {
   display: block;
 }
+
 svg,
 path {
   width: 24px;
@@ -61,6 +67,7 @@ path {
 
 #start-session-btn {
   margin-top: 16px;
+  position: absolute;
 }
 
 #sample-problem-container {
@@ -77,6 +84,7 @@ path {
   width: 32%;
   padding-top: 24px;
 }
+
 .problem-card-bottom-line {
   background-color: #000;
   border: none;
@@ -91,11 +99,17 @@ path {
   position: fixed;
   inset: 0;
 }
+
+#pause-btn {
+  align-items: flex-end;
+}
+
 #math-problem-container {
   display: flex;
   flex-direction: column;
   max-width: 240px;
 }
+
 #math-problem {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
@@ -107,13 +121,16 @@ path {
   width: 100%;
   height: 120px;
 }
+
 #session-first-operand {
   grid-row: 1;
   max-width: 100%;
 }
+
 #session-second-operand {
   grid-row: 2;
 }
+
 #session-first-operand,
 #session-second-operand {
   /* Moves operands to right edge of flash card upto it's padding */
@@ -126,16 +143,34 @@ path {
   grid-row: 3;
   margin-bottom: 8px;
 }
+
 #problem-answer-form {
   margin-top: 24px;
 }
+
 #problem-answer-form {
   display: inline-block;
 }
+
 #session-btns {
   display: flex;
   margin-top: 8px;
   justify-content: space-between;
+}
+
+#problem-answer-input {
+  display: block;
+}
+
+#session-countdown {
+  color: #f00;
+}
+
+.session-input {
+  /* SHOULD ONLY APPLY TO SESSION INPUTS */
+  width: 80px;
+  margin-top: 4px;
+  margin-bottom: 8px;
 }
 
 /* VOLUME SLIDER */
@@ -161,26 +196,7 @@ path {
   justify-content: center;
 }
 
-/* PLACEHOLDER/TEMPORARY STYLES */
-
-button {
-  position: absolute;
-}
-
-label[for="volume-slider--1"] {
-  /* SHOULD BE ALL VOLUME SLIDERS */
+.volume-slider--label {
   margin: 0 4px;
   justify-content: flex-start;
-}
-
-input {
-  /* SHOULD ONLY APPLY TO SESSION INPUTS */
-  width: 80px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-}
-
-#session-countdown {
-  /* ADD CUSTOM RED/GREEN COLOR FOR RIGHT/WRONG ANSWER, TIMER */
-  color: red;
 }

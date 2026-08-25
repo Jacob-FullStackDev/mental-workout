@@ -8,7 +8,7 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <section id="preboarding-section" class="hidden">
+    <section id="preboarding-section">
       <h1 id="preboarding-heading">Practice mental multiplication</h1>
       <form id="start-session">
             <label for="session-goal"
@@ -82,7 +82,7 @@
               />
             </svg>
             <div class="volume-inputandlabel-container">
-          <label for="volume-slider--1">Volume:</label>
+          <label for="volume-slider--1" class="volume-slider--label">Volume:</label>
           <p id="volume-value--1" class="volume-value"></p>
           </div>
         </div>
@@ -95,7 +95,7 @@
         </div>
         <form id="problem-answer-form">
           <label for="problem-answer-input">Answer:</label>
-          <input id="problem-answer-input" type="number" required />
+          <input id="problem-answer-input" class="session-input" type="number" required />
           <button id="problem-answer-submit">Submit answer</button>
         </form>
         <p id="accuracy"></p>
@@ -143,7 +143,7 @@
               />
             </svg>
           </div>
-          <label for="volume-slider--2">Volume:</label>
+          <label for="volume-slider--2" class="volume-slider--label">Volume:</label>
           <p id="volume-value--2" class="volume-value"></p>
       </div>
       <p>When you get back, a new problem will be generated.</p>
