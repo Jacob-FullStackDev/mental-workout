@@ -14,18 +14,18 @@
             <label for="session-goal"
               >How many problems do you want to solve this session?</label
             >
-            <input id="session-goal" type="number" min="1" class="input start-session-inputs" placeholder="1" required />
+            <input id="session-goal" class="input start-session-inputs" type="number" min="1" placeholder="1" required />
             <label for="session-duration">How many seconds should this session be?</label>
-            <input id="session-duration" type="number" min="1" class="input start-session-inputs" placeholder="1" required />
+            <input id="session-duration" class="input start-session-inputs" type="number" min="1" placeholder="1" required />
             <label for="first-operand-length"
               >How many digits should the first operand be?</label
             >
             <input
               id="first-operand-length"
+              class="input start-session-inputs"
               type="number"
               min="1"
               max="16"
-              class="input start-session-inputs"
               placeholder="1"
               required
             />
@@ -34,10 +34,10 @@
             >
             <input
               id="second-operand-length"
+              class="input start-session-inputs"
               type="number"
               min="1"
               max="16"
-              class="input start-session-inputs"
               placeholder="1"
             />
 <div id="sample-problem-container"><math id="sample-problem"><mn id="sample-operand-1"></mn><mo id="sample-operator">×</mo><mn id="sample-operand-2"></mn>      
@@ -95,7 +95,7 @@
         </div>
         <form id="problem-answer-form">
           <label for="problem-answer-input" class="input-session-label">Answer:</label>
-          <input id="problem-answer-input" class="input session-input" type="number" required />
+          <input id="problem-answer-input" class="input session-input" type="number" min="0" placeholder="0" required />
           <button id="problem-answer-submit">Submit answer</button>
         </form>
         <p id="accuracy"></p>
