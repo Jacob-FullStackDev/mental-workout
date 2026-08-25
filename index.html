@@ -14,15 +14,15 @@
             <label for="preboarding-form-goal"
               >How many problems do you want to solve this session?</label
             >
-            <input id="preboarding-form-goal" class="input input--preboarding-goal" type="number" min="1" placeholder="1" required />
+            <input id="preboarding-form-goal" class="input input--preboarding" type="number" min="1" placeholder="1" required />
             <label for="preboarding-form-duration">How many seconds should this session be?</label>
-            <input id="preboarding-form-duration" class="input input--preboarding-duration" type="number" min="1" placeholder="1" required />
+            <input id="preboarding-form-duration" class="input input--preboarding" type="number" min="1" placeholder="1" required />
             <label for="preboarding-form-first-operand-digits"
               >How many digits should the first operand be?</label
             >
             <input
               id="preboarding-form-first-operand-digits"
-              class="input input--preboarding-operand-digits"
+              class="input input--preboarding"
               type="number"
               min="1"
               max="16"
@@ -34,17 +34,17 @@
             >
             <input
               id="preboarding-form-second-operand-digits"
-              class="input input--preboarding-operand-digits"
+              class="input input--preboarding"
               type="number"
               min="1"
               max="16"
               placeholder="1"
             />
-<div id="preboarding-form-problem-container" class="hidden"><math id="preboarding-form-problem"><mn id="preboarding-form-first-operand"></mn><mo id="preboarding-form-operator">×</mo><mn id="preboarding-form-second-operand"></mn>      
+<div id="preboarding-form-problem-container"><math id="preboarding-form-problem" class="hidden"><mn id="preboarding-form-first-operand"></mn><mo id="preboarding-form-operator">×</mo><mn id="preboarding-form-second-operand"></mn>      
         </math></div>
-          <button id="preboarding-form-start">Start session</button>
+          <button id="preboarding-start-btn">Start session</button>
           </form>
-          <div id="volume-container">
+          <div id="preboarding-volume-container" class="volume-container">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -87,23 +87,23 @@
           </div>
         </div>
     </section>
-    <div id="session-container" class="hidden">
+    <section id="session-container" class="hidden">
       <main>
         <div id="session-problem-container">
         <math id="session-problem"><mn id="session-first-operand"></mn><mo id="session-operator">×</mo><mn id="session-second-operand"></mn></math>
-        <hr class="session-card-bottom-line" />
+        <hr id="session-problem-card-bottom-divider" />
         </div>
-        <form id="problem-answer-form">
-          <label for="session-form-first-operand" class="session-label">Answer:</label>
-          <input id="session-form-first-operand" class="input input--session" type="number" min="0" placeholder="0" required />
-          <button id="session-form-submit-btn">Submit answer</button>
+        <form id="session-answer-form">
+          <label for="session-form-answer" class="label label--session">Answer:</label>
+          <input id="session-form-answer" class="input input--session" type="number" min="0" placeholder="1" required />
+          <button id="session-form-submit-btn" class="btn btn--session">Submit answer</button>
         </form>
         <p id="session-accuracy"></p>
         <p id="session-answer-feedback"></p>
         <p id="session-countdown"></p>
-        <button id="session-pause-btn">Pause session</button>
+        <button id="session-pause-btn" class="btn btn--session">Pause session</button>
       </main>
-    </div>
+    </section>
     <section id="pause-menu-container" class="hidden">
       <button id="pause-menu-section-resume-section-btn">Resume session</button>
      <div class="volume-container">
@@ -123,7 +123,7 @@
             </svg>
             <input
               id="pause-menu-volume-input"
-              class="input input--pause-menu"
+              class="input input--volume"
               type="range"
               min="0"
               max="100"
@@ -143,7 +143,7 @@
               />
             </svg>
           </div>
-          <label for="pause-menu-volume-input" class="label-pause-menu-volume-value">Volume:</label>
+          <label for="pause-menu-volume-input" class="label label--volume-input">Volume:</label>
           <p id="pause-menu-volume-input" class="volume-value"></p>
       </div>
       <p>When you get back, a new problem will be generated.</p>

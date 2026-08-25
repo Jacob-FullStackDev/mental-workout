@@ -64,27 +64,36 @@ path {
   width: 50%;
 }
 
-#second-operand-length {
-  margin-bottom: 8px;
-}
-
-.start-session-inputs {
+.input--preboarding {
   border-radius: 8px;
   padding: 4px;
 }
 
-#start-session-btn {
+#preboarding-form-problem-container {
+  height: 12px;
+}
+
+#preboarding-start-btn {
   margin-top: 16px;
   position: absolute;
 }
 
-#sample-problem-container {
-  height: 12px;
+/* PREBOARDING-VOLUME COMPONENT */
+
+#preboarding-volume-container {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#preboarding-volume-input {
+  margin-bottom: 0;
 }
 
 /* SESSION COMPONENT */
 
-#session-section-container {
+#session-container {
   display: flex;
   justify-content: center;
   background-color: #1042ef;
@@ -93,32 +102,24 @@ path {
   padding-top: 24px;
 }
 
-.problem-card-bottom-line {
+#session-problem-card-bottom-divider {
   background-color: #000;
   border: none;
   margin-top: -20px;
   height: 3px;
 }
 
-#pause-menu {
-  opacity: 0.98;
-  background-color: #dadbd9;
-  z-index: 9999;
-  position: fixed;
-  inset: 0;
-}
-
-#pause-btn {
+#session-pause-btn {
   align-items: flex-end;
 }
 
-#math-problem-container {
+#session-problem-container {
   display: flex;
   flex-direction: column;
   max-width: 240px;
 }
 
-#math-problem {
+#session-problem {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 100%;
@@ -156,17 +157,17 @@ path {
   margin-top: 24px;
 }
 
-#problem-answer-form {
+#session-answer-form {
   display: inline-block;
 }
 
-#session-btns {
+.btn--session {
   display: flex;
   margin-top: 8px;
   justify-content: space-between;
 }
 
-#problem-answer-input {
+#session-form-answer {
   display: block;
 }
 
@@ -174,31 +175,30 @@ path {
   color: #f00;
 }
 
-.session-input {
+.input--session {
   width: 80px;
   margin-bottom: 8px;
   border-radius: 16px;
 }
-.input-session-label {
+.label--session {
   margin-bottom: 4px;
 }
+/* PAUSE MENU COMPONENT */
 
-/* VOLUME SLIDER */
+#pause-menu-container {
+  opacity: 0.98;
+  background-color: #dadbd9;
+  z-index: 9999;
+  position: fixed;
+  inset: 0;
+}
 
-.volume-slider {
+/* GENERAL VOLUME COMPONENT STYLES */
+
+.input--volume {
   margin: 0 4px;
 }
-.set-volume-container {
-  margin-top: 16px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 
-.volume-inputandlabel-container {
-  display: flex;
-  justify-content: center;
-}
 .volume-value {
   display: inline;
   width: 5ch;
