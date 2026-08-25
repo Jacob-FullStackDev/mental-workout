@@ -152,6 +152,14 @@ function displayPreboardingOperand(operandPosition) {
     }
     return (firstOperandValueEl.textContent = newFirstOperand);
   }
+  if (operandPosition === 2) {
+    let previousSecondOperand = Number(firstOperandValueEl.textContent) || null;
+    let newSecondOperand = operandGen(secondOperandDigits);
+    while (newSecondOperand === previousSecondOperand) {
+      newSecondOperand = operandGen(secondOperandDigits);
+    }
+    return (secondOperandValueEl.textContent = newSecondOperand);
+  }
 }
 
 // STARTS/ENDS SESSION
