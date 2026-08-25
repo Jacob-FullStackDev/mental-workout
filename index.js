@@ -2,23 +2,23 @@
 
 // PREBOARDING DOM ELEMENT SELECTORS
 
-const preboardingSectionEl = document.getElementById("preboarding-section");
-const startSessionFormEl = document.getElementById("preboarding-form");
-const goalInputEl = document.getElementById("preboarding-goal-input");
-const durationInputEl = document.getElementById("preboarding-duration-input");
+const preboardingSectionEl = document.getElementById("preboarding-section"); //
+const preboardingFormEl = document.getElementById("preboarding-form"); //
+const goalInputEl = document.getElementById("preboarding-goal-input"); //
+const durationInputEl = document.getElementById("preboarding-duration-input"); //
 const firstOperandInputEl = document.getElementById(
   "preboarding-first-operand-digits-input",
-);
+); //
 const secondOperandInputEl = document.getElementById(
   "preboarding-second-operand-digits-input",
-);
-const firstOperandOfSampleProblemEl = document.getElementById(
+); //
+const firstOperandValueEl = document.getElementById(
   "preboarding-first-operand",
-);
-const secondOperandOfSampleProblemEl = document.getElementById(
+); //
+const secondOperandValueEl = document.getElementById(
   "preboarding-second-operand",
 );
-const sampleProblemEl = document.getElementById("preboarding-problem");
+const preboardingProblemEl = document.getElementById("preboarding-problem");
 
 // SESSION DOM ELEMENT SELECTORS
 
@@ -109,9 +109,8 @@ function init() {
   firstOperandInputEl.value = secondOperandInputEl.value = "";
   answerInputEl.value = "";
   firstOperandDigits = secondOperandDigits = null;
-  firstOperandOfSampleProblemEl.textContent =
-    secondOperandOfSampleProblemEl.textContent = "";
-  sampleProblemEl.classList.add("hidden");
+  firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
+  preboardingProblemEl.classList.add("hidden");
 }
 init();
 
@@ -214,59 +213,57 @@ firstOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
   if (digitsLength >= 1 && digitsLength <= 16) {
-    firstOperandOfSampleProblemEl.textContent = operandGen(digitsLength);
+    firstOperandValueEl.textContent = operandGen(digitsLength);
   }
   if (!secondOperandInputEl.value) {
-    secondOperandOfSampleProblemEl.textContent = operandGen(
-      firstOperandOfSampleProblemEl.textContent.length,
+    secondOperandValueEl.textContent = operandGen(
+      firstOperandValueEl.textContent.length,
     );
   }
   if (!firstOperandInputEl.value) {
     // Value removed
     if (secondOperandInputEl.value) {
       // Use length of other operand
-      firstOperandOfSampleProblemEl.textContent = operandGen(
-        secondOperandOfSampleProblemEl.textContent.length,
+      firstOperandValueEl.textContent = operandGen(
+        secondOperandValueEl.textContent.length,
       );
     } else if (!secondOperandInputEl.value) {
-      secondOperandOfSampleProblemEl.textContent =
-        firstOperandOfSampleProblemEl.textContent = "";
-      sampleProblemEl.classList.add("hidden");
+      secondOperandValueEl.textContent = firstOperandValueEl.textContent = "";
+      preboardingProblemEl.classList.add("hidden");
       return;
     }
   }
-  sampleProblemEl.classList.remove("hidden");
+  preboardingProblemEl.classList.remove("hidden");
 });
 
 secondOperandInputEl.addEventListener("input", (e) => {
   e.preventDefault();
   const digitsLength = Number(e.target.value);
   if (digitsLength >= 1 && digitsLength <= 16) {
-    secondOperandOfSampleProblemEl.textContent = operandGen(digitsLength);
+    secondOperandValueEl.textContent = operandGen(digitsLength);
   }
   if (!firstOperandInputEl.value) {
-    firstOperandOfSampleProblemEl.textContent = operandGen(
-      secondOperandOfSampleProblemEl.textContent.length,
+    firstOperandValueEl.textContent = operandGen(
+      secondOperandValueEl.textContent.length,
     );
   }
   if (!secondOperandInputEl.value) {
     // Value removed
     if (firstOperandInputEl.value) {
       // Use length of other operand
-      secondOperandOfSampleProblemEl.textContent = operandGen(
-        firstOperandOfSampleProblemEl.textContent.length,
+      secondOperandValueEl.textContent = operandGen(
+        firstOperandValueEl.textContent.length,
       );
     } else if (!firstOperandInputEl.value) {
-      firstOperandOfSampleProblemEl.textContent =
-        secondOperandOfSampleProblemEl.textContent = "";
-      sampleProblemEl.classList.add("hidden");
+      firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
+      preboardingProblemEl.classList.add("hidden");
       return;
     }
   }
   sampleProblemEl.classList.remove("hidden");
 });
 
-startSessionFormEl.addEventListener("submit", (e) => {
+preboardingFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   handleSession();
   firstOperandDigits = Number(firstOperandInputEl.value);
