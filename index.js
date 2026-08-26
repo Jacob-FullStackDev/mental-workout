@@ -30,7 +30,6 @@ const firstOperandEl = document.getElementById("session-first-operand");
 const secondOperandEl = document.getElementById("session-second-operand");
 const answerInputFormEl = document.getElementById("session-answer-form");
 const answerInputEl = document.getElementById("session-answer-input");
-const accuracyEl = document.getElementById("session-accuracy");
 const answerFeedbackEl = document.getElementById("session-answer-feedback"); // Whether or not the answer was correct
 const sessionCountdownEl = document.getElementById("session-countdown");
 const pauseBtnEl = document.getElementById("session-pause-btn");
@@ -112,7 +111,6 @@ function init() {
   problemsAnswered = 0;
   sessionPaused = false;
   sessionFinished = false;
-  accuracyEl.value = "";
   goalInputEl.value = "";
   durationInputEl.value = "";
   firstOperandInputEl.value = secondOperandInputEl.value = "";
@@ -185,7 +183,6 @@ function displayPreboardingOperand(operandPosition, digits) {
 function handleSession() {
   preboardingSectionEl.classList.toggle("hidden");
   sessionSectionEl.classList.toggle("hidden");
-  accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
 }
 
 // UPON ENDING SESSION
@@ -386,7 +383,6 @@ answerInputFormEl.addEventListener("submit", (e) => {
     answerFeedbackEl.classList.remove("correct-answer", "incorrect-answer");
     clearInterval(showAnswerFeedbacktimer);
   }, 800);
-  accuracyEl.textContent = `${correctAnswers} / ${problemsAnswered}`;
 });
 
 pauseBtnEl.addEventListener("click", (e) => {
