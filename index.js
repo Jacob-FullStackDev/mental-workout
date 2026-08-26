@@ -237,15 +237,14 @@ function errorHandler(feedbackEl, hiddenEl, msg, action) {
 // PREBOARDING EVENT LISTENERS (To start a session)
 
 firstOperandInputEl.addEventListener("input", (e) => {
-  e.preventDefault();
   const digits = Number(e.target.value);
-  if (digits >= 1 && digits <= 16) {
+  if (digits >= 1 && digits <= 7) {
     displayPreboardingOperand(1, digits);
     preboardingProblemEl.classList.remove("hidden");
     preboardingProblemFeedbackEl.classList.add("hidden");
   } else if (
     digits <= 1 ||
-    digits >= 16 ||
+    digits >= 7 ||
     !firstOperandValueEl.textContent ||
     !secondOperandValueEl.textContent
   ) {
@@ -274,7 +273,6 @@ firstOperandInputEl.addEventListener("input", (e) => {
 });
 
 secondOperandInputEl.addEventListener("input", (e) => {
-  e.preventDefault();
   const digits = Number(e.target.value);
   if (digits >= 1 && digits <= 16) {
     displayPreboardingOperand(2, digits);
@@ -282,7 +280,7 @@ secondOperandInputEl.addEventListener("input", (e) => {
     preboardingProblemFeedbackEl.classList.add("hidden");
   } else if (
     digits <= 1 ||
-    digits >= 16 ||
+    digits >= 7 ||
     !firstOperandValueEl.textContent ||
     !secondOperandValueEl.textContent
   ) {
