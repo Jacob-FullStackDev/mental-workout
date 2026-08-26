@@ -33,8 +33,10 @@ const answerInputEl = document.getElementById("session-answer-input");
 const answerFeedbackEl = document.getElementById("session-answer-feedback"); // Whether or not the answer was correct
 const sessionCountdownEl = document.getElementById("session-countdown");
 const pauseBtnEl = document.getElementById("session-pause-btn");
-const rightAnswersValueEl = document.getElementById("session-right-answers");
-const wrongAnswersValueEl = document.getElementById("session-wrong-answers");
+const correctAnswersValueEl = document.getElementById(
+  "session-correct-answers",
+);
+const totalAnswersValueEl = document.getElementById("session-total-answers");
 
 // PAUSE MENU DOM ELEMENT SELECTORS
 
@@ -100,7 +102,7 @@ volumeSliderPauseMenuEl.addEventListener("input", (e) => {
 // INITAL STATE FUNCTION
 
 let correctAnswers,
-  problemsAnswered,
+  totalAnswers,
   sessionPaused, // Indicates being on the pause screen
   sessionFinished, // Indicates being on the session results screen
   firstOperandDigits,
@@ -108,15 +110,17 @@ let correctAnswers,
 
 function init() {
   correctAnswers = 0;
-  problemsAnswered = 0;
+  totalAnswers = 0;
   sessionPaused = false;
   sessionFinished = false;
   goalInputEl.value = "";
   durationInputEl.value = "";
-  firstOperandInputEl.value = secondOperandInputEl.value = "";
   answerInputEl.value = "";
   firstOperandDigits = secondOperandDigits = null;
+  firstOperandInputEl.value = secondOperandInputEl.value = "";
   firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
+  correctAnswersValueEl.textContent = correctAnswers;
+  totalAnswersValueEl.textContent = totalAnswers;
   preboardingProblemEl.classList.add("hidden");
 }
 init();
@@ -196,7 +200,7 @@ function setSessionGoalResultMessage(goal) {
 function endSession(goal) {
   // stops timer, marks session as finished, enters results page
   sessionFinished = true;
-  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
+  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${totalAnswers} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
   returnToHomeBtn.textContent = "Return to Home";
   resultsContainerElement.append(resultsElement, returnToHomeBtn);
   document.body.append(resultsContainerElement);
@@ -348,6 +352,7 @@ preboardingFormEl.addEventListener("submit", (e) => {
 });
 
 // IN SESSION EVENT LISTENERS
+
 answerInputFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   let answer = Number(answerInputEl.value);
@@ -355,7 +360,9 @@ answerInputFormEl.addEventListener("submit", (e) => {
   let secondOperand = Number(secondOperandEl.textContent);
   const correctAnswerCondition = answer === firstOperand * secondOperand;
   answerInputEl.value = "";
-  problemsAnswered++;
+  totalAnswers++;
+  totalAnswersValueEl.textContent = totalAnswers;
+
   problemGen(
     firstOperandDigits,
     secondOperandDigits,
@@ -365,6 +372,7 @@ answerInputFormEl.addEventListener("submit", (e) => {
   if (correctAnswerCondition) {
     correctAnswerSfx.play();
     correctAnswers++;
+    correctAnswersValueEl.textContent = correctAnswers;
   } else {
     // testing statement
     console.log(
@@ -389,6 +397,9 @@ pauseBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
   togglePauseMenu();
 });
+
+// PAUSE MENU EVENT LISTENER
+
 resumeBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
   togglePauseMenu();

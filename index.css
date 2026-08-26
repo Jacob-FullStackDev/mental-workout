@@ -28,10 +28,6 @@ h1 {
   margin-bottom: 16px;
 }
 
-label {
-  display: block;
-}
-
 svg,
 path {
   width: 24px;
@@ -44,6 +40,11 @@ path {
   border: 1px solid #fff;
   margin-bottom: 8px;
   padding: 4px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 4px;
 }
 
 /* PREBOARDING COMPONENT */
@@ -179,7 +180,7 @@ path {
 .label--session {
   margin-bottom: 4px;
 }
-#session-right-answers {
+#session-correct-answers {
   color: #19bb2e;
 }
 
