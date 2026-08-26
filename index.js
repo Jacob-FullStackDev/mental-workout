@@ -163,9 +163,10 @@ function problemGen(
 
 function displayPreboardingOperand(operandPosition, digits) {
   let newValue = operandGen(digits);
+  let oldValue;
   if (operandPosition === 1) {
     // first operand value element
-    let oldValue = Number(firstOperandValueEl.textContent);
+    oldValue = Number(firstOperandValueEl.textContent);
     while (oldValue === newValue) {
       // ensures new operand is different than the old operand
       newValue = operandGen(digits);
@@ -174,7 +175,7 @@ function displayPreboardingOperand(operandPosition, digits) {
   }
   if (operandPosition === 2) {
     // second operand value element
-    let oldValue = Number(secondOperandValueEl.textContent);
+    oldValue = Number(secondOperandValueEl.textContent);
     while (oldValue === newValue) {
       newValue = operandGen(digits);
     }
@@ -256,17 +257,15 @@ function errorHandler(feedbackEl, hiddenEl, msg, action) {
 // PREBOARDING EVENT LISTENERS (To start a session)
 
 firstOperandInputEl.addEventListener("input", (e) => {
-  const digits = Number(e.target.value);
-  if (digits >= 1 && digits <= 7) {
-    displayPreboardingOperand(1, digits);
-    preboardingProblemEl.classList.remove("hidden");
-    preboardingProblemFeedbackEl.classList.add("hidden");
-  } else if (
-    digits < 1 ||
-    digits > 7 ||
-    !firstOperandValueEl.textContent ||
-    !secondOperandValueEl.textContent
+  firstOperandDigits = Number(e.target.value);
+  if (
+    (firstOperandDigits >= 1 && firstOperandDigits <= 7) ||
+    !firstOperandInputEl.value
   ) {
+    displayPreboardingOperand(1, firstOperandDigits);
+    preboardingProblemFeedbackEl.classList.add("hidden");
+  } else {
+    // this should not run if the value is an empty string, on either input or both
     return errorHandler(
       preboardingProblemFeedbackEl,
       preboardingProblemEl,
@@ -274,15 +273,15 @@ firstOperandInputEl.addEventListener("input", (e) => {
       "warn",
     );
   }
-  if (secondOperandInputEl.value === "") {
-    displayPreboardingOperand(2, digits);
+  if (!secondOperandInputEl.value) {
+    displayPreboardingOperand(2, firstOperandDigits);
   }
   if (!firstOperandInputEl.value) {
     // Value removed or wasn't added
     if (secondOperandInputEl.value) {
       // Use length of other operand
-      displayPreboardingOperand(1, digits);
-    } else if (!secondOperandInputEl.value) {
+      displayPreboardingOperand(1, secondOperandDigits);
+    } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
       secondOperandValueEl.textContent = firstOperandValueEl.textContent = "";
       preboardingProblemEl.classList.add("hidden");
       return;
@@ -292,17 +291,15 @@ firstOperandInputEl.addEventListener("input", (e) => {
 });
 
 secondOperandInputEl.addEventListener("input", (e) => {
-  const digits = Number(e.target.value);
-  if (digits >= 1 && digits <= 16) {
-    displayPreboardingOperand(2, digits);
+  secondOperandDigits = Number(e.target.value);
+  if (
+    (secondOperandDigits >= 1 && secondOperandDigits <= 7) ||
+    !secondOperandInputEl.value
+  ) {
+    displayPreboardingOperand(2, secondOperandDigits);
     preboardingProblemEl.classList.remove("hidden");
     preboardingProblemFeedbackEl.classList.add("hidden");
-  } else if (
-    digits < 1 ||
-    digits > 7 ||
-    !firstOperandValueEl.textContent ||
-    !secondOperandValueEl.textContent
-  ) {
+  } else {
     return errorHandler(
       preboardingProblemFeedbackEl,
       preboardingProblemEl,
@@ -311,14 +308,14 @@ secondOperandInputEl.addEventListener("input", (e) => {
     );
   }
   if (!firstOperandInputEl.value) {
-    displayPreboardingOperand(1, digits);
+    displayPreboardingOperand(1, secondOperandDigits);
   }
   if (!secondOperandInputEl.value) {
     // Value removed or wasn't added
     if (firstOperandInputEl.value) {
       // Use length of other operand
-      displayPreboardingOperand(2, digits);
-    } else if (!firstOperandInputEl.value) {
+      displayPreboardingOperand(2, firstOperandDigits);
+    } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
       firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
       return preboardingProblemEl.classList.add("hidden");
     }
