@@ -141,6 +141,14 @@ function problemGen(
     (firstOperandEl.textContent && secondOperandEl.textContent) ||
     (previousFirstOperand && previousSecondOperand)
   ) {
+    let newFirstOperand;
+    let newSecondOperand;
+    while (!newFirstOperand || newFirstOperand === previousFirstOperand) {
+      newFirstOperand = operandGen(firstOperandDigits);
+    }
+    while (!newSecondOperand || newSecondOperand === previousSecondOperand) {
+      newSecondOperand = operandGen(secondOperandDigits);
+    }
     firstOperandEl.textContent = newFirstOperand;
     secondOperandEl.textContent = newSecondOperand;
   } else {
