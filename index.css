@@ -179,6 +179,10 @@ path {
 .label--session {
   margin-bottom: 4px;
 }
+#session-right-answers {
+  color: #19bb2e;
+}
+
 /* PAUSE MENU COMPONENT */
 
 #pause-menu-container {

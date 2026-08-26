@@ -34,6 +34,8 @@ const accuracyEl = document.getElementById("session-accuracy");
 const answerFeedbackEl = document.getElementById("session-answer-feedback"); // Whether or not the answer was correct
 const sessionCountdownEl = document.getElementById("session-countdown");
 const pauseBtnEl = document.getElementById("session-pause-btn");
+const rightAnswersValueEl = document.getElementById("session-right-answers");
+const wrongAnswersValueEl = document.getElementById("session-wrong-answers");
 
 // PAUSE MENU DOM ELEMENT SELECTORS
 
@@ -259,8 +261,8 @@ firstOperandInputEl.addEventListener("input", (e) => {
     preboardingProblemEl.classList.remove("hidden");
     preboardingProblemFeedbackEl.classList.add("hidden");
   } else if (
-    digits <= 1 ||
-    digits >= 7 ||
+    digits < 1 ||
+    digits > 7 ||
     !firstOperandValueEl.textContent ||
     !secondOperandValueEl.textContent
   ) {
@@ -295,8 +297,8 @@ secondOperandInputEl.addEventListener("input", (e) => {
     preboardingProblemEl.classList.remove("hidden");
     preboardingProblemFeedbackEl.classList.add("hidden");
   } else if (
-    digits <= 1 ||
-    digits >= 7 ||
+    digits < 1 ||
+    digits > 7 ||
     !firstOperandValueEl.textContent ||
     !secondOperandValueEl.textContent
   ) {
