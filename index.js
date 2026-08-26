@@ -43,6 +43,9 @@ const timeRemainingEl = document.getElementById("pause-menu-countdown");
 
 // RESULTS SECTION ELEMENTS
 
+const resultsContainerElement = document.createElement("div");
+resultsContainerElement.id = "results-container";
+
 const returnToHomeBtn = document.createElement("button");
 const resultsElement = document.createElement("p"); // Session results displayed as fraction (e.g. 1/3)
 
@@ -188,7 +191,8 @@ function endSession(goal) {
   sessionFinished = true;
   resultsElement.textContent = `You correctly solved ${correctAnswers} / ${problemsAnswered} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
   returnToHomeBtn.textContent = "Return to Home";
-  document.body.append(resultsElement, returnToHomeBtn);
+  resultsContainerElement.append(resultsElement, returnToHomeBtn);
+  document.body.append(resultsContainerElement);
   init();
   sessionSectionEl.classList.add("hidden");
   firstOperandEl.textContent = secondOperandEl.textContent = "";
@@ -209,8 +213,7 @@ function togglePauseMenu() {
 // RESULTS SCREEN
 
 function returnToHome() {
-  returnToHomeBtn.remove();
-  resultsElement.remove();
+  resultsContainerElement.remove();
   preboardingSectionEl.classList.remove("hidden");
 }
 
