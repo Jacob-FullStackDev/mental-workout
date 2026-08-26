@@ -128,7 +128,12 @@ function operandGen(digits) {
     return operand;
   }
 }
-function problemGen(firstOperandDigits, secondOperandDigits) {
+function problemGen(
+  firstOperandDigits,
+  secondOperandDigits,
+  previousFirstOperand = undefined,
+  previousSecondOperand = undefined,
+) {
   if (
     (firstOperandEl.textContent && secondOperandEl.textContent) ||
     (previousFirstOperand && previousSecondOperand)

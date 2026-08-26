@@ -38,10 +38,6 @@ path {
   height: 24px;
 }
 
-.input:focus {
-  outline: 1px solid #fff;
-}
-
 .input {
   background-color: #1042ef;
   color: #fff;
