@@ -18,6 +18,9 @@ const firstOperandValueEl = document.getElementById(
 const secondOperandValueEl = document.getElementById(
   "preboarding-second-operand",
 );
+const preboardingProblemFeedbackEl = document.getElementById(
+  "preboarding-problem--feedback",
+);
 const preboardingProblemEl = document.getElementById("preboarding-problem");
 
 // SESSION DOM ELEMENT SELECTORS
@@ -125,12 +128,7 @@ function operandGen(digits) {
     return operand;
   }
 }
-function problemGen(
-  firstOperandDigits,
-  secondOperandDigits,
-  previousFirstOperand = undefined,
-  previousSecondOperand = undefined,
-) {
+function problemGen(firstOperandDigits, secondOperandDigits) {
   if (
     (firstOperandEl.textContent && secondOperandEl.textContent) ||
     (previousFirstOperand && previousSecondOperand)
@@ -144,11 +142,12 @@ function problemGen(
 }
 
 function displayPreboardingOperand(operandPosition, digits) {
+  let newValue = operandGen(digits);
   if (operandPosition === 1) {
     // first operand value element
     let oldValue = Number(firstOperandValueEl.textContent);
-    let newValue = operandGen(digits);
     while (oldValue === newValue) {
+      // ensures new operand is different than the old operand
       newValue = operandGen(digits);
     }
     firstOperandValueEl.textContent = newValue;
@@ -156,7 +155,6 @@ function displayPreboardingOperand(operandPosition, digits) {
   if (operandPosition === 2) {
     // second operand value element
     let oldValue = Number(secondOperandValueEl.textContent);
-    let newValue = operandGen(digits);
     while (oldValue === newValue) {
       newValue = operandGen(digits);
     }
@@ -222,10 +220,18 @@ document.body.addEventListener("keyup", (e) => {
 });
 
 // ERROR HANDLER
-function errorHandler(feedbackEl, feedbackElText, errorMsg, warnMsg) {
-  feedbackEl.textContent = feedbackElText;
-  errorMsg && console.error(errorMsg);
-  warnMsg && console.warn(warnMsg);
+function errorHandler(feedbackEl, hiddenEl, msg, action) {
+  feedbackEl.textContent = msg;
+  if (hiddenEl) {
+    feedbackEl.classList.remove("hidden");
+    hiddenEl.classList.add("hidden");
+  }
+  if (action === "error") {
+    console.error(msg);
+  }
+  if (action === "warn") {
+    console.warn(msg);
+  }
 }
 
 // PREBOARDING EVENT LISTENERS (To start a session)
@@ -236,8 +242,19 @@ firstOperandInputEl.addEventListener("input", (e) => {
   if (digits >= 1 && digits <= 16) {
     displayPreboardingOperand(1, digits);
     preboardingProblemEl.classList.remove("hidden");
-  } else {
-    errorHandler(feedbackEl, feedbackElText, errorMsg, warnMsg);
+    preboardingProblemFeedbackEl.classList.add("hidden");
+  } else if (
+    digits <= 1 ||
+    digits >= 16 ||
+    !firstOperandValueEl.textContent ||
+    !secondOperandValueEl.textContent
+  ) {
+    return errorHandler(
+      preboardingProblemFeedbackEl,
+      preboardingProblemEl,
+      "Operands must be between 1 and 16 digits long",
+      "warn",
+    );
   }
   if (secondOperandInputEl.value === "") {
     displayPreboardingOperand(2, digits);
@@ -262,6 +279,19 @@ secondOperandInputEl.addEventListener("input", (e) => {
   if (digits >= 1 && digits <= 16) {
     displayPreboardingOperand(2, digits);
     preboardingProblemEl.classList.remove("hidden");
+    preboardingProblemFeedbackEl.classList.add("hidden");
+  } else if (
+    digits <= 1 ||
+    digits >= 16 ||
+    !firstOperandValueEl.textContent ||
+    !secondOperandValueEl.textContent
+  ) {
+    return errorHandler(
+      preboardingProblemFeedbackEl,
+      preboardingProblemEl,
+      "Operands must be between 1 and 16 digits long",
+      "warn",
+    );
   }
   if (!firstOperandInputEl.value) {
     displayPreboardingOperand(1, digits);
@@ -303,6 +333,7 @@ preboardingFormEl.addEventListener("submit", (e) => {
     }
   }, 1000);
 });
+
 // IN SESSION EVENT LISTENERS
 answerInputFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
