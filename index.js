@@ -327,7 +327,6 @@ function preboardingOperandInputElHandler(
     activeListenerOperandPos = 2;
     otherListenerOperandPos = 1;
   }
-  console.log(activeListenerDigits >= 1 && activeListenerDigits <= 7);
   if (
     (activeListenerDigits >= 1 && activeListenerDigits <= 7) ||
     !activeOperandInputEl.value
