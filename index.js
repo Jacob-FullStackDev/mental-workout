@@ -72,33 +72,45 @@ const volumeValuePauseMenuEl = document.getElementById(
 );
 volumeValuePauseMenuEl.textContent = `${volumeSliderPreboardingEl.value}%`;
 
-// HANDLE SFX
+// VOLUME PROPERTIES
 
 const correctAnswerSfx = new Audio("assets/CorrectAnswerSFX.mp3");
 const incorrectAnswerSfx = new Audio("assets/IncorrectAnswerSFX.mp3");
+let volumeValue = Number(volumeSliderPreboardingEl.value) / 100; // audio.volume property value ranging from 0-1
+let volumePercent = Number(volumeSliderPreboardingEl.value); // volume % ranging from 0-100%
+
+// HANDLE SFX
 
 function handleSFXVolume(sliderEl) {
-  let volume = Number(sliderEl.value) / 100;
-  correctAnswerSfx.volume = volume;
-  incorrectAnswerSfx.volume = volume;
+  console.log(Number(sliderEl.value) / 100);
+  volumeValue = Number(sliderEl.value) / 100;
+  correctAnswerSfx.volume = volumeValue;
+  incorrectAnswerSfx.volume = volumeValue;
   // Plays sound effect for the user to gauge the volume
   correctAnswerSfx.play();
 }
 
-volumeSliderPreboardingEl.addEventListener("change", (e) => {
+volumeSliderPreboardingEl.addEventListener("change", () => {
   // updates SFX volume
   handleSFXVolume(volumeSliderPreboardingEl);
 });
 volumeSliderPreboardingEl.addEventListener("input", (e) => {
   // displays SFX volume
-  volumeValuePreboardingEl.textContent = `${e.target.value}%`;
+  volumePercent = Number(e.target.value);
+  // sync other volume sliders range attribute/volume values
+  volumeValuePreboardingEl.textContent =
+    volumeValuePauseMenuEl.textContent = `${volumePercent}%`;
+  volumeSliderPauseMenuEl.value = volumePercent;
 });
 
-volumeSliderPauseMenuEl.addEventListener("change", (e) => {
+volumeSliderPauseMenuEl.addEventListener("change", () => {
   handleSFXVolume(volumeSliderPauseMenuEl);
 });
 volumeSliderPauseMenuEl.addEventListener("input", (e) => {
-  volumeValuePauseMenuEl.textContent = `${e.target.value}%`;
+  volumePercent = Number(e.target.value);
+  volumeValuePauseMenuEl.textContent =
+    volumeValuePreboardingEl.textContent = `${volumePercent}%`;
+  volumeSliderPreboardingEl.value = volumePercent;
 });
 
 // INITAL STATE FUNCTION
@@ -434,13 +446,8 @@ answerInputFormEl.addEventListener("submit", (e) => {
     correctAnswerSfx.play();
     correctAnswers++;
     correctAnswersValueEl.textContent = correctAnswers;
-  } else {
-    // testing statement
-    console.log(
-      `you answered ${answer}, the solution is ${firstOperand * secondOperand}, ${firstOperand}, ${secondOperand}`,
-    );
-    incorrectAnswerSfx.play();
-  }
+  } else incorrectAnswerSfx.play();
+
   answerFeedbackEl.textContent = correctAnswerCondition
     ? `Correct!: ${answer}`
     : `Incorrect! you answered ${answer} but it was ${firstOperand * secondOperand}`;
@@ -456,6 +463,7 @@ answerInputFormEl.addEventListener("submit", (e) => {
 
 pauseBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
+  console.log(volumeValue);
   togglePauseMenu();
 });
 
