@@ -295,25 +295,47 @@ durationInputEl.addEventListener("input", (e) => {
     return (durationInputEl.value = "");
   }
 });
-
-firstOperandInputEl.addEventListener("input", (e) => {
+function preboardingOperandInputElHandler(
+  e,
+  activeOperandInputEl,
+  otherOperandInputEl,
+) {
+  // activeOperandInputEl refers to the element with the attached event listener
   if (
     invalidNumberHandler(
       e,
-      "First operand isn't a valid number",
+      `The ${activeOperandInputEl === firstOperandInputEl ? "first" : "second"} operand isn't a valid number`,
       preboardingProblemFeedbackEl,
     ) === true
   ) {
-    return (firstOperandInputEl.value = "");
+    return (activeOperandInputEl.value = "");
   }
-  firstOperandDigits = Number(e.target.value);
+  // Operand digits length for the input
+  let activeListenerDigits;
+  let otherActiveListenerDigits;
+  // Operand position for the first/second sample operands
+  let activeListenerOperandPos;
+  let otherListenerOperandPos;
+  if (activeOperandInputEl === firstOperandInputEl) {
+    activeListenerDigits = firstOperandDigits = Number(e.target.value);
+    otherActiveListenerDigits = secondOperandDigits;
+    activeListenerOperandPos = 1;
+    otherListenerOperandPos = 2;
+  } else if (activeOperandInputEl === secondOperandInputEl) {
+    activeListenerDigits = secondOperandDigits = Number(e.target.value);
+    otherActiveListenerDigits = firstOperandDigits;
+    activeListenerOperandPos = 2;
+    otherListenerOperandPos = 1;
+  }
+  console.log(activeListenerDigits >= 1 && activeListenerDigits <= 7);
   if (
-    (firstOperandDigits >= 1 && firstOperandDigits <= 7) ||
-    !firstOperandInputEl.value
+    (activeListenerDigits >= 1 && activeListenerDigits <= 7) ||
+    !activeOperandInputEl.value
   ) {
-    displayPreboardingOperand(1, firstOperandDigits);
+    displayPreboardingOperand(activeListenerOperandPos, activeListenerDigits);
     preboardingProblemFeedbackEl.classList.add("hidden");
   } else {
+    activeOperandInputEl.value = "";
     return errorHandler(
       preboardingProblemFeedbackEl,
       "Operands must be between 1 and 7 digits long",
@@ -321,63 +343,39 @@ firstOperandInputEl.addEventListener("input", (e) => {
       preboardingProblemEl,
     );
   }
-  if (!secondOperandInputEl.value) {
-    displayPreboardingOperand(2, firstOperandDigits);
+  if (!otherOperandInputEl.value) {
+    displayPreboardingOperand(otherListenerOperandPos, activeListenerDigits);
   }
-  if (!firstOperandInputEl.value) {
+  if (!activeOperandInputEl.value) {
     // Value removed or wasn't added
-    if (secondOperandInputEl.value) {
+    if (otherOperandInputEl.value) {
       // Use length of other operand
-      displayPreboardingOperand(1, secondOperandDigits);
-    } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
+      displayPreboardingOperand(
+        activeListenerOperandPos,
+        otherActiveListenerDigits,
+      );
+    } else if (!activeOperandInputEl.value && !otherOperandInputEl.value) {
       secondOperandValueEl.textContent = firstOperandValueEl.textContent = "";
       preboardingProblemEl.classList.add("hidden");
       return;
     }
   }
   preboardingProblemEl.classList.remove("hidden");
+}
+firstOperandInputEl.addEventListener("input", (e) => {
+  preboardingOperandInputElHandler(
+    e,
+    firstOperandInputEl,
+    secondOperandInputEl,
+  );
 });
 
 secondOperandInputEl.addEventListener("input", (e) => {
-  if (
-    invalidNumberHandler(
-      e,
-      "Second operand isn't a valid number",
-      preboardingProblemFeedbackEl,
-    ) === true
-  ) {
-    return (secondOperandInputEl.value = "");
-  }
-  secondOperandDigits = Number(e.target.value);
-  if (
-    (secondOperandDigits >= 1 && secondOperandDigits <= 7) ||
-    !secondOperandInputEl.value
-  ) {
-    displayPreboardingOperand(2, secondOperandDigits);
-    preboardingProblemFeedbackEl.classList.add("hidden");
-  } else {
-    return errorHandler(
-      preboardingProblemFeedbackEl,
-      "Operands must be between 1 and 7 digits long",
-      "warn",
-      preboardingProblemEl,
-    );
-  }
-  if (!firstOperandInputEl.value) {
-    displayPreboardingOperand(1, secondOperandDigits);
-  }
-  if (!secondOperandInputEl.value) {
-    // Value removed or wasn't added
-    if (firstOperandInputEl.value) {
-      // Use length of other operand
-      displayPreboardingOperand(2, firstOperandDigits);
-    } else if (!secondOperandInputEl.value && !firstOperandInputEl.value) {
-      firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
-      preboardingProblemEl.classList.add("hidden");
-      return;
-    }
-  }
-  preboardingProblemEl.classList.remove("hidden");
+  preboardingOperandInputElHandler(
+    e,
+    secondOperandInputEl,
+    firstOperandInputEl,
+  );
 });
 
 preboardingFormEl.addEventListener("submit", (e) => {
