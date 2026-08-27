@@ -243,10 +243,11 @@ document.body.addEventListener("keyup", (e) => {
 
 // ERROR HANDLER
 function errorHandler(feedbackEl, msg, action, hiddenEl = undefined) {
-  console.log(feedbackEl, hiddenEl);
   feedbackEl.textContent = msg;
   feedbackEl.classList.remove("hidden");
-  hiddenEl.classList.add("hidden");
+  if (hiddenEl) {
+    hiddenEl.classList.add("hidden");
+  }
   if (action === "error") {
     console.error(msg);
   }
@@ -377,54 +378,57 @@ preboardingFormEl.addEventListener("submit", (e) => {
 });
 
 // IN SESSION EVENT LISTENERS
-
-answerInputFormEl.addEventListener("submit", (e) => {
+answerInputEl.addEventListener("input", (e) => {
   if (
-    (!isNaN(Number(e.target.value)) && e.target.value !== "e") ||
+    (isNaN(Number(e.target.value)) && e.target.value === "e") ||
     e.target.value === ""
   ) {
-    e.preventDefault();
-    let answer = Number(answerInputEl.value);
-    let firstOperand = Number(firstOperandEl.textContent);
-    let secondOperand = Number(secondOperandEl.textContent);
-    const correctAnswerCondition = answer === firstOperand * secondOperand;
-    answerInputEl.value = "";
-    totalAnswers++;
-    totalAnswersValueEl.textContent = totalAnswers;
-
-    problemGen(
-      firstOperandDigits,
-      secondOperandDigits,
-      firstOperand,
-      secondOperand,
+    errorHandler(
+      preboardingProblemFeedbackEl,
+      "Input is not a valid number",
+      "error",
     );
-    if (correctAnswerCondition) {
-      correctAnswerSfx.play();
-      correctAnswers++;
-      correctAnswersValueEl.textContent = correctAnswers;
-    } else {
-      // testing statement
-      console.log(
-        `you answered ${answer}, the solution is ${firstOperand * secondOperand}, ${firstOperand}, ${secondOperand}`,
-      );
-      incorrectAnswerSfx.play();
-    }
-    answerFeedbackEl.textContent = correctAnswerCondition
-      ? `Correct!: ${answer}`
-      : `Incorrect! you answered ${answer} but it was ${firstOperand * secondOperand}`;
-    answerFeedbackEl.classList.add(
-      correctAnswerCondition ? "correct-answer" : "incorrect-answer",
-    );
-    const showAnswerFeedbacktimer = setInterval(() => {
-      answerFeedbackEl.textContent = "";
-      answerFeedbackEl.classList.remove("correct-answer", "incorrect-answer");
-      clearInterval(showAnswerFeedbacktimer);
-    }, 800);
-  } else {
-    // if input wasn't a number, handles that edge case
     answerInputEl.value = "";
-    errorHandler(answerFeedbackEl, "Input is not a valid number", "error");
   }
+});
+answerInputFormEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let answer = Number(answerInputEl.value);
+  let firstOperand = Number(firstOperandEl.textContent);
+  let secondOperand = Number(secondOperandEl.textContent);
+  const correctAnswerCondition = answer === firstOperand * secondOperand;
+  answerInputEl.value = "";
+  totalAnswers++;
+  totalAnswersValueEl.textContent = totalAnswers;
+
+  problemGen(
+    firstOperandDigits,
+    secondOperandDigits,
+    firstOperand,
+    secondOperand,
+  );
+  if (correctAnswerCondition) {
+    correctAnswerSfx.play();
+    correctAnswers++;
+    correctAnswersValueEl.textContent = correctAnswers;
+  } else {
+    // testing statement
+    console.log(
+      `you answered ${answer}, the solution is ${firstOperand * secondOperand}, ${firstOperand}, ${secondOperand}`,
+    );
+    incorrectAnswerSfx.play();
+  }
+  answerFeedbackEl.textContent = correctAnswerCondition
+    ? `Correct!: ${answer}`
+    : `Incorrect! you answered ${answer} but it was ${firstOperand * secondOperand}`;
+  answerFeedbackEl.classList.add(
+    correctAnswerCondition ? "correct-answer" : "incorrect-answer",
+  );
+  const showAnswerFeedbacktimer = setInterval(() => {
+    answerFeedbackEl.textContent = "";
+    answerFeedbackEl.classList.remove("correct-answer", "incorrect-answer");
+    clearInterval(showAnswerFeedbacktimer);
+  }, 800);
 });
 
 pauseBtnEl.addEventListener("click", (e) => {
