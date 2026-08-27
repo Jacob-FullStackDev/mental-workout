@@ -50,6 +50,8 @@ const resultsContainerElement = document.createElement("div");
 resultsContainerElement.id = "results-container";
 
 const returnToHomeBtn = document.createElement("button");
+returnToHomeBtn.classList.add("btn");
+
 const resultsElement = document.createElement("p"); // Session results displayed as fraction (e.g. 1/3)
 
 // VOLUME ELEMENTS

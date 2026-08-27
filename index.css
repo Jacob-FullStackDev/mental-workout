@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: #fff;
 }
 
 body,
@@ -37,7 +38,6 @@ path {
 
 .input:not([type="range"]) {
   background-color: #1042ef;
-  color: #fff;
   outline: 1px solid #fff;
   margin-bottom: 16px;
   padding: 8px;
@@ -55,6 +55,7 @@ path {
 
 .btn {
   margin-bottom: 24px;
+  color: #000;
 }
 
 /* PREBOARDING COMPONENT */
@@ -66,7 +67,6 @@ path {
   padding: 8px;
   position: relative;
   box-shadow: 0 0 40px #000;
-  color: #fff;
   border-radius: 8px;
   width: 60%;
 }
@@ -111,8 +111,13 @@ path {
   border-radius: 16px;
   width: 32%;
   padding-top: 24px;
+  color: #000;
 }
-
+#session-first-operand,
+#session-operator,
+#session-second-operand {
+  color: #000;
+}
 #session-problem-card-bottom-divider {
   background-color: #000;
   border: none;
@@ -135,12 +140,13 @@ path {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 100%;
-  box-shadow: 0 0 20px #000;
-  font-size: 20px;
-  background-color: #fff;
   padding: 16px;
   width: 100%;
   min-height: 120px;
+  font-size: 20px;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 0 20px #000;
 }
 
 #session-first-operand {
@@ -195,9 +201,7 @@ path {
 .label--session {
   margin-bottom: 4px;
 }
-#session-correct-answers {
-  color: #19bb2e;
-}
+
 #session-accuracy {
   margin-bottom: 40px;
 }
@@ -209,11 +213,12 @@ path {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  opacity: 0.98;
-  background-color: #dadbd9;
   z-index: 9999;
   position: fixed;
   inset: 0;
+  background-color: #dadbd9;
+  color: #000;
+  opacity: 0.98;
 }
 
 #pause-menu-volume-container {
@@ -225,6 +230,16 @@ path {
 }
 #pause-menu-info-message {
   margin-bottom: 24px;
+}
+
+#pause-menu-info-message,
+.label--volume-input,
+#pause-menu-volume-value,
+#pause-menu-countdown {
+  color: #000;
+}
+.icon--pause-menu {
+  stroke: #000;
 }
 
 /* GENERAL VOLUME COMPONENT STYLES */
