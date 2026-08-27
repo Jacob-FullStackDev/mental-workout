@@ -215,3 +215,22 @@ path {
   margin: 0 4px;
   justify-content: flex-start;
 }
+
+/* RESULTS COMPONENT */
+
+#results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1042ef;
+  box-shadow: 0 0 24px #000;
+  padding: 8px;
+  max-height: 30%;
+  width: 90%;
+  border-radius: 24px;
+}
+#results-container > p {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
