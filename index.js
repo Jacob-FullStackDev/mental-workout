@@ -255,7 +255,10 @@ function errorHandler(feedbackEl, hiddenEl, msg, action) {
 // PREBOARDING EVENT LISTENERS (To start a session)
 
 firstOperandInputEl.addEventListener("input", (e) => {
-  if (!isNaN(Number(e.target.value)) && e.target.value !== "e") {
+  if (
+    (!isNaN(Number(e.target.value)) && e.target.value !== "e") ||
+    e.target.value === ""
+  ) {
     firstOperandDigits = Number(e.target.value);
     if (
       (firstOperandDigits >= 1 && firstOperandDigits <= 7) ||
@@ -267,7 +270,7 @@ firstOperandInputEl.addEventListener("input", (e) => {
       return errorHandler(
         preboardingProblemFeedbackEl,
         preboardingProblemEl,
-        "Operands must be between 1 and 16 digits long",
+        "Operands must be between 1 and 7 digits long",
         "warn",
       );
     }
@@ -288,7 +291,6 @@ firstOperandInputEl.addEventListener("input", (e) => {
     preboardingProblemEl.classList.remove("hidden");
   } else {
     // if input wasn't a number, handles that edge case
-    firstOperandInputEl.value = "";
     errorHandler(
       preboardingProblemFeedbackEl,
       preboardingProblemEl,
@@ -299,7 +301,10 @@ firstOperandInputEl.addEventListener("input", (e) => {
 });
 
 secondOperandInputEl.addEventListener("input", (e) => {
-  if (!isNaN(Number(e.target.value)) && e.target.value !== "e") {
+  if (
+    (!isNaN(Number(e.target.value)) && e.target.value !== "e") ||
+    e.target.value === ""
+  ) {
     secondOperandDigits = Number(e.target.value);
     if (
       (secondOperandDigits >= 1 && secondOperandDigits <= 7) ||
@@ -311,7 +316,7 @@ secondOperandInputEl.addEventListener("input", (e) => {
       return errorHandler(
         preboardingProblemFeedbackEl,
         preboardingProblemEl,
-        "Operands must be between 1 and 16 digits long",
+        "Operands must be between 1 and 7 digits long",
         "warn",
       );
     }
@@ -323,24 +328,15 @@ secondOperandInputEl.addEventListener("input", (e) => {
       if (firstOperandInputEl.value) {
         // Use length of other operand
         displayPreboardingOperand(2, firstOperandDigits);
-      } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
+      } else if (!secondOperandInputEl.value && !firstOperandInputEl.value) {
         firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
-        return preboardingProblemEl.classList.add("hidden");
+        preboardingProblemEl.classList.add("hidden");
+        return;
       }
-    } else {
-      // if input wasn't a number, handles that edge case
-      errorHandler(
-        preboardingProblemFeedbackEl,
-        preboardingProblemEl,
-        "Input is not a valid number",
-        "error",
-      );
-      firstOperandInputEl.value = "";
     }
     preboardingProblemEl.classList.remove("hidden");
   } else {
     // if input wasn't a number, handles that edge case
-    secondOperandInputEl.value = "";
     errorHandler(
       preboardingProblemFeedbackEl,
       preboardingProblemEl,
