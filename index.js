@@ -2,19 +2,19 @@
 
 // PREBOARDING DOM ELEMENT SELECTORS
 
-const preboardingSectionEl = document.getElementById("preboarding-section"); //
-const preboardingFormEl = document.getElementById("preboarding-form"); //
-const goalInputEl = document.getElementById("preboarding-goal-input"); //
-const durationInputEl = document.getElementById("preboarding-duration-input"); //
+const preboardingSectionEl = document.getElementById("preboarding-section");
+const preboardingFormEl = document.getElementById("preboarding-form");
+const goalInputEl = document.getElementById("preboarding-goal-input");
+const durationInputEl = document.getElementById("preboarding-duration-input");
 const firstOperandInputEl = document.getElementById(
   "preboarding-first-operand-digits-input",
-); //
+);
 const secondOperandInputEl = document.getElementById(
   "preboarding-second-operand-digits-input",
-); //
+);
 const firstOperandValueEl = document.getElementById(
   "preboarding-first-operand",
-); //
+);
 const secondOperandValueEl = document.getElementById(
   "preboarding-second-operand",
 );
