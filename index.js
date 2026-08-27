@@ -242,10 +242,8 @@ document.body.addEventListener("keyup", (e) => {
 // ERROR HANDLER
 function errorHandler(feedbackEl, hiddenEl, msg, action) {
   feedbackEl.textContent = msg;
-  if (hiddenEl) {
-    feedbackEl.classList.remove("hidden");
-    hiddenEl.classList.add("hidden");
-  }
+  feedbackEl.classList.remove("hidden");
+  hiddenEl.classList.add("hidden");
   if (action === "error") {
     console.error(msg);
   }
@@ -257,70 +255,99 @@ function errorHandler(feedbackEl, hiddenEl, msg, action) {
 // PREBOARDING EVENT LISTENERS (To start a session)
 
 firstOperandInputEl.addEventListener("input", (e) => {
-  firstOperandDigits = Number(e.target.value);
-  if (
-    (firstOperandDigits >= 1 && firstOperandDigits <= 7) ||
-    !firstOperandInputEl.value
-  ) {
-    displayPreboardingOperand(1, firstOperandDigits);
-    preboardingProblemFeedbackEl.classList.add("hidden");
+  if (!isNaN(Number(e.target.value)) && e.target.value !== "e") {
+    firstOperandDigits = Number(e.target.value);
+    if (
+      (firstOperandDigits >= 1 && firstOperandDigits <= 7) ||
+      !firstOperandInputEl.value
+    ) {
+      displayPreboardingOperand(1, firstOperandDigits);
+      preboardingProblemFeedbackEl.classList.add("hidden");
+    } else {
+      return errorHandler(
+        preboardingProblemFeedbackEl,
+        preboardingProblemEl,
+        "Operands must be between 1 and 16 digits long",
+        "warn",
+      );
+    }
+    if (!secondOperandInputEl.value) {
+      displayPreboardingOperand(2, firstOperandDigits);
+    }
+    if (!firstOperandInputEl.value) {
+      // Value removed or wasn't added
+      if (secondOperandInputEl.value) {
+        // Use length of other operand
+        displayPreboardingOperand(1, secondOperandDigits);
+      } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
+        secondOperandValueEl.textContent = firstOperandValueEl.textContent = "";
+        preboardingProblemEl.classList.add("hidden");
+        return;
+      }
+    }
+    preboardingProblemEl.classList.remove("hidden");
   } else {
-    // this should not run if the value is an empty string, on either input or both
-    return errorHandler(
+    // if input wasn't a number, handles that edge case
+    firstOperandInputEl.value = "";
+    errorHandler(
       preboardingProblemFeedbackEl,
       preboardingProblemEl,
-      "Operands must be between 1 and 16 digits long",
-      "warn",
+      "Input is not a valid number",
+      "error",
     );
   }
-  if (!secondOperandInputEl.value) {
-    displayPreboardingOperand(2, firstOperandDigits);
-  }
-  if (!firstOperandInputEl.value) {
-    // Value removed or wasn't added
-    if (secondOperandInputEl.value) {
-      // Use length of other operand
-      displayPreboardingOperand(1, secondOperandDigits);
-    } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
-      secondOperandValueEl.textContent = firstOperandValueEl.textContent = "";
-      preboardingProblemEl.classList.add("hidden");
-      return;
-    }
-  }
-  preboardingProblemEl.classList.remove("hidden");
 });
 
 secondOperandInputEl.addEventListener("input", (e) => {
-  secondOperandDigits = Number(e.target.value);
-  if (
-    (secondOperandDigits >= 1 && secondOperandDigits <= 7) ||
-    !secondOperandInputEl.value
-  ) {
-    displayPreboardingOperand(2, secondOperandDigits);
+  if (!isNaN(Number(e.target.value)) && e.target.value !== "e") {
+    secondOperandDigits = Number(e.target.value);
+    if (
+      (secondOperandDigits >= 1 && secondOperandDigits <= 7) ||
+      !secondOperandInputEl.value
+    ) {
+      displayPreboardingOperand(2, secondOperandDigits);
+      preboardingProblemFeedbackEl.classList.add("hidden");
+    } else {
+      return errorHandler(
+        preboardingProblemFeedbackEl,
+        preboardingProblemEl,
+        "Operands must be between 1 and 16 digits long",
+        "warn",
+      );
+    }
+    if (!firstOperandInputEl.value) {
+      displayPreboardingOperand(1, secondOperandDigits);
+    }
+    if (!secondOperandInputEl.value) {
+      // Value removed or wasn't added
+      if (firstOperandInputEl.value) {
+        // Use length of other operand
+        displayPreboardingOperand(2, firstOperandDigits);
+      } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
+        firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
+        return preboardingProblemEl.classList.add("hidden");
+      }
+    } else {
+      // if input wasn't a number, handles that edge case
+      errorHandler(
+        preboardingProblemFeedbackEl,
+        preboardingProblemEl,
+        "Input is not a valid number",
+        "error",
+      );
+      firstOperandInputEl.value = "";
+    }
     preboardingProblemEl.classList.remove("hidden");
-    preboardingProblemFeedbackEl.classList.add("hidden");
   } else {
-    return errorHandler(
+    // if input wasn't a number, handles that edge case
+    secondOperandInputEl.value = "";
+    errorHandler(
       preboardingProblemFeedbackEl,
       preboardingProblemEl,
-      "Operands must be between 1 and 16 digits long",
-      "warn",
+      "Input is not a valid number",
+      "error",
     );
   }
-  if (!firstOperandInputEl.value) {
-    displayPreboardingOperand(1, secondOperandDigits);
-  }
-  if (!secondOperandInputEl.value) {
-    // Value removed or wasn't added
-    if (firstOperandInputEl.value) {
-      // Use length of other operand
-      displayPreboardingOperand(2, firstOperandDigits);
-    } else if (!firstOperandInputEl.value && !secondOperandInputEl.value) {
-      firstOperandValueEl.textContent = secondOperandValueEl.textContent = "";
-      return preboardingProblemEl.classList.add("hidden");
-    }
-  }
-  preboardingProblemEl.classList.remove("hidden");
 });
 
 preboardingFormEl.addEventListener("submit", (e) => {
