@@ -9,7 +9,7 @@
   </head>
   <body>
     <section id="preboarding-section">
-      <h1 id="preboarding-heading">Practice mental multiplication</h1>
+      <h1 id="preboarding-heading">Practice multiplication</h1>
       <form id="preboarding-form">
             <label for="preboarding-goal-input" class="label"
               >How many problems do you want to solve this session?</label
@@ -84,7 +84,7 @@
               />
             </svg>
             <div class="preboarding-container">
-          <label for="preboarding-volume-input" class="label label-volume">Volume:</label>
+          <label for="preboarding-volume-input" class="label label--volume">Volume:</label>
           <p id="preboarding-volume-value" class="volume-value"></p>
           </div>
         </div>
@@ -107,7 +107,9 @@
       </main>
     </section>
     <section id="pause-menu-container" class="hidden">
-      <button id="pause-menu-resume-btn">Resume session</button>
+      <p id="pause-menu-info-message">When you get back, a new problem will be generated.</p>
+      <button id="pause-menu-resume-btn" class="btn">Resume session</button>
+      <p id="pause-menu-countdown"></p>     
      <div class="volume-container">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,11 +147,11 @@
               />
             </svg>
           </div>
+          <div id="pause-menu-volume-container">
           <label for="pause-menu-volume-input" class="label label--volume-input">Volume:</label>
           <p id="pause-menu-volume-value" class="volume-value"></p>
+          </div>
       </div>
-      <p>When you get back, a new problem will be generated.</p>
-      <p id="pause-menu-countdown"></p>
     </section>
   </body>
 </html>

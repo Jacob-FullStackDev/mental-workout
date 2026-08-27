@@ -32,23 +32,29 @@ svg,
 path {
   width: 24px;
   height: 24px;
+  margin: 0 8px;
 }
 
 .input:not([type="range"]) {
   background-color: #1042ef;
   color: #fff;
   outline: 1px solid #fff;
-  margin-bottom: 8px;
-  padding: 4px;
+  margin-bottom: 16px;
+  padding: 8px;
   border: none;
 }
 
 .input:focus:not([type="range"]) {
   outline: 2px solid white;
 }
+
 .label {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.btn {
+  margin-bottom: 24px;
 }
 
 /* PREBOARDING COMPONENT */
@@ -62,12 +68,12 @@ path {
   box-shadow: 0 0 40px #000;
   color: #fff;
   border-radius: 8px;
-  width: 50%;
+  width: 60%;
 }
 
 .input--preboarding {
   border-radius: 8px;
-  padding: 4px;
+  padding: 8px;
 }
 
 #preboarding-problem-container {
@@ -90,6 +96,10 @@ path {
 
 #preboarding-volume-input {
   margin-bottom: 0;
+}
+
+.preboarding-container {
+  min-width: 16ch;
 }
 
 /* SESSION COMPONENT */
@@ -118,6 +128,7 @@ path {
   display: flex;
   flex-direction: column;
   max-width: 240px;
+  margin-bottom: 36px;
 }
 
 #session-problem {
@@ -129,7 +140,7 @@ path {
   background-color: #fff;
   padding: 16px;
   width: 100%;
-  height: 120px;
+  min-height: 120px;
 }
 
 #session-first-operand {
@@ -187,10 +198,17 @@ path {
 #session-correct-answers {
   color: #19bb2e;
 }
+#session-accuracy {
+  margin-bottom: 40px;
+}
 
 /* PAUSE MENU COMPONENT */
 
 #pause-menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   opacity: 0.98;
   background-color: #dadbd9;
   z-index: 9999;
@@ -198,22 +216,44 @@ path {
   inset: 0;
 }
 
+#pause-menu-volume-container {
+  display: flex;
+  margin-bottom: 32px;
+}
+#pause-menu-volume-container > .label {
+  margin-right: 16px;
+}
+#pause-menu-info-message {
+  margin-bottom: 24px;
+}
+
 /* GENERAL VOLUME COMPONENT STYLES */
 
-.input--volume {
-  margin: 0 4px;
+#preboarding-volume-input {
+  margin: 0 8px;
 }
 
 .volume-value {
   display: inline;
-  width: 5ch;
+  min-width: 6ch;
   align-items: center;
   justify-content: center;
+  margin-right: 8px;
 }
 
-.volume-slider--label {
+.label--volume {
+  display: inline-block;
   margin: 0 4px;
   justify-content: flex-start;
+}
+
+#max-volume-icon {
+  margin-right: 16px;
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
 }
 
 /* RESULTS COMPONENT */
