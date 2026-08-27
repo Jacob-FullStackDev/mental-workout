@@ -34,14 +34,18 @@ path {
   height: 24px;
 }
 
-.input {
+.input:not([type="range"]) {
   background-color: #1042ef;
   color: #fff;
-  border: 1px solid #fff;
+  outline: 1px solid #fff;
   margin-bottom: 8px;
   padding: 4px;
+  border: none;
 }
 
+.input:focus:not([type="range"]) {
+  outline: 2px solid white;
+}
 .label {
   display: block;
   margin-bottom: 4px;
