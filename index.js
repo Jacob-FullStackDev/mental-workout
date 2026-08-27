@@ -243,6 +243,7 @@ document.body.addEventListener("keyup", (e) => {
 
 // ERROR HANDLER
 function errorHandler(feedbackEl, msg, action, hiddenEl = undefined) {
+  console.log(feedbackEl, hiddenEl);
   feedbackEl.textContent = msg;
   feedbackEl.classList.remove("hidden");
   hiddenEl.classList.add("hidden");
@@ -271,9 +272,9 @@ firstOperandInputEl.addEventListener("input", (e) => {
     } else {
       return errorHandler(
         preboardingProblemFeedbackEl,
-        preboardingProblemEl,
         "Operands must be between 1 and 7 digits long",
         "warn",
+        preboardingProblemEl,
       );
     }
     if (!secondOperandInputEl.value) {
@@ -293,6 +294,7 @@ firstOperandInputEl.addEventListener("input", (e) => {
     preboardingProblemEl.classList.remove("hidden");
   } else {
     // if input wasn't a number, handles that edge case
+    firstOperandInputEl.value = "";
     errorHandler(
       preboardingProblemFeedbackEl,
       "Input is not a valid number",
@@ -317,9 +319,9 @@ secondOperandInputEl.addEventListener("input", (e) => {
     } else {
       return errorHandler(
         preboardingProblemFeedbackEl,
-        preboardingProblemEl,
         "Operands must be between 1 and 7 digits long",
         "warn",
+        preboardingProblemEl,
       );
     }
     if (!firstOperandInputEl.value) {
@@ -339,6 +341,7 @@ secondOperandInputEl.addEventListener("input", (e) => {
     preboardingProblemEl.classList.remove("hidden");
   } else {
     // if input wasn't a number, handles that edge case
+    secondOperandInputEl.value = "";
     errorHandler(
       preboardingProblemFeedbackEl,
       "Input is not a valid number",
