@@ -185,7 +185,7 @@ function displayPreboardingOperand(operandPosition, digits) {
   }
 }
 
-// STARTS/ENDS SESSION
+// TOGGLES SESSION COMPONENT
 
 function handleSession() {
   preboardingSectionEl.classList.toggle("hidden");
@@ -256,13 +256,11 @@ function errorHandler(feedbackEl, msg, action, hiddenEl = undefined) {
     console.warn(msg);
   }
 }
-
 function invalidNumberHandler(e, msg, feedbackEl) {
-  console.log(isNaN(Number(e.target.value)));
   if (
-    isNaN(Number(e.target.value)) &&
-    e.target.value !== "e" &&
-    e.target.value !== ""
+    isNaN(Number(e.target.value)) ||
+    e.target.value === "e" ||
+    e.target.value.includes(" ")
   ) {
     errorHandler(feedbackEl, msg, "error");
     return true; // function ran
@@ -270,8 +268,29 @@ function invalidNumberHandler(e, msg, feedbackEl) {
 }
 
 // PREBOARDING EVENT LISTENERS (To start a session)
-goalInputEl;
-durationInputEl;
+goalInputEl.addEventListener("input", (e) => {
+  if (
+    invalidNumberHandler(
+      e,
+      "Goal isn't a valid number",
+      preboardingProblemFeedbackEl,
+    ) === true
+  ) {
+    return (goalInputEl.value = "");
+  }
+});
+
+durationInputEl.addEventListener("input", (e) => {
+  if (
+    invalidNumberHandler(
+      e,
+      "Goal isn't a valid number",
+      preboardingProblemFeedbackEl,
+    ) === true
+  ) {
+    return (durationInputEl.value = "");
+  }
+});
 
 firstOperandInputEl.addEventListener("input", (e) => {
   if (
@@ -386,17 +405,13 @@ preboardingFormEl.addEventListener("submit", (e) => {
 
 answerInputEl.addEventListener("input", (e) => {
   if (
-    isNaN(Number(e.target.value)) ||
-    e.target.value === "e" ||
-    e.target.value === ""
-  ) {
-    errorHandler(
-      preboardingProblemFeedbackEl,
+    invalidNumberHandler(
+      e,
       "Answer is not a valid number",
-      "error",
-    );
-    answerInputEl.value = "";
-  }
+      answerFeedbackEl,
+    ) === true
+  )
+    return (answerInputEl.value = "");
 });
 
 answerInputFormEl.addEventListener("submit", (e) => {
