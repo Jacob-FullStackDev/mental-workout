@@ -82,7 +82,6 @@ let volumePercent = Number(volumeSliderPreboardingEl.value); // volume % ranging
 // HANDLE SFX
 
 function handleSFXVolume(sliderEl) {
-  console.log(Number(sliderEl.value) / 100);
   volumeValue = Number(sliderEl.value) / 100;
   correctAnswerSfx.volume = volumeValue;
   incorrectAnswerSfx.volume = volumeValue;
@@ -120,7 +119,9 @@ let correctAnswers,
   sessionPaused, // Indicates being on the pause screen
   sessionFinished, // Indicates being on the session results screen
   firstOperandDigits,
-  secondOperandDigits;
+  secondOperandDigits,
+  firstOperand,
+  secondOperand;
 
 function init() {
   correctAnswers = 0;
@@ -139,7 +140,7 @@ function init() {
 }
 init();
 
-// GENERATE PROBLEM
+// GENERATE UNIQUE PROBLEM
 
 function operandGen(digits) {
   if (digits >= 1) {
@@ -149,30 +150,21 @@ function operandGen(digits) {
     return operand;
   }
 }
-function problemGen(
-  firstOperandDigits,
-  secondOperandDigits,
-  previousFirstOperand = undefined,
-  previousSecondOperand = undefined,
-) {
-  if (
-    (firstOperandEl.textContent && secondOperandEl.textContent) ||
-    (previousFirstOperand && previousSecondOperand)
-  ) {
-    let newFirstOperand;
-    let newSecondOperand;
-    while (!newFirstOperand || newFirstOperand === previousFirstOperand) {
-      newFirstOperand = operandGen(firstOperandDigits);
-    }
-    while (!newSecondOperand || newSecondOperand === previousSecondOperand) {
-      newSecondOperand = operandGen(secondOperandDigits);
-    }
-    firstOperandEl.textContent = newFirstOperand;
-    secondOperandEl.textContent = newSecondOperand;
-  } else {
-    firstOperandEl.textContent = operandGen(firstOperandDigits);
-    secondOperandEl.textContent = operandGen(secondOperandDigits);
+
+let previousFirstOperand, previousSecondOperand;
+function problemGen(firstOperandDigits, secondOperandDigits) {
+  let newFirstOperand;
+  let newSecondOperand;
+  while (!newFirstOperand || newFirstOperand === previousFirstOperand) {
+    newFirstOperand = operandGen(firstOperandDigits);
   }
+  previousFirstOperand = newFirstOperand;
+  while (!newSecondOperand || newSecondOperand === previousSecondOperand) {
+    newSecondOperand = operandGen(secondOperandDigits);
+  }
+  previousSecondOperand = newSecondOperand;
+  firstOperandEl.textContent = newFirstOperand;
+  secondOperandEl.textContent = newSecondOperand;
 }
 
 function displayPreboardingOperand(operandPosition, digits) {
@@ -429,19 +421,14 @@ answerInputEl.addEventListener("input", (e) => {
 answerInputFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   let answer = Number(answerInputEl.value);
-  let firstOperand = Number(firstOperandEl.textContent);
-  let secondOperand = Number(secondOperandEl.textContent);
+  firstOperand = Number(firstOperandEl.textContent);
+  secondOperand = Number(secondOperandEl.textContent);
   const correctAnswerCondition = answer === firstOperand * secondOperand;
   answerInputEl.value = "";
   totalAnswers++;
   totalAnswersValueEl.textContent = totalAnswers;
 
-  problemGen(
-    firstOperandDigits,
-    secondOperandDigits,
-    firstOperand,
-    secondOperand,
-  );
+  problemGen(firstOperandDigits, secondOperandDigits);
   if (correctAnswerCondition) {
     correctAnswerSfx.play();
     correctAnswers++;
@@ -463,7 +450,6 @@ answerInputFormEl.addEventListener("submit", (e) => {
 
 pauseBtnEl.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log(volumeValue);
   togglePauseMenu();
 });
 
