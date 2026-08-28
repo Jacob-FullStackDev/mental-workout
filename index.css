@@ -65,6 +65,11 @@ path {
   font-size: 20px;
 }
 
+.input::placeholder {
+  color: #3b3b3b;
+  opacity: 0.53;
+}
+
 .feedback {
   font-size: 16px;
 }
@@ -284,6 +289,10 @@ path {
 .volume-container {
   display: flex;
   align-items: center;
+}
+
+.input--volume {
+  accent-color: #fff;
 }
 
 /* RESULTS COMPONENT */
