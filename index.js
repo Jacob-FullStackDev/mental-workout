@@ -313,6 +313,7 @@ function preboardingOperandInputElHandler(
   // Operand digits length for the input
   let activeListenerDigits;
   let otherActiveListenerDigits;
+  let maxDigits;
   // Operand position for the first/second sample operands
   let activeListenerOperandPos;
   let otherListenerOperandPos;
@@ -321,14 +322,16 @@ function preboardingOperandInputElHandler(
     otherActiveListenerDigits = secondOperandDigits;
     activeListenerOperandPos = 1;
     otherListenerOperandPos = 2;
+    maxDigits = 8;
   } else if (activeOperandInputEl === secondOperandInputEl) {
     activeListenerDigits = secondOperandDigits = Number(e.target.value);
     otherActiveListenerDigits = firstOperandDigits;
     activeListenerOperandPos = 2;
     otherListenerOperandPos = 1;
+    maxDigits = 7;
   }
   if (
-    (activeListenerDigits >= 1 && activeListenerDigits <= 7) ||
+    (activeListenerDigits >= 1 && activeListenerDigits <= maxDigits) ||
     !activeOperandInputEl.value
   ) {
     displayPreboardingOperand(activeListenerOperandPos, activeListenerDigits);

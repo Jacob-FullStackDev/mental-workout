@@ -29,7 +29,7 @@
               class="input input--preboarding"
               inputmode="numeric"
               min="1"
-              max="7"
+              max="8"
               placeholder="1"
               required
             />
@@ -103,11 +103,11 @@
           <input id="session-answer-input" class="input input--session" type="text" inputmode="numeric" min="0" placeholder="1" required />
           <button id="session-submit-btn" class="btn btn--session">Submit answer</button>
         </form>
-        <div id="session-accuracy-container">
+        <div id="session-accuracy-container" class="session-accuracy-container">
         <p id="session-accuracy" class='feedback session-accuracy'><span id="session-correct-answers" classs="session-correct-answers">0</span> / <span id="session-total-answers" class="session-total-answers">0</span></p>
         </div>
-        <p id="session-answer-feedback" class='feedback'></p>
-        <p id="session-countdown" class='feedback'></p>
+        <p id="session-answer-feedback" class="feedback"></p>
+        <p id="session-countdown" class="feedback"></p>
         <button id="session-pause-btn" class="btn btn--session">Pause session</button>
       </main>
     </section>
