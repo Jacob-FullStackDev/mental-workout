@@ -333,7 +333,7 @@ function preboardingOperandInputElHandler(
     activeOperandInputEl.value = "";
     return errorHandler(
       preboardingProblemFeedbackEl,
-      "Operands must be between 1 and 7 digits long",
+      "The first operand must be between 1 and 8 digits long, the second between 1 and 7",
       "warn",
       preboardingProblemEl,
     );
@@ -383,7 +383,7 @@ preboardingFormEl.addEventListener("submit", (e) => {
   let sessionProblemSolveGoal = Number(goalInputEl.value);
   let durationInMS = Number(durationInputEl.value) * 1000;
   let durationInS = durationInMS / 1000;
-  sessionCountdownEl.textContent = durationInS;
+  sessionCountdownEl.textContent = `Seconds left: ${durationInS}`;
   problemGen(firstOperandDigits, secondOperandDigits);
   let sessionTimer = setInterval(() => {
     // Counts down time while not paused
@@ -393,7 +393,7 @@ preboardingFormEl.addEventListener("submit", (e) => {
         return clearInterval(sessionTimer);
       }
       durationInS--;
-      sessionCountdownEl.textContent = durationInS;
+      sessionCountdownEl.textContent = `Seconds left: ${durationInS}`;
     }
   }, 1000);
 });
