@@ -44,15 +44,11 @@ const pauseMenuEl = document.getElementById("pause-menu-container");
 const resumeBtnEl = document.getElementById("pause-menu-resume-btn");
 const timeRemainingEl = document.getElementById("pause-menu-countdown");
 
-// RESULTS SECTION ELEMENTS
+// RESULT COMPONENT ELEMENTS
 
-const resultsContainerElement = document.createElement("div");
-resultsContainerElement.id = "results-container";
-
-const returnToHomeBtn = document.createElement("button");
-returnToHomeBtn.classList.add("btn");
-
-const resultsElement = document.createElement("p"); // Session results displayed as fraction (e.g. 1/3)
+const resultsContainerEl = document.getElementById("results-container");
+const resultsEl = document.getElementById("results-p");
+const returnHomeBtn = document.getElementById("btn-results-return-home");
 
 // VOLUME ELEMENTS
 
@@ -207,19 +203,11 @@ function setSessionGoalResultMessage(goal) {
 function endSession(goal) {
   // stops timer, marks session as finished, enters results page
   sessionFinished = true;
-  resultsElement.textContent = `You correctly solved ${correctAnswers} / ${totalAnswers} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
-  returnToHomeBtn.textContent = "Return to Home";
-  resultsContainerElement.append(resultsElement, returnToHomeBtn);
-  document.body.append(resultsContainerElement);
+  resultsEl.textContent = `You correctly solved ${correctAnswers} / ${totalAnswers} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
   init();
   sessionSectionEl.classList.add("hidden");
-  firstOperandEl.textContent = secondOperandEl.textContent = "";
+  resultsContainerEl.classList.remove("hidden");
 }
-
-returnToHomeBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  returnToHome();
-});
 
 // PAUSE MENU
 
@@ -231,9 +219,14 @@ function togglePauseMenu() {
 // RESULTS SCREEN
 
 function returnToHome() {
-  resultsContainerElement.remove();
+  resultsContainerEl.classList.add("hidden");
   preboardingSectionEl.classList.remove("hidden");
 }
+
+returnHomeBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  returnToHome();
+});
 
 // RETURN TO AREA
 

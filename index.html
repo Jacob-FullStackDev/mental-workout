@@ -5,158 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing</title>
     <link href="index.css" rel="stylesheet" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
     <script src="index.js" defer></script>
   </head>
   <body>
     <section id="preboarding-section">
       <h1 id="preboarding-heading">Practice multiplication</h1>
       <form id="preboarding-form">
-            <label for="preboarding-goal-input" class="label"
-              >How many problems do you want to solve this session?</label
-            >
-            <input id="preboarding-goal-input" class="input input--preboarding" inputmode="numeric"  min="1" placeholder="1" required />
-            <label for="preboarding-duration-input" class="label">How many seconds should this session be?</label>
-            <input id="preboarding-duration-input" class="input input--preboarding" inputmode="numeric"  min="1" placeholder="1" required />
-            <label for="preboarding-first-operand-digits-input" class="label"
-              >How many digits should the first operand be?</label
-            >
-            <input
-              id="preboarding-first-operand-digits-input"
-              class="input input--preboarding"
-              inputmode="numeric"
-              min="1"
-              max="8"
-              placeholder="1"
-              required
-            />
-            <label for="preboarding-second-operand-digits-input" class="label"
-              >How many digits should the second operand be?</label
-            >
-            <input
-              id="preboarding-second-operand-digits-input"
-              class="input input--preboarding"
-              inputmode="numeric"
-              min="1"
-              max="7"
-              placeholder="1"
-            />
-<div id="preboarding-problem-container"><math id="preboarding-problem" class="hidden math-problem"><mn id="preboarding-first-operand"></mn><mo id="preboarding-operator">×</mo><mn id="preboarding-second-operand"></mn>      
-        </math></div>
-        <p id="preboarding-problem--feedback" class="feedback hidden"></p>
-          <button id="preboarding-start-btn" class="btn">Start session</button>
-          </form>
-          <div id="preboarding-volume-container" class="volume-container">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
-              />
-            </svg>
-            <input
-              id="preboarding-volume-input"
-              class="input input--volume"
-              type="range"
-              min="0"
-              max="100"
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="icon"
-              id="max-volume-icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
-              />
-            </svg>
-            <div class="preboarding-container">
-          <label for="preboarding-volume-input" class="label label--volume">Volume:</label>
-          <p id="preboarding-volume-value" class="volume-value feedback"></p>
-          </div>
+        <label for="preboarding-goal-input" class="label"
+          >How many problems do you want to solve this session?</label
+        >
+        <input
+          id="preboarding-goal-input"
+          class="input input--preboarding"
+          inputmode="numeric"
+          min="1"
+          placeholder="1"
+          required
+        />
+        <label for="preboarding-duration-input" class="label"
+          >How many seconds should this session be?</label
+        >
+        <input
+          id="preboarding-duration-input"
+          class="input input--preboarding"
+          inputmode="numeric"
+          min="1"
+          placeholder="1"
+          required
+        />
+        <label for="preboarding-first-operand-digits-input" class="label"
+          >How many digits should the first operand be?</label
+        >
+        <input
+          id="preboarding-first-operand-digits-input"
+          class="input input--preboarding"
+          inputmode="numeric"
+          min="1"
+          max="8"
+          placeholder="1"
+          required
+        />
+        <label for="preboarding-second-operand-digits-input" class="label"
+          >How many digits should the second operand be?</label
+        >
+        <input
+          id="preboarding-second-operand-digits-input"
+          class="input input--preboarding"
+          inputmode="numeric"
+          min="1"
+          max="7"
+          placeholder="1"
+        />
+        <div id="preboarding-problem-container">
+          <math id="preboarding-problem" class="hidden math-problem"
+            ><mn id="preboarding-first-operand"></mn
+            ><mo id="preboarding-operator">×</mo
+            ><mn id="preboarding-second-operand"></mn>
+          </math>
         </div>
+        <p id="preboarding-problem--feedback" class="feedback hidden"></p>
+        <button id="preboarding-start-btn" class="btn">Start session</button>
+      </form>
+      <div id="preboarding-volume-container" class="volume-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+          />
+        </svg>
+        <input
+          id="preboarding-volume-input"
+          class="input input--volume"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="icon"
+          id="max-volume-icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+          />
+        </svg>
+        <div class="preboarding-container">
+          <label for="preboarding-volume-input" class="label label--volume"
+            >Volume:</label
+          >
+          <p id="preboarding-volume-value" class="volume-value feedback"></p>
+        </div>
+      </div>
     </section>
     <section id="session-container" class="hidden">
       <main>
         <div id="session-problem-container">
-        <math id="session-problem" class="math-problem"><mn id="session-first-operand"></mn><mo id="session-operator">×</mo><mn id="session-second-operand"></mn></math>
-        <hr id="session-problem-card-bottom-divider" />
+          <math id="session-problem" class="math-problem"
+            ><mn id="session-first-operand"></mn><mo id="session-operator">×</mo
+            ><mn id="session-second-operand"></mn
+          ></math>
+          <hr id="session-problem-card-bottom-divider" />
         </div>
         <form id="session-answer-form">
-          <label for="session-answer-input" class="label label--session">Answer:</label>
-          <input id="session-answer-input" class="input input--session" type="text" inputmode="numeric" min="0" placeholder="1" required />
-          <button id="session-submit-btn" class="btn btn--session">Submit answer</button>
+          <label for="session-answer-input" class="label label--session"
+            >Answer:</label
+          >
+          <input
+            id="session-answer-input"
+            class="input input--session"
+            type="text"
+            inputmode="numeric"
+            min="0"
+            placeholder="1"
+            required
+          />
+          <button id="session-submit-btn" class="btn btn--session">
+            Submit answer
+          </button>
         </form>
         <div id="session-accuracy-container" class="session-accuracy-container">
-        <p id="session-accuracy" class='feedback session-accuracy'><span id="session-correct-answers" classs="session-correct-answers">0</span> / <span id="session-total-answers" class="session-total-answers">0</span></p>
+          <p id="session-accuracy" class="feedback session-accuracy">
+            <span id="session-correct-answers" class="session-correct-answers"
+              >0</span
+            >
+            /
+            <span id="session-total-answers" class="session-total-answers"
+              >0</span
+            >
+          </p>
         </div>
         <p id="session-answer-feedback" class="feedback"></p>
         <p id="session-countdown" class="feedback"></p>
-        <button id="session-pause-btn" class="btn btn--session">Pause session</button>
+        <button id="session-pause-btn" class="btn btn--session">
+          Pause session
+        </button>
       </main>
     </section>
     <section id="pause-menu-container" class="hidden">
-      <p id="pause-menu-info-message" class='feedback'>When you get back, a new problem will be generated.</p>
+      <p id="pause-menu-info-message" class="feedback">
+        When you get back, a new problem will be generated.
+      </p>
       <button id="pause-menu-resume-btn" class="btn">Resume session</button>
-      <p id="pause-menu-countdown" class='feedback'></p>     
-     <div class="volume-container">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="icon--pause-menu"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
-              />
-            </svg>
-            <input
-              id="pause-menu-volume-input"
-              class="input input--volume"
-              type="range"
-              min="0"
-              max="100"
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="icon--pause-menu"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
-              />
-            </svg>
-          </div>
-          <div id="pause-menu-volume-container">
-          <label for="pause-menu-volume-input" class="label label--volume-input">Volume:</label>
-          <p id="pause-menu-volume-value" class="volume-value feedback"></p>
-          </div>
+      <p id="pause-menu-countdown" class="feedback"></p>
+      <div class="volume-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="icon--pause-menu"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+          />
+        </svg>
+        <input
+          id="pause-menu-volume-input"
+          class="input input--volume"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="icon--pause-menu"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+          />
+        </svg>
       </div>
+      <div id="pause-menu-volume-container">
+        <label for="pause-menu-volume-input" class="label label--volume-input"
+          >Volume:</label
+        >
+        <p id="pause-menu-volume-value" class="volume-value feedback"></p>
+      </div>
+    </section>
+    <section id="results-container" class="hidden">
+      <button id="btn-results-return-home">Return to home</button>
+      <p id="results-p"></p>
     </section>
   </body>
 </html>

@@ -236,7 +236,7 @@ path {
   padding: 8px;
 }
 
-.session-correct-answers {
+#session-correct-answers {
   margin-right: 8px;
   color: #19bb2e;
 }
