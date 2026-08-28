@@ -52,11 +52,21 @@ path {
 .label {
   display: block;
   margin-bottom: 8px;
+  font-size: 18px;
 }
 
 .btn {
   margin-bottom: 24px;
   color: #000;
+  font-size: 20px;
+}
+
+.input {
+  font-size: 20px;
+}
+
+.feedback {
+  font-size: 16px;
 }
 
 /* PREBOARDING COMPONENT */
@@ -65,7 +75,7 @@ path {
   display: flex;
   flex-direction: column;
   background-color: #1042ef;
-  padding: 8px;
+  padding: 16px;
   position: relative;
   box-shadow: 0 0 40px #000;
   border-radius: 8px;
@@ -78,7 +88,7 @@ path {
 }
 
 #preboarding-problem-container {
-  height: 12px;
+  height: 20px;
 }
 
 #preboarding-start-btn {
@@ -102,7 +112,16 @@ path {
 .preboarding-container {
   min-width: 16ch;
 }
+/* MATH PROBLEM COMPONENT */
 
+#session-first-operand,
+#session-operator,
+#session-second-operator,
+#preboarding-first-operand,
+#preboarding-operator,
+#preboarding-second-operand {
+  font-size: 16px !important;
+}
 /* SESSION COMPONENT */
 
 #session-container {
