@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing</title>
     <link href="index.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <script src="index.js" defer></script>
   </head>
   <body>
@@ -40,7 +44,7 @@
               max="7"
               placeholder="1"
             />
-<div id="preboarding-problem-container"><math id="preboarding-problem" class="hidden"><mn id="preboarding-first-operand"></mn><mo id="preboarding-operator">×</mo><mn id="preboarding-second-operand"></mn>      
+<div id="preboarding-problem-container"><math id="preboarding-problem" class="hidden math-problem"><mn id="preboarding-first-operand"></mn><mo id="preboarding-operator">×</mo><mn id="preboarding-second-operand"></mn>      
         </math></div>
         <p id="preboarding-problem--feedback" class="feedback hidden"></p>
           <button id="preboarding-start-btn" class="btn">Start session</button>
@@ -91,7 +95,7 @@
     <section id="session-container" class="hidden">
       <main>
         <div id="session-problem-container">
-        <math id="session-problem"><mn id="session-first-operand"></mn><mo id="session-operator">×</mo><mn id="session-second-operand"></mn></math>
+        <math id="session-problem" class="math-problem"><mn id="session-first-operand"></mn><mo id="session-operator">×</mo><mn id="session-second-operand"></mn></math>
         <hr id="session-problem-card-bottom-divider" />
         </div>
         <form id="session-answer-form">

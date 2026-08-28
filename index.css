@@ -114,13 +114,8 @@ path {
 }
 /* MATH PROBLEM COMPONENT */
 
-#session-first-operand,
-#session-operator,
-#session-second-operator,
-#preboarding-first-operand,
-#preboarding-operator,
-#preboarding-second-operand {
-  font-size: 16px !important;
+.math-problem {
+  font-size: 16px;
 }
 /* SESSION COMPONENT */
 
@@ -301,11 +296,11 @@ path {
   background-color: #1042ef;
   box-shadow: 0 0 24px #000;
   padding: 8px;
-  max-height: 30%;
-  width: 90%;
+  max-height: 40%;
   border-radius: 24px;
 }
 #results-container > p {
   margin-top: 16px;
   margin-bottom: 32px;
+  font-size: 24px;
 }
