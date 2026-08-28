@@ -222,8 +222,37 @@ path {
   margin-bottom: 4px;
 }
 
-#session-accuracy {
+/* SESSION ACCURACY COMPONENT */
+
+.session-accuracy-container {
+  width: 100%;
+  background-color: #ebecf0;
   margin-bottom: 40px;
+}
+
+.session-accuracy {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.session-correct-answers {
+  margin-right: 8px;
+  color: #19bb2e;
+}
+
+.session-total-answers {
+  margin-left: 8px;
+}
+
+.session-total-answers,
+.session-accuracy {
+  color: #000;
+}
+
+.session-correct-answers,
+.session-total-answers {
+  display: flex;
 }
 
 /* PAUSE MENU COMPONENT */
