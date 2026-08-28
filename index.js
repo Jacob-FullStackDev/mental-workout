@@ -307,6 +307,7 @@ function preboardingOperandInputElHandler(
   let activeListenerDigits;
   let otherActiveListenerDigits;
   let maxDigits;
+  let activeListener;
   // Operand position for the first/second sample operands
   let activeListenerOperandPos;
   let otherListenerOperandPos;
@@ -315,6 +316,7 @@ function preboardingOperandInputElHandler(
     otherActiveListenerDigits = secondOperandDigits;
     activeListenerOperandPos = 1;
     otherListenerOperandPos = 2;
+    activeListener = "first";
     maxDigits = 8;
   } else if (activeOperandInputEl === secondOperandInputEl) {
     activeListenerDigits = secondOperandDigits = Number(e.target.value);
@@ -322,6 +324,7 @@ function preboardingOperandInputElHandler(
     activeListenerOperandPos = 2;
     otherListenerOperandPos = 1;
     maxDigits = 7;
+    activeListener = "second";
   }
   if (
     (activeListenerDigits >= 1 && activeListenerDigits <= maxDigits) ||
@@ -333,7 +336,7 @@ function preboardingOperandInputElHandler(
     activeOperandInputEl.value = "";
     return errorHandler(
       preboardingProblemFeedbackEl,
-      "The first operand must be between 1 and 8 digits long, the second between 1 and 7",
+      `The ${activeListener} operand must be between 1 and ${maxDigits} digits long`,
       "warn",
       preboardingProblemEl,
     );
