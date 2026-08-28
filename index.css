@@ -129,10 +129,15 @@ path {
   justify-content: center;
   background-color: #1042ef;
   border-radius: 16px;
-  width: 32%;
+  width: 94%;
   padding-top: 24px;
   color: #000;
 }
+
+#session-main-container {
+  width: 60%;
+}
+
 #session-first-operand,
 #session-operator,
 #session-second-operand {
@@ -178,6 +183,11 @@ path {
   grid-row: 2;
 }
 
+#session-answer-input {
+  width: 16ch;
+  padding: 8px;
+}
+
 #session-first-operand,
 #session-second-operand {
   /* Moves operands to right edge of flash card upto it's padding */
@@ -208,9 +218,20 @@ path {
 #session-form-answer {
   display: block;
 }
+#session-accuracy-container {
+  max-width: 150px;
+}
+
+#session-answer-feedback {
+  height: 20px;
+  margin-bottom: 16px;
+}
 
 #session-countdown {
+  display: inline;
   color: #f00;
+  background-color: #ebecf0;
+  max-width: 150px;
 }
 
 .input--session {
