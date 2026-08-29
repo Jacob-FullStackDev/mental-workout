@@ -83,6 +83,11 @@ path {
   font-size: 16px;
 }
 
+.feedback-container {
+  /* Prevents layout shift when the feedback element is made visible */
+  height: 20px;
+}
+
 /* PREBOARDING */
 
 #preboarding-section {
