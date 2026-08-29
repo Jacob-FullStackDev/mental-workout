@@ -25,6 +25,7 @@ const preboardingProblemEl = document.getElementById("preboarding-problem");
 
 // SESSION DOM ELEMENT SELECTORS
 
+const sessionMainEl = document.getElementById("session-main-container");
 const sessionSectionEl = document.getElementById("session-container");
 const firstOperandEl = document.getElementById("session-first-operand");
 const secondOperandEl = document.getElementById("session-second-operand");
@@ -203,10 +204,11 @@ function setSessionGoalResultMessage(goal) {
 function endSession(goal) {
   // stops timer, marks session as finished, enters results page
   sessionFinished = true;
-  resultsEl.textContent = `You correctly solved ${correctAnswers} / ${totalAnswers} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
-  init();
+  sessionMainEl.classList.add("not-in-session");
   sessionSectionEl.classList.add("hidden");
   resultsContainerEl.classList.remove("hidden");
+  resultsEl.textContent = `You correctly solved ${correctAnswers} / ${totalAnswers} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
+  init();
 }
 
 // PAUSE MENU
@@ -397,6 +399,7 @@ secondOperandInputEl.addEventListener("input", (e) => {
 preboardingFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
   handleSession();
+  sessionMainEl.classList.remove("not-in-session");
   firstOperandDigits = Number(firstOperandInputEl.value);
   secondOperandDigits = secondOperandInputEl.value
     ? Number(secondOperandInputEl.value)
