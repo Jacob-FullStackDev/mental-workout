@@ -275,7 +275,7 @@ goalInputEl.addEventListener("input", (e) => {
       preboardingProblemFeedbackEl,
     ) === true
   ) {
-    return (goalInputEl.value = "");
+    return (goalInputEl.value = goalInputEl.value.slice(0, -1));
   }
   if (Number(goalInputEl.value) <= 0) {
     errorHandler(
@@ -296,7 +296,7 @@ durationInputEl.addEventListener("input", (e) => {
       preboardingProblemFeedbackEl,
     ) === true
   ) {
-    return (durationInputEl.value = "");
+    return (durationInputEl.value = durationInputEl.value.slice(0, -1));
   }
   if (Number(durationInputEl.value) <= 0) {
     errorHandler(
@@ -432,7 +432,7 @@ answerInputEl.addEventListener("input", (e) => {
       answerFeedbackEl,
     ) === true
   )
-    return (answerInputEl.value = "");
+    return (answerInputEl.value = answerInputEl.value.slice(0, -1));
 });
 
 answerInputFormEl.addEventListener("submit", (e) => {
