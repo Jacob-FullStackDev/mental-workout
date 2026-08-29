@@ -275,6 +275,15 @@ goalInputEl.addEventListener("input", (e) => {
   ) {
     return (goalInputEl.value = "");
   }
+  if (Number(goalInputEl.value) <= 0) {
+    errorHandler(
+      preboardingProblemFeedbackEl,
+      `Your goal must be greater than 0`,
+      "warn",
+      preboardingProblemEl,
+    );
+    return (goalInputEl.value = "");
+  }
 });
 
 durationInputEl.addEventListener("input", (e) => {
@@ -285,6 +294,15 @@ durationInputEl.addEventListener("input", (e) => {
       preboardingProblemFeedbackEl,
     ) === true
   ) {
+    return (durationInputEl.value = "");
+  }
+  if (Number(durationInputEl.value) <= 0) {
+    errorHandler(
+      preboardingProblemFeedbackEl,
+      `Your session must be longer than 0 seconds`,
+      "warn",
+      preboardingProblemEl,
+    );
     return (durationInputEl.value = "");
   }
 });
