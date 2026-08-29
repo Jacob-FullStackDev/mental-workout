@@ -207,7 +207,7 @@ function endSession(goal) {
   sessionMainEl.classList.add("not-in-session");
   sessionSectionEl.classList.add("hidden");
   resultsContainerEl.classList.remove("hidden");
-  resultsEl.textContent = `You correctly solved ${correctAnswers} / ${totalAnswers} problems. You correctly solved ${correctAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
+  resultsEl.textContent = `You correctly solved ${correctAnswers} / ${totalAnswers} problems. You ${setSessionGoalResultMessage(goal)} your goal of ${goal} correct answers.`;
   init();
 }
 
