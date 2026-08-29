@@ -177,7 +177,7 @@ path {
 #session-problem-container {
   display: flex;
   flex-direction: column;
-  max-width: 240px;
+  max-width: 130px;
   margin-bottom: 36px;
 }
 
@@ -187,7 +187,7 @@ path {
   grid-template-columns: 100%;
   padding: 16px;
   width: 100%;
-  min-height: 120px;
+  max-height: 114px;
   font-size: 20px;
   background-color: #ebecf0;
   color: #000;
